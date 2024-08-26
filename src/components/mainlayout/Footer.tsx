@@ -1,5 +1,4 @@
 
-import {Link} from 'react-router-dom';
 import React from 'react';
 const Footer: React.FC = () => {
 
@@ -31,9 +30,9 @@ const Footer: React.FC = () => {
               {services.map((link,index)=>{
                 return (
                   <li className="mb-2" key={index}>
-                  <Link to="#services" className="text-gray-400 hover:text-white transition">{link.title}</Link>
+                  <a href="#services" className="text-gray-400 hover:text-white transition">{link.title}</a>
                 </li>
-                )
+                ) 
               })}
              
             </ul>
