@@ -3,13 +3,15 @@ import React, { useState } from "react";
 import { FiShoppingCart } from "react-icons/fi";
 import { FaRegUser } from "react-icons/fa6";
 import { FaBus } from "react-icons/fa";
-// Use a standard <img> tag if not using Next.js Image
+import { GiHamburgerMenu } from "react-icons/gi";
+
 import { CiSearch } from "react-icons/ci";
 
 const Navbar: React.FC = () => {
  
   const [searchInput, setSearchInput] = useState("");
   const [searchResults, setSearchResults] = useState<string[]>([]);
+  const [isHamburgerClicked,setIsHamburgerClicked] = useState<boolean>(false)
 
   const extraLinks = [
     { title: "Sell With Us", href: "/sell-with-us" },
@@ -33,11 +35,23 @@ const Navbar: React.FC = () => {
   };
   return (
     <div>
-      <nav className="bg-gray-800 text-white">
-        <div className="container mx-auto flex justify-between items-center p-4">
+      <nav className="bg-gray-800 relative text-white">
+        <div className="container mx-auto flex justify-between   items-center p-4">
+          {/* harmburger */}
+          <div className="text-white flex md:hidden" onClick={()=>setIsHamburgerClicked(!isHamburgerClicked)}>
+          <GiHamburgerMenu />
+          </div>
+          {/* hambugre links */}
+         {isHamburgerClicked && <div className="absolute hover:cursor-pointer z-10 top-[100%] p-4 left-0 bg-white text-gray-800">
+            <ul>
+              {extraLinks.map((link,index)=>{
+                return(<li key={index} className="hover:underline">{link.title}</li>)
+              })}
+            </ul>
+          </div>}
           <div className="flex items-center">
             <img
-              src="/hack-repairs.jpg" // Use standard <img> tag if not using Next.js Image
+              src="/hack-repairs.jpg" 
               alt="logo"
               width={30}
               height={30}
@@ -55,20 +69,18 @@ const Navbar: React.FC = () => {
               <FiShoppingCart />
               Cart
             </a>
-            <a href="/orders" className={`flex items-center gap-2 py-2 ${window.location.pathname === "/orders" ? "text-green-500" : "text-white"}`}>
+            <a href="/orders" className={`hidden md:flex   items-center gap-2 py-2 ${window.location.pathname === "/orders" ? "text-green-500" : "text-white"}`}>
               <FaBus /> Orders
             </a>
             <a href="/profile" className={`flex items-center gap-2 py-2 ${window.location.pathname === "/profile" ? "text-green-500" : "text-white"}`}>
               <FaRegUser />
             </a>
             
-            <a href="/login" className={`flex items-center gap-2 py-2 ${window.location.pathname === "/home" ? "text-green-500" : "text-white"}`}>
-              signin
-            </a>
+            
           </div>
         </div>
       </nav>
-      <div className="container mx-auto flex flex-col md:flex-row items-center p-4 relative">
+      <div className="container bg-gray-700  mx-auto flex flex-col md:flex-row items-center p-4 relative">
         <div className="relative w-full md:w-1/2">
           <input
             type="text"
@@ -83,7 +95,7 @@ const Navbar: React.FC = () => {
         </div>
 
         {searchInput.trim() !== "" && (
-          <div className="absolute mt-2 bg-white shadow-lg rounded-md w-full md:w-1/2 z-50">
+          <div className="absolute mt-[3rem] md:mt-[9rem] bg-white shadow-lg rounded-md w-full md:w-1/2 z-50">
             {searchResults.length > 0 ? (
               <ul>
                 {searchResults.map((result, index) => (
@@ -117,7 +129,7 @@ const Navbar: React.FC = () => {
           <div>
             <ul className="flex space-x-4">
               {extraLinks.map((link) => (
-                <li key={link.title} className={`text-gray-800 hover:underline ${window.location.pathname === link.href ? "text-green-500 font-bold" : ""}`}>
+                <li key={link.title} className={`text-white hover:underline ${window.location.pathname === link.href ? "text-green-500 font-bold" : ""}`}>
                   <a href={link.href}>{link.title}</a>
                 </li>
               ))}
