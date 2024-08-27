@@ -18,6 +18,7 @@ const Navbar: React.FC = () => {
     { title: "About our Products", href: "/products" },
     { title: "About Us", href: "/about" },
     { title: "Contact Us", href: "/contact" },
+    { title: "How It Works", href: "/how-it-works " },
   ];
 
   
@@ -42,8 +43,8 @@ const Navbar: React.FC = () => {
           <GiHamburgerMenu />
           </div>
           {/* hambugre links */}
-         {isHamburgerClicked && <div className="absolute hover:cursor-pointer z-10 top-[100%] p-4 left-0 bg-white text-gray-800">
-            <ul>
+         {isHamburgerClicked && <div className="absolute hover:cursor-pointer z-50 top-[100%]  p-4 left-0 bg-gray-800 text-white">
+            <ul className="flex flex-col gap-8">
               {extraLinks.map((link,index)=>{
                 return(<li key={index} className="hover:underline">{link.title}</li>)
               })}

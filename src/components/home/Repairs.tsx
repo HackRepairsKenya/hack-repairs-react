@@ -86,7 +86,7 @@ const Repairs = () => {
       >
         Repair Your Screen Now !!
       </motion.h1>
-      <section className="p-4">
+      <section className="md:p-4">
         <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
           {availableRepairs.map((repair, index) => (
             <div key={index}>

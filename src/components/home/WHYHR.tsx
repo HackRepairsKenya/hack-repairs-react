@@ -1,20 +1,22 @@
 import { TiWorld } from "react-icons/ti";
+import { TbTruckDelivery } from "react-icons/tb";
 import {
   MdDashboard,
   MdSecurity,
   MdSupportAgent,
 } from "react-icons/md";
+import { MdOutlineHighQuality } from "react-icons/md";
 const WhyHR = () => {
   const data = [
     {
       title: "Delivery in 24hrs",
-      icon: <TiWorld />,
+      icon: <TbTruckDelivery />,
 
       description: "HackRepairs products for you.",
     },
     {
       title: "Quality Quarantee",
-      icon: <MdDashboard />,
+      icon: <MdOutlineHighQuality />,
 
       description:
         "Quality checked by our team",
@@ -34,7 +36,7 @@ const WhyHR = () => {
     },
   ];
   return (
-    <section className="mb-12  pt-6 bg-gray-100">
+    <section className="mb-12  md:mt-12 pt-6 bg-gray-100">
       <div className="grid grid-cols-1  md:grid-cols-2 lg:grid-cols-4 gap-6">
         {data.map((item) => {
           return (

@@ -35,7 +35,7 @@ const Brands = () =>{
             {brands.map((brand,index)=>{
 
                 return(<div key={index}>
-                    <img width={100} height={100}src={brand.image} alt={brand.name} />
+                    <img width={150} height={150}src={brand.image} alt={brand.name} />
                 </div>)
             })}
         </div>
