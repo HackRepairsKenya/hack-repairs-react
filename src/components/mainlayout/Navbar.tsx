@@ -81,14 +81,14 @@ const Navbar: React.FC = () => {
           </div>
         </div>
       </nav>
-      <div className="container bg-gray-700  mx-auto flex flex-col md:flex-row items-center p-4 relative">
+      <div className="container bg-gray-700 md:bg-white  mx-auto flex flex-col md:flex-row items-center p-4 relative">
         <div className="relative w-full md:w-1/2">
           <input
             type="text"
             value={searchInput}
             onChange={handleSearchChange}
             placeholder="Search all phone screens (e.g Tecno, Samsung)"
-            className="border p-2 border-gray-300 outline-none focus:ring-2 focus:ring-green-500 rounded-md w-full h-full pl-4 pr-12 text-gray-700 placeholder-gray-500"
+            className="border p-3 border-gray-300 outline-none focus:ring-2 focus:ring-green-500 rounded-md w-full h-full pl-4 pr-12 text-gray-700 placeholder-gray-500"
           />
           <p className="absolute inset-y-0 right-0 bg-green-800 p-2 rounded-r-md flex items-center">
             <CiSearch className="text-white" />
@@ -130,7 +130,7 @@ const Navbar: React.FC = () => {
           <div>
             <ul className="flex space-x-4">
               {extraLinks.map((link) => (
-                <li key={link.title} className={`text-white hover:underline ${window.location.pathname === link.href ? "text-green-500 font-bold" : ""}`}>
+                <li key={link.title} className={`text-white md:text-gray-800 hover:underline ${window.location.pathname === link.href ? "text-green-500 font-bold" : ""}`}>
                   <a href={link.href}>{link.title}</a>
                 </li>
               ))}

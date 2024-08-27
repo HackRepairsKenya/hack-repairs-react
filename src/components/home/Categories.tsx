@@ -79,13 +79,13 @@ const Categories: React.FC = () => {
           <div
             key={category.id}
             onClick={() => handleCategoryClick(category.name)}
-            className="transition-transform duration-500 ease-in-out hover:scale-105 w-48 hover:cursor-pointer h-48 relative p-4 flex flex-col items-center"
+            className="transition-transform duration-500 ease-in-out hover:scale-105  w-40 md:w-48 hover:cursor-pointer h-40 md:h-48 relative p-4 flex flex-col items-center"
           >
             <div className="border p-4 rounded-full flex items-center justify-center w-full h-full">
               <img
                 src={category.image}
                 alt={category.name}
-                className="w-[80%] h-[80%] object-cover mb-4 rounded-md"
+                className="w-[60%] h-[60%] md:w-[80%] md:h-[80%] object-cover mb-4 rounded-md"
               />
             </div>
             <h2 className="text-xl font-semibold capitalize mt-2">
