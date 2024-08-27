@@ -5,6 +5,7 @@ import { HelmetProvider } from 'react-helmet-async';
 import Loading from './components/spinner/Loading.tsx';
 import SellWithUsPage from './pages/SellWithUs.tsx';
 import Sell from './pages/Sell.tsx';
+import Services from './pages/Services.tsx';
 
 // Lazy load the Home component
 const Home = React.lazy(() => import('./pages/Home.tsx'));
@@ -21,6 +22,8 @@ function App() {
             {/* sell */}
             <Route path='/sell-with-us' element={<SellWithUsPage />} />
             <Route path='/sell-with-us/sell'  element={<Sell />}/>
+            {/* services */}
+            <Route path='/services' element={<Services />} />
             <Route path='*' element={<PageNotFound />} />
           </Routes>
         </Suspense>
