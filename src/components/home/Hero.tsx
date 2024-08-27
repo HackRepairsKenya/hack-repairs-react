@@ -3,8 +3,8 @@ import { Link } from "react-router-dom";
 const Hero = () => {
   return (
     <div className="h-screen relative">
-      <div className="container mx-auto px-6 md:px-12 grid grid-cols-1 lg:grid-cols-2 items-center gap-8 h-full">
-        <div className="text-center flex flex-col justify-center items-center lg:items-start z-10 lg:text-left h-full">
+      <div className="container mx-auto px-6 md:px-12 grid grid-cols-1 lg:grid-cols-2  gap-8 h-full">
+        <div className="text-center flex flex-col justify-center  lg:items-start z-10 lg:text-left h-full">
           <h2 className="text-4xl font-bold text-white md:text-black md:text-6xl">
             Phone Screen Repair & Sales
           </h2>

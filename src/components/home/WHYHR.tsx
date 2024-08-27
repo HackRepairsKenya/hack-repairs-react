@@ -1,7 +1,7 @@
-import { TiWorld } from "react-icons/ti";
+
 import { TbTruckDelivery } from "react-icons/tb";
 import {
-  MdDashboard,
+  
   MdSecurity,
   MdSupportAgent,
 } from "react-icons/md";

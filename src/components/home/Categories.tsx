@@ -15,7 +15,7 @@ const categories: Category[] = [
   { id: 1, name: "Tecno", image: "/categories/tecno.png" },
   { id: 2, name: "Samsung", image: "/categories/samsung.png" },
   { id: 3, name: "Itel", image: "/categories/itel.png" },
-  { id: 4, name: "Huawei", image: "/categories/huawei.png" },
+  { id: 4, name: "Huawei", image: "/categories/samsung.png" },
 //   { id: 5, name: "Apple", image: "/categories/apple.png" },
 //   { id: 6, name: "Nokia", image: "/categories/nokia.png" },
 //   { id: 7, name: "Xiaomi", image: "/categories/xiaomi.png" },

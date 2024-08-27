@@ -73,7 +73,7 @@ const Repairs = () => {
   }, [controls, hasAnimated]);
 
   return (
-    <div className=" md:ml-8 mx-8 md:mx-0 my-8">
+    <div className="mx-6 md:ml-8  md:mx-0 my-8">
         
       {/* Available Repairs Section */}
       <motion.h1
@@ -86,7 +86,7 @@ const Repairs = () => {
       >
         Repair Your Screen Now !!
       </motion.h1>
-      <section className="md:p-4">
+      <section className="md:p-4 mt-6">
         <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
           {availableRepairs.map((repair, index) => (
             <div key={index}>

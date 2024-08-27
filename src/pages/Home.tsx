@@ -7,15 +7,18 @@ import Repairs from '@/components/home/Repairs'
 import WhyHR from '@/components/home/WHYHR'
 import Footer from '@/components/mainlayout/Footer'
 import Navbar from '@/components/mainlayout/Navbar.tsx'
-import { useEffect } from 'react'
-
+import SEO from '@/components/seo/SEO'
 export default function Home() {
-  useEffect(()=>{
-    document.title='Home -Hack repars'
-  })
+  
   return (
     <div>
       
+      
+      <SEO
+title='HackRepairs'
+description=' We provide top-notch phone screen repair services and sell high-quality replacement screens for all major brands.'
+name='HackRepairs.'
+type='home page' />
 
 <Navbar />
        <Hero/>
