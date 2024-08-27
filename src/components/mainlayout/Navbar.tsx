@@ -6,6 +6,7 @@ import { FaBus } from "react-icons/fa";
 import { GiHamburgerMenu } from "react-icons/gi";
 
 import { CiSearch } from "react-icons/ci";
+import { Link } from "react-router-dom";
 
 const Navbar: React.FC = () => {
  
@@ -46,7 +47,7 @@ const Navbar: React.FC = () => {
          {isHamburgerClicked && <div className="absolute hover:cursor-pointer z-50 top-[100%]  p-4 left-0 bg-gray-800 text-white">
             <ul className="flex flex-col gap-8">
               {extraLinks.map((link,index)=>{
-                return(<li key={index} className="hover:underline">{link.title}</li>)
+                return(<Link to={link.href} key={index} className="hover:underline">{link.title}</Link>)
               })}
             </ul>
           </div>}
