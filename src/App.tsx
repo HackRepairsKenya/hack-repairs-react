@@ -6,6 +6,9 @@ import Loading from './components/spinner/Loading.tsx';
 import SellWithUsPage from './pages/SellWithUs.tsx';
 import Sell from './pages/Sell.tsx';
 import Services from './pages/Services.tsx';
+import AboutOurProducts from './pages/AboutOurProducts.tsx';
+import AboutUs from './pages/AboutUs.tsx';
+import Contact from './pages/ContactUs.tsx';
 
 // Lazy load the Home component
 const Home = React.lazy(() => import('./pages/Home.tsx'));
@@ -24,6 +27,11 @@ function App() {
             <Route path='/sell-with-us/sell'  element={<Sell />}/>
             {/* services */}
             <Route path='/services' element={<Services />} />
+            {/* about our products */}
+            <Route path='/about-our-products' element={<AboutOurProducts />} />
+            {/* about us */}
+            <Route path='/about' element={<AboutUs />} />
+            <Route path='/contact' element={<Contact />} />
             <Route path='*' element={<PageNotFound />} />
           </Routes>
         </Suspense>

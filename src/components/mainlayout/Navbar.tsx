@@ -16,7 +16,7 @@ const Navbar: React.FC = () => {
 
   const extraLinks = [
     { title: "Sell With Us", href: "/sell-with-us" },
-    { title: "About our Products", href: "/products" },
+    { title: "About our Products", href: "/about-our-products" },
     { title: "About Us", href: "/about" },
     { title: "Contact Us", href: "/contact" },
     { title: "How It Works", href: "/how-it-works " },
