@@ -4,9 +4,16 @@ import { MdDashboard, MdSecurity, MdSupportAgent } from "react-icons/md";
 import Navbar from '@/components/mainlayout/Navbar';
 import Footer from '@/components/mainlayout/Footer';
 import { Link } from 'react-router-dom';
+import SEO from '@/components/seo/SEO';
 const SellWithUsPage: React.FC = () => {
   return (
     <>
+    <SEO
+        title="Sell With Us -HackRepairs"
+        description="We provide top-notch phone screen repair services and sell high-quality replacement screens for all major brands."
+        name="HackRepairs."
+        type="sell page"
+      />
     <Navbar />
     <div className="container mx-auto p-6">
       {/* Hero Section */}
