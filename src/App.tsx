@@ -11,6 +11,10 @@ import AboutUs from './pages/AboutUs.tsx';
 import Contact from './pages/ContactUs.tsx';
 import ServiceDetailedView from './pages/ServiceDetailedView.tsx';
 import CategoriesDetailedView from './pages/CategoriesDetailedView.tsx';
+import Cart from './pages/Cart.tsx';
+import RepairDetail from './pages/RepairDetail.tsx';
+import CategoryDetail from './pages/CategoryDetail.tsx'
+import Checkout from './pages/Checkout.tsx';
 
 // Lazy load the Home component
 const Home = React.lazy(() => import('./pages/Home.tsx'));
@@ -37,6 +41,10 @@ function App() {
             {/* About us */}
             <Route path='/about' element={<AboutUs />} />
             <Route path='/contact' element={<Contact />} />
+            <Route path='/brand/:id' element={<RepairDetail />} />
+            <Route path='/category/:id' element={<CategoryDetail />} />
+            <Route path='/cart' element={<Cart />} />
+            <Route  path='/checkout' element={<Checkout />} />
             <Route path='*' element={<PageNotFound />} />
           </Routes>
         </Suspense>

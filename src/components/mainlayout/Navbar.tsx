@@ -7,12 +7,18 @@ import { GiHamburgerMenu } from "react-icons/gi";
 
 import { CiSearch } from "react-icons/ci";
 import { Link } from "react-router-dom";
+import SignIn from "../auth/SignIn";
+import {
+  Sheet,
+  SheetContent,
+  SheetTrigger,
+} from "@/components/ui/sheet";
 
 const Navbar: React.FC = () => {
- 
   const [searchInput, setSearchInput] = useState("");
   const [searchResults, setSearchResults] = useState<string[]>([]);
-  const [isHamburgerClicked,setIsHamburgerClicked] = useState<boolean>(false)
+  const [isHamburgerClicked, setIsHamburgerClicked] = useState<boolean>(false);
+  const [showmodal, setShowModal] = useState<boolean>(false);
 
   const extraLinks = [
     { title: "Sell With Us", href: "/sell-with-us" },
@@ -21,8 +27,6 @@ const Navbar: React.FC = () => {
     { title: "Contact Us", href: "/contact" },
     { title: "How It Works", href: "/how-it-works " },
   ];
-
-  
 
   const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setSearchInput(e.target.value);
@@ -37,29 +41,49 @@ const Navbar: React.FC = () => {
   };
   return (
     <div>
+      {showmodal && <SignIn />}
       <nav className="bg-gray-800 relative text-white">
         <div className="container mx-auto flex justify-between   items-center p-4">
           {/* harmburger */}
-          <div className="text-white flex md:hidden" onClick={()=>setIsHamburgerClicked(!isHamburgerClicked)}>
-          <GiHamburgerMenu />
-          </div>
-          {/* hambugre links */}
-         {isHamburgerClicked && <div className="absolute hover:cursor-pointer z-50 top-[100%]  p-4 left-0 bg-gray-800 text-white">
-            <ul className="flex flex-col gap-8">
-              {extraLinks.map((link,index)=>{
-                return(<Link to={link.href} key={index} className="hover:underline">{link.title}</Link>)
-              })}
-            </ul>
-          </div>}
+          <Sheet>
+            <div
+              className="text-white flex md:hidden"
+              onClick={() => setIsHamburgerClicked(!isHamburgerClicked)}
+            >
+              <SheetTrigger><GiHamburgerMenu /></SheetTrigger>
+            </div>
+            {/* hambugre links */}
+            <SheetContent className="absolute hover:cursor-pointer z-50  p-4 left-0 bg-gray-800 text-white">
+            {isHamburgerClicked && (
+              <div className="">
+                <ul className="flex flex-col gap-8">
+                  {extraLinks.map((link, index) => {
+                    return (
+                      <Link
+                        to={link.href}
+                        key={index}
+                        className="hover:underline"
+                      >
+                        {link.title}
+                      </Link>
+                    );
+                  })}
+                </ul>
+              </div>
+            )}
+            </SheetContent>
+          </Sheet>
           <div className="flex items-center">
             <img
-              src="/hack-repairs.jpg" 
+              src="/hack-repairs.jpg"
               alt="logo"
               width={30}
               height={30}
               className="rounded-full"
             />
-            <p className="text-sm ml-2 font-semibold md:text-2xl">Hack-Repairs</p>
+            <p className="text-sm ml-2 font-semibold md:text-2xl">
+              Hack-Repairs
+            </p>
             <button type="button" className="text-white ml-4 md:hidden">
               <svg viewBox="0 0 24 24" className="w-6 h-6 fill-current">
                 <path d="M4 5h16M4 12h16m-7 7h7"></path>
@@ -67,18 +91,37 @@ const Navbar: React.FC = () => {
             </button>
           </div>
           <div className="flex items-center space-x-4">
-            <a href="/cart" className={`flex items-center gap-2 py-2 ${window.location.pathname === "/cart" ? "text-green-500" : "text-white"}`}>
+            <a
+              href="/cart"
+              className={`flex items-center gap-2 py-2 ${
+                window.location.pathname === "/cart"
+                  ? "text-green-500"
+                  : "text-white"
+              }`}
+            >
               <FiShoppingCart />
               Cart
             </a>
-            <a href="/orders" className={`hidden md:flex   items-center gap-2 py-2 ${window.location.pathname === "/orders" ? "text-green-500" : "text-white"}`}>
+            <a
+              href="/orders"
+              className={`hidden md:flex   items-center gap-2 py-2 ${
+                window.location.pathname === "/orders"
+                  ? "text-green-500"
+                  : "text-white"
+              }`}
+            >
               <FaBus /> Orders
             </a>
-            <a href="/profile" className={`flex items-center gap-2 py-2 ${window.location.pathname === "/profile" ? "text-green-500" : "text-white"}`}>
+            <p
+              onClick={() => setShowModal(!showmodal)}
+              className={`flex items-center hover:cursor-pointer gap-2 py-2 ${
+                window.location.pathname === "/profile"
+                  ? "text-green-500"
+                  : "text-white"
+              }`}
+            >
               <FaRegUser />
-            </a>
-            
-            
+            </p>
           </div>
         </div>
       </nav>
@@ -131,7 +174,14 @@ const Navbar: React.FC = () => {
           <div>
             <ul className="flex space-x-4">
               {extraLinks.map((link) => (
-                <li key={link.title} className={`text-white md:text-gray-800 hover:underline ${window.location.pathname === link.href ? "text-green-500 font-bold" : ""}`}>
+                <li
+                  key={link.title}
+                  className={`text-white md:text-gray-800 hover:underline ${
+                    window.location.pathname === link.href
+                      ? "text-green-500 font-bold"
+                      : ""
+                  }`}
+                >
                   <a href={link.href}>{link.title}</a>
                 </li>
               ))}
