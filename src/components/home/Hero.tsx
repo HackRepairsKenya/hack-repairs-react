@@ -20,7 +20,7 @@ const Hero = () => {
           
             src="/heroim.png"
             alt="Phone Repair"
-            className="w-full h-full"
+            className="w-full object-cover h-full"
           />
           <div className="absolute bg-black inset-0 bg-opacity-50 md:hidden"></div>
         </div>
