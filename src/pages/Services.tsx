@@ -1,3 +1,4 @@
+import Breadcrumbs from "@/components/BreadCrumbs";
 import Footer from "@/components/mainlayout/Footer";
 import Navbar from "@/components/mainlayout/Navbar";
 import ServicesCard from "@/components/ServicesCard";
@@ -32,6 +33,7 @@ const Services = () => {
     <>
     
       <Navbar />
+      <Breadcrumbs />
       <div className="container mx-auto p-6">
         {/* hero section */}
         <section className="relative mb-12">

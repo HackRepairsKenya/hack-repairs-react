@@ -1,3 +1,4 @@
+import Breadcrumbs from "@/components/BreadCrumbs";
 import Footer from "@/components/mainlayout/Footer";
 import Navbar from "@/components/mainlayout/Navbar";
 import SellWithusForm from "@/components/sell-with-us/SellWithUsForm";
@@ -16,6 +17,7 @@ const Sell: React.FC = () => {
         type="sell page"
       />
     <Navbar />
+    <Breadcrumbs />
     <SellWithusForm />
     <Footer />
   </div>

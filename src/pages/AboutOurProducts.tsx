@@ -1,3 +1,4 @@
+import Breadcrumbs from "@/components/BreadCrumbs"
 import Footer from "@/components/mainlayout/Footer"
 import Navbar from "@/components/mainlayout/Navbar"
 
@@ -6,6 +7,7 @@ function AboutOurProducts() {
   return (
     <div>
         <Navbar />
+        <Breadcrumbs />
          {/* Hero Section */}
       <section className="relative ">
         <img

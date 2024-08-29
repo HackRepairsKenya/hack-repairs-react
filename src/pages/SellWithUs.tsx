@@ -5,6 +5,7 @@ import Navbar from '@/components/mainlayout/Navbar';
 import Footer from '@/components/mainlayout/Footer';
 import { Link } from 'react-router-dom';
 import SEO from '@/components/seo/SEO';
+import Breadcrumbs from '@/components/BreadCrumbs';
 const SellWithUsPage: React.FC = () => {
   return (
     <>
@@ -15,7 +16,9 @@ const SellWithUsPage: React.FC = () => {
         type="sell page"
       />
     <Navbar />
+    <Breadcrumbs />
     <div className="container mx-auto p-6">
+    
       {/* Hero Section */}
       <section className="relative ">
         <img
@@ -29,6 +32,7 @@ const SellWithUsPage: React.FC = () => {
           <h1 className="text-white text-4xl font-bold text-center">Start Selling with Us</h1>
         </div>
       </section>
+      
       {/* Why Sell With Us Section */}
       <section className="mb-12 pt-12 bg-gray-100">
         <h2 className="text-3xl font-semibold text-center mb-6">Why Sell With Us?</h2>

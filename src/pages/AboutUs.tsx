@@ -1,3 +1,4 @@
+import Breadcrumbs from "@/components/BreadCrumbs";
 import Footer from "@/components/mainlayout/Footer";
 import Navbar from "@/components/mainlayout/Navbar";
 
@@ -6,6 +7,7 @@ export default function AboutUs() {
   return (
     <div>
         <Navbar />
+        <Breadcrumbs />
          {/* Hero Section */}
       <section className="relative ">
         <img
@@ -19,6 +21,8 @@ export default function AboutUs() {
           <h1 className="text-white text-4xl font-bold text-center">About us</h1>
         </div>
       </section>
+     
+      
         <Footer />
     </div>
   )

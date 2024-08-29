@@ -43,6 +43,7 @@ const FormSchema = z.object({
 import { motion } from "framer-motion";
 import Navbar from "@/components/mainlayout/Navbar";
 import Footer from "@/components/mainlayout/Footer";
+import Breadcrumbs from "@/components/BreadCrumbs";
 
 export default function Contact() {
   const form = useForm<z.infer<typeof FormSchema>>({
@@ -108,6 +109,7 @@ export default function Contact() {
   return (
     <>
     <Navbar />
+    <Breadcrumbs />
       {/* Hero Section */}
       <section className="relative ">
         <img
