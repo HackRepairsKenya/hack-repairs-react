@@ -9,6 +9,8 @@ import Services from './pages/Services.tsx';
 import AboutOurProducts from './pages/AboutOurProducts.tsx';
 import AboutUs from './pages/AboutUs.tsx';
 import Contact from './pages/ContactUs.tsx';
+import ServiceDetailedView from './pages/ServiceDetailedView.tsx';
+import CategoriesDetailedView from './pages/CategoriesDetailedView.tsx';
 
 // Lazy load the Home component
 const Home = React.lazy(() => import('./pages/Home.tsx'));
@@ -19,17 +21,20 @@ function App() {
   return (
     <HelmetProvider context={helmetContext}>
       <BrowserRouter>
-        <Suspense fallback={<div><Loading /></div>}>
+        <Suspense fallback={<Loading />}>
           <Routes>
             <Route path='/' element={<Home />} />
-            {/* sell */}
+            {/* Sell */}
             <Route path='/sell-with-us' element={<SellWithUsPage />} />
-            <Route path='/sell-with-us/sell'  element={<Sell />}/>
-            {/* services */}
+            <Route path='/sell-with-us/sell' element={<Sell />} />
+            {/* Services */}
             <Route path='/services' element={<Services />} />
-            {/* about our products */}
+            <Route path='/services/:id' element={<ServiceDetailedView />} />
+            {/* Categories */}
+            <Route path='/categories/:id' element={<CategoriesDetailedView />} />
+            {/* About our products */}
             <Route path='/about-our-products' element={<AboutOurProducts />} />
-            {/* about us */}
+            {/* About us */}
             <Route path='/about' element={<AboutUs />} />
             <Route path='/contact' element={<Contact />} />
             <Route path='*' element={<PageNotFound />} />
