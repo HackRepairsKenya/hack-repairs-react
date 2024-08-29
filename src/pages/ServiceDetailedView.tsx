@@ -44,6 +44,7 @@ const ServiceDetailedView: React.FC = () => {
   const [searchTerm, setSearchTerm] = useState<string>("");
   const [selectedBrands, setSelectedBrands] = useState<string[]>([]);
   const [priceRange, setPriceRange] = useState<[number, number]>([0, 5000]);
+  const [isFilterOpen, setIsFilterOpen] = useState<boolean>(false);
 
   const handleSearchChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setSearchTerm(event.target.value.toLowerCase());
@@ -82,9 +83,14 @@ const ServiceDetailedView: React.FC = () => {
     <>
       <Navbar />
       <Breadcrumbs />
-      <div className="flex w-full">
+      <div className="flex flex-col md:flex-row  w-full">
         {/* Filter Section */}
-        <section className="p-4 w-[20%]">
+        <section
+          id="filter-section"
+          className={`p-4 w-full md:w-1/5 bg-gray-100 ${
+            isFilterOpen ? "block" : "hidden"
+          } md:block transition-all duration-300 ease-in-out`}
+        >
           <div className="flex flex-col gap-4 mb-4">
             {/* Brand Filter */}
             <div>
@@ -97,7 +103,7 @@ const ServiceDetailedView: React.FC = () => {
                       value={brand}
                       checked={selectedBrands.includes(brand)}
                       onChange={handleBrandChange}
-                      className="form-checkbox h-4 w-4 text-button"
+                      className="form-checkbox h-4 w-4 text-blue-600"
                     />
                     <span className="ml-2 text-gray-700">{brand}</span>
                   </label>
@@ -127,9 +133,19 @@ const ServiceDetailedView: React.FC = () => {
           </div>
         </section>
 
-        <section className="w-[80%]">
+        <section className="wfull md:w-[80%]">
           {/* Search Section */}
-          <section className="p-4 ">
+          <section className="flex gap-4 items-center p-4 ">
+          <div className="md:hidden">
+          <button
+            onClick={() => setIsFilterOpen(!isFilterOpen)}
+            className="px-4 py-1 border  rounded-md focus:outline-none focus:ring-2 focus:ring-button"
+            aria-expanded={isFilterOpen}
+            aria-controls="filter-section"
+          >
+            {isFilterOpen ? "Filters" : "Filters"}
+          </button>
+        </div>
             <Input
               placeholder="Search phone screen type"
               value={searchTerm}
@@ -140,7 +156,7 @@ const ServiceDetailedView: React.FC = () => {
 
           {/* Available Repairs Section */}
           <section className="p-4">
-            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4">
+            <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-4 gap-4">
               {filteredRepairs.map((repair, index) => (
                 <div key={index}>
                   <ScreenRepaircard
