@@ -1,3 +1,4 @@
+import CarouselBanner from "@/components/CarouselBanner";
 import Brands from "@/components/home/Brand";
 import Categories from "@/components/home/Categories";
 import Hero from "@/components/home/Hero.tsx";
@@ -40,6 +41,7 @@ export default function Home() {
 
       <Navbar />
       <Hero />
+      <CarouselBanner />
       <WhyHR />
       <Categories />
       <Repairs />
