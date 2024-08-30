@@ -18,23 +18,18 @@ export default function CarouselBanner() {
       list2:'we sell phone ,computer and laptop spares'
        // Replace with actual image URL
     },
-    {
-      title: 'New arrivals every week',
-      image: '/delivery.webp', 
-      list:'buy other accessories and products here',
-      list2:'we sell phone ,computer and laptop spares'// Replace with actual image URL
-    },
+    
     {
       title: 'We offer door-step screen replacement services',
       image: '/delivery.webp',
-      list:'buy other accessories and products here',
-      list2:'we sell phone ,computer and laptop spares' // Replace with actual image URL
+      list:'book a service from us',
+      list2:'pay zero cash for delivery if within Kilifi Town' // Replace with actual image URL
     },
     {
       title: 'Sell With Us',
       image: '/delivery.webp',
-      list:'buy other accessories and products here',
-      list2:'we sell phone ,computer and laptop spares'
+      list:'Register you business to sell with us',
+      list2:'Get a custom dashboard to manage your products and sales'
     },
   ];
 
@@ -43,7 +38,7 @@ export default function CarouselBanner() {
   );
 
   return (
-    <div className="w-full  md:mx-4 lg:mx-auto mt-8 mb-8">
+    <div className="w-full  md:mx-4 lg:mx-auto md:mt-8 md:mb-8">
       <div className=" w-full relative h-64 lg:w-[90%] mx-auto">
         <Carousel
           plugins={[plugin.current]}
