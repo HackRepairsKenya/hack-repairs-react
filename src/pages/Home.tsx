@@ -33,11 +33,11 @@ export default function Home() {
   return (
     <div>
       <SEO
-        title="HackRepairs"
+        title="HackRepairs - Quality Screens, Quality Services"
         description="We provide top-notch phone screen repair services and sell high-quality replacement screens for all major brands."
         name="HackRepairs."
         type="home page"
-        image="/hack-repairs.jpg"
+        image="https://hackrepairs.co.ke/hack-repairs.jpg"
       />
 
       <Navbar />
