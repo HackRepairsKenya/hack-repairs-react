@@ -11,7 +11,9 @@ export default function AboutUs() {
        title="About Us -HackRepairs"
        description="We provide top-notch phone screen repair services and sell high-quality replacement screens for all major brands."
        name="HackRepairs."
-       type="sell page"
+       type="website"
+       url="https://hackrepairs.co.ke/about"
+       metaKeywords="about,hack repairs,website"
         image="/hack-repairs.jpg"/>
         <Navbar />
         <Breadcrumbs />

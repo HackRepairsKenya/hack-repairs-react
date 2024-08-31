@@ -36,8 +36,10 @@ export default function Home() {
         title="HackRepairs - Quality Screens, Quality Services"
         description="We provide top-notch phone screen repair services and sell high-quality replacement screens for all major brands."
         name="HackRepairs."
-        type="home page"
+        type="website"
+        url="https://hackrepairs.co.ke/"
         image="https://hackrepairs.co.ke/hack-repairs.jpg"
+        metaKeywords="home,hack repairs, kilifi,screens, screen replacement,phone spares,tecno ,nokia,samsung,oppo"
       />
 
       <Navbar />

@@ -113,7 +113,9 @@ export default function Contact() {
      title="Contact Us -HackRepairs"
      description="We provide top-notch phone screen repair services and sell high-quality replacement screens for all major brands."
      name="HackRepairs."
-     type="contact Us page"
+     type="website"
+     url="https://hackrepairs.co.ke/contact"
+     metaKeywords="hack repairs,call,kilifi"
       image="/hack-repairs.jpg"/>
     <Navbar />
     <Breadcrumbs />

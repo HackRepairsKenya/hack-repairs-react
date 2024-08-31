@@ -13,7 +13,9 @@ const SellWithUsPage: React.FC = () => {
         title="Sell With Us -HackRepairs"
         description="We provide top-notch phone screen repair services and sell high-quality replacement screens for all major brands."
         name="HackRepairs."
-        type="sell page"
+        type="website"
+        url="https://hackrepairs.co.ke/sell-with-us"
+        metaKeywords="sell,hack repairs,phone accessories"
          image="/hack-repairs.jpg"
       />
     <Navbar />

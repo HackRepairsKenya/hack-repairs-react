@@ -6,13 +6,20 @@ interface SEOprops {
     name:string
     type:string
     image:string
+    metaKeywords:string
+    url:string
+
+    
 }
-export default function SEO({title, description, name, type,image}:SEOprops) {
+export default function SEO({title, description,url, name, type,image,metaKeywords}:SEOprops) {
 return (
 <Helmet>
 { /* Standard metadata tags */ }
 <title>{title}</title>
 <meta name='description' content={description} />
+<meta name="keywords" content={metaKeywords} />
+<meta name="author" content='hack Repairs' />
+<link rel='canonical' href={url} />
 { /* End standard metadata tags */ }
 { /* Facebook tags */ }
 <meta property="og:type" content={type} />

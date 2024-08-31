@@ -36,7 +36,9 @@ const Services = () => {
      title="Services -HackRepairs"
      description="We provide top-notch phone screen repair services and sell high-quality replacement screens for all major brands."
      name="HackRepairs."
-     type="service  page"
+     type="website"
+     url="https://hackrepairs.co.ke"
+     metaKeywords="services,screen replacement, computer services, laptop services"
      image="/hack-repairs.jpg"/>
       <Navbar />
       <Breadcrumbs />
