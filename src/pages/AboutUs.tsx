@@ -1,11 +1,18 @@
 import Breadcrumbs from "@/components/BreadCrumbs";
 import Footer from "@/components/mainlayout/Footer";
 import Navbar from "@/components/mainlayout/Navbar";
+import SEO from "@/components/seo/SEO";
 
 
 export default function AboutUs() {
   return (
     <div>
+      <SEO 
+       title="About Us -HackRepairs"
+       description="We provide top-notch phone screen repair services and sell high-quality replacement screens for all major brands."
+       name="HackRepairs."
+       type="sell page"
+        image="/hack-repairs.jpg"/>
         <Navbar />
         <Breadcrumbs />
          {/* Hero Section */}

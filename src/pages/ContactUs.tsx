@@ -44,6 +44,7 @@ import { motion } from "framer-motion";
 import Navbar from "@/components/mainlayout/Navbar";
 import Footer from "@/components/mainlayout/Footer";
 import Breadcrumbs from "@/components/BreadCrumbs";
+import SEO from "@/components/seo/SEO";
 
 export default function Contact() {
   const form = useForm<z.infer<typeof FormSchema>>({
@@ -108,6 +109,12 @@ export default function Contact() {
 
   return (
     <>
+    <SEO 
+     title="Contact Us -HackRepairs"
+     description="We provide top-notch phone screen repair services and sell high-quality replacement screens for all major brands."
+     name="HackRepairs."
+     type="contact Us page"
+      image="/hack-repairs.jpg"/>
     <Navbar />
     <Breadcrumbs />
       {/* Hero Section */}

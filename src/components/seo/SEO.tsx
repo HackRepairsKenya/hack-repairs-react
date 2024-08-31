@@ -5,8 +5,9 @@ interface SEOprops {
     description:string
     name:string
     type:string
+    image:string
 }
-export default function SEO({title, description, name, type}:SEOprops) {
+export default function SEO({title, description, name, type,image}:SEOprops) {
 return (
 <Helmet>
 { /* Standard metadata tags */ }
@@ -17,6 +18,7 @@ return (
 <meta property="og:type" content={type} />
 <meta property="og:title" content={title} />
 <meta property="og:description" content={description} />
+<meta property="og:image" content={image}/>
 { /* End Facebook tags */ }
 { /* Twitter tags */ }
 <meta name="twitter:creator" content={name} />
