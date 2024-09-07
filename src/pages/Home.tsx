@@ -60,7 +60,7 @@ export default function Home() {
       <DialogHeader>
         <DialogTitle className="mt-2">Is Your Phone Screen Cracked or Damaged?</DialogTitle>
         <DialogDescription className="flex flex-col gap-4">
-          <p>Don't let a cracked screen ruin your day! We offer fast and reliable on-door screen replacement services right here in Kilifi. Our expert technicians are just a call away, ready to provide you with a top-quality repair right at your doorstep.</p>
+          <p>Don't let a cracked screen ruin your day! We offer fast and reliable on-door screen replacement services right here in <span className="font-bold text-black">Kilifi</span>, <span className="font-bold text-black">Malindi</span> & <span className="font-bold text-black">Mombasa</span>. Our expert technicians are just a call away, ready to provide you with a top-quality repair right at your doorstep.</p>
           {/* <p>Why choose us?</p>
           <ul>
             <li><strong>Convenience:</strong> No need to travel or wait in long lines. We come to you!</li>

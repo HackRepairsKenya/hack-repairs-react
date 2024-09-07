@@ -9,21 +9,25 @@ import {
 } from "@/components/ui/carousel";
 
 export default function CarouselBanner() {
-  // Define your data here
-  const data = [
+  interface Data {
+    title:string
+    image:string
+    list:string
+    list2:string
+  }
+
+  const data:Data[] = [
     {
       title: 'We have other products',
       image: '/delivery.webp',
       list:'buy other accessories and products here',
-      list2:'we sell phone ,computer and laptop spares'
-       // Replace with actual image URL
-    },
-    
+      list2:'we sell phone ,computer and laptop spares'   
+    }, 
     {
       title: 'We offer door-step screen replacement services',
       image: '/delivery.webp',
       list:'book a service from us',
-      list2:'pay zero cash for delivery if within Kilifi Town' // Replace with actual image URL
+      list2:'pay zero cash for delivery if within Kilifi Town' 
     },
     {
       title: 'Sell With Us',
@@ -32,14 +36,12 @@ export default function CarouselBanner() {
       list2:'Get a custom dashboard to manage your products and sales'
     },
   ];
-
   const plugin = React.useRef(
-    Autoplay({ delay: 2000, stopOnInteraction: true })
+    Autoplay({ delay: 3000, stopOnInteraction: true })
   );
-
   return (
     <div className="w-full  md:mx-4 lg:mx-auto md:mt-8 md:mb-8">
-      <div className=" w-full relative h-64 lg:w-[90%] mx-auto">
+      <div className=" w-full relative h-64 lg:w-[92%] md:w-[92%] mx-auto">
         <Carousel
           plugins={[plugin.current]}
           className="w-full"
@@ -47,12 +49,12 @@ export default function CarouselBanner() {
           onMouseLeave={plugin.current.reset}
         >
           <CarouselContent>
-            {data.map((item, index) => (
-              <CarouselItem key={index} className="flex-shrink-0 hover:cursor-pointer relative h-64 bg-gray-800 w-full">
+            {data.map((item: { title: string; list: string; list2: string; image: string ; }, index: React.Key | null | undefined) => (
+              <CarouselItem key={index} className="flex-shrink-0  hover:cursor-pointer relative h-64 md:h-72 bg-gray-800 w-full">
                 <div className="w-[30%] p-4">
                   <h1 className="text-white absolute top-4 left-4 z-50 font-bold capitalize text-3xl">{item.title}</h1>
                 </div>
-                <div className="absolute z-50 top-[50%] left-[50%]  text-white">
+                <div className="absolute z-50 top-[50%] left-[50%] text-white">
                   <ul className="list-disc">
                     <li>{item.list}</li>
                     <li>{item.list2}</li>

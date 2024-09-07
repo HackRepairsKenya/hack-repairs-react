@@ -39,6 +39,7 @@ const repairsData = {
 
 const RepairDetail = () => {
   const [quantity, setQuantity] = useState(1); // State to track quantity
+  const [isBooked, setIsBooked] = useState(false); // State to track booking
   const { id: brand } = useParams(); // Access the dynamic route parameter
 
   const repairDetail = repairsData[brand?.toLowerCase() as keyof typeof repairsData];
@@ -54,6 +55,11 @@ const RepairDetail = () => {
 
   const handleDecrement = () => {
     setQuantity((prevQuantity) => (prevQuantity > 1 ? prevQuantity - 1 : 1));
+  };
+
+  // Handle booking function
+  const handleBooking = () => {
+    setIsBooked(true);
   };
 
   return (
@@ -114,28 +120,34 @@ const RepairDetail = () => {
             {/* Dialog for booking */}
             <Dialog>
               <DialogTrigger>
-                <button className="mt-4 px-6 py-3 bg-button text-white rounded-lg hover:bg-green-700">
+                <button
+                  onClick={handleBooking}
+                  className="mt-4 px-6 py-3 bg-button text-white rounded-lg hover:bg-green-700"
+                >
                   Book Now
                 </button>
               </DialogTrigger>
-              <DialogContent>
-                <DialogHeader>
-                  <DialogTitle className="text-center text-button text-3xl"><SiTicktick /></DialogTitle>
-                  <h1>Service added to cart successfully</h1>
-                  <DialogDescription>
-                    Do you want to continue browsing for more screen repair services or go to cart?
-                  </DialogDescription>
-                </DialogHeader>
-
-                <div className='flex justify-between capitalize'>
-                  <button className="bg-button hover:bg-green-800 text-white p-2 rounded">
-                    <Link to='/cart'>View Cart and checkout</Link>
-                  </button>
-                  <button className="border border-button p-2 rounded">
-                    <Link to='/services/screen-replacement'>Continue browsing</Link>
-                  </button>
-                </div>
-              </DialogContent>
+              {isBooked && (
+                <DialogContent>
+                  <DialogHeader>
+                    <DialogTitle className="text-center text-button text-3xl">
+                      <SiTicktick />
+                    </DialogTitle>
+                    <h1>Service added to cart successfully</h1>
+                    <DialogDescription>
+                      Do you want to continue browsing for more screen repair services or go to cart?
+                    </DialogDescription>
+                  </DialogHeader>
+                  <div className="flex justify-between capitalize">
+                    <button className="bg-button hover:bg-green-800 text-white p-2 rounded">
+                      <Link to="/cart">View Cart and checkout</Link>
+                    </button>
+                    <button className="border border-button p-2 rounded">
+                      <Link to="/services/screen-replacement">Continue browsing</Link>
+                    </button>
+                  </div>
+                </DialogContent>
+              )}
             </Dialog>
           </div>
         </div>

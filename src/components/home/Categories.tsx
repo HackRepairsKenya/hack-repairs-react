@@ -1,9 +1,7 @@
-"use client";
+
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { motion, useAnimation } from "framer-motion";
-
-// Define interface for category
 interface Category {
   name: string;
   id: number;
@@ -15,11 +13,10 @@ const categories: Category[] = [
   { id: 1, name: "Tecno", image: "/categories/tecno.png" },
   { id: 2, name: "Samsung", image: "/categories/samsung.png" },
   { id: 3, name: "Itel", image: "/categories/itel.png" },
-  { id: 4, name: "Huawei", image: "/categories/samsung.png" },
-//   { id: 5, name: "Apple", image: "/categories/apple.png" },
-//   { id: 6, name: "Nokia", image: "/categories/nokia.png" },
-//   { id: 7, name: "Xiaomi", image: "/categories/xiaomi.png" },
-//   { id: 8, name: "Oppo", image: "/categories/oppo.png" },
+  { id: 4, name: "Oppo", image: "/categories/samsung.png" },
+  { id: 4, name: "Nokia", image: "/categories/samsung.png" },
+  { id: 4, name: "Realme", image: "/categories/samsung.png" },
+
 ];
 
 // Typing animation variants
@@ -37,7 +34,7 @@ const typingAnimation = {
 const Categories: React.FC = () => {
   const navigate = useNavigate();
   const controls = useAnimation();
-  const [hasAnimated, setHasAnimated] = useState(false);
+  const [hasAnimated, setHasAnimated] = useState<boolean>(false);
 
   useEffect(() => {
     const handleScroll = () => {

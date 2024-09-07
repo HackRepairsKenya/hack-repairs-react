@@ -1,50 +1,59 @@
 import React, { useState } from "react";
-import { useNavigate } from 'react-router-dom';
+import { useNavigate } from "react-router-dom";
 import Navbar from "@/components/mainlayout/Navbar";
 import Footer from "@/components/mainlayout/Footer";
 import { Input } from "@/components/ui/input";
 import ScreenRepaircard from "@/components/shared/ScreenRepaircard";
 import Breadcrumbs from "@/components/BreadCrumbs";
 
-interface Repair {
-  title: string;
-  img: string;
+interface Screen {
   oldPrice: number;
   newPrice: number;
+  img: string;
+  type: string;
+}
+
+interface Repair {
+  id: number;
+  title: string;
+  screen: Screen[];
 }
 
 const CategoriesDetailedView: React.FC = () => {
   const availableRepairs: Repair[] = [
     {
+      id: 0,
       title: "Tecno",
-      img: "/screens/tecno/tecnoscreen.png",
-      oldPrice: 2000,
-      newPrice: 1800,
+      screen: [
+        {
+          type: "Tecno Camon 15",
+          img: "/screens/tecno/tecnoscreen.png",
+          oldPrice: 2000,
+          newPrice: 1800,
+        },
+        // Add more screen data here...
+      ],
     },
     {
+      id: 1,
       title: "Samsung",
-      img: "/screens/tecno/tecnoscreen.png",
-      oldPrice: 2500,
-      newPrice: 2300,
+      screen: [
+        {
+          type: "Samsung Galaxy S10",
+          img: "/screens/samsung/samsungscreen.png",
+          oldPrice: 3000,
+          newPrice: 2800,
+        },
+        
+      ],
     },
-    {
-      title: "Itel",
-      img: "/screens/tecno/tecnoscreen.png",
-      oldPrice: 1500,
-      newPrice: 1400,
-    },
-    {
-      title: "Xiaomi",
-      img: "/screens/tecno/tecnoscreen.png",
-      oldPrice: 2200,
-      newPrice: 2000,
-    },
+    
   ];
 
   const [searchTerm, setSearchTerm] = useState<string>("");
   const [selectedBrands, setSelectedBrands] = useState<string[]>([]);
   const [priceRange, setPriceRange] = useState<[number, number]>([0, 5000]);
-  const [isFilterOpen, setIsFilterOpen] = useState<boolean>(false); // State to manage filter visibility on small screens
+  const [isFilterOpen, setIsFilterOpen] = useState<boolean>(false); 
 
   const navigate = useNavigate();
 
@@ -52,8 +61,8 @@ const CategoriesDetailedView: React.FC = () => {
     setSearchTerm(event.target.value.toLowerCase());
   };
 
-  const handleBooking = (title: string) => {
-    navigate(`/brand/${title.toLowerCase()}`);
+  const handleBooking = (type: string) => {
+    navigate(`/brand/${type.toLowerCase()}`);
   };
 
   const handleBrandChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -65,27 +74,33 @@ const CategoriesDetailedView: React.FC = () => {
     );
   };
 
-  const handlePriceRangeChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+  const handlePriceRangeChange = (
+    event: React.ChangeEvent<HTMLInputElement>
+  ) => {
     const value = Number(event.target.value);
     setPriceRange((prevRange) => [prevRange[0], value]);
   };
 
-  const filteredRepairs = availableRepairs.filter((repair) => {
-    const matchesSearchTerm = repair.title.toLowerCase().includes(searchTerm);
-    const matchesBrand =
-      selectedBrands.length === 0 || selectedBrands.includes(repair.title);
-    const matchesPrice =
-      repair.newPrice >= priceRange[0] && repair.newPrice <= priceRange[1];
-    return matchesSearchTerm && matchesBrand && matchesPrice;
-  });
+  const filteredRepairs = availableRepairs
+    .filter((repair) => {
+      const matchesSearchTerm = repair.title.toLowerCase().includes(searchTerm);
+      const matchesBrand =
+        selectedBrands.length === 0 || selectedBrands.includes(repair.title);
+      return matchesSearchTerm && matchesBrand;
+    })
+    .map((repair) => ({
+      ...repair,
+      screen: repair.screen.filter(
+        (screen) => screen.newPrice >= priceRange[0] && screen.newPrice <= priceRange[1]
+      ),
+    }))
+    .filter((repair) => repair.screen.length > 0);
 
   return (
     <>
       <Navbar />
       <Breadcrumbs />
       <div className="flex flex-col md:flex-row w-full">
-        
-
         {/* Filter Section */}
         <section
           id="filter-section"
@@ -137,43 +152,49 @@ const CategoriesDetailedView: React.FC = () => {
 
         {/* Main Content Section */}
         <section className="w-full ">
-        
           {/* Search Section */}
           <section className="flex gap-4 items-center w-full p-4">
             {/* filter */}
-          {/* Filter Toggle Button for Small Screens */}
-        <div className="md:hidden">
-          <button
-            onClick={() => setIsFilterOpen(!isFilterOpen)}
-            className="px-4 py-1 border  rounded-md focus:outline-none focus:ring-2 focus:ring-button"
-            aria-expanded={isFilterOpen}
-            aria-controls="filter-section"
-          >
-            {isFilterOpen ? "Filters" : "Filters"}
-          </button>
-        </div>
-        <div> <Input
-              placeholder="Search phone screen type"
-              value={searchTerm}
-              onChange={handleSearchChange}
-              className="w-full max-w-xs border-gray-300 rounded-lg"
-            /></div>
-           
+            {/* Filter Toggle Button for Small Screens */}
+            <div className="md:hidden">
+              <button
+                onClick={() => setIsFilterOpen(!isFilterOpen)}
+                className="px-4 py-1 border  rounded-md focus:outline-none focus:ring-2 focus:ring-button"
+                aria-expanded={isFilterOpen}
+                aria-controls="filter-section"
+              >
+                {isFilterOpen ? "Hide Filters" : "Show Filters"}
+              </button>
+            </div>
+            <div>
+              <Input
+                placeholder="Search phone screen type"
+                value={searchTerm}
+                onChange={handleSearchChange}
+                className="w-full max-w-xs border-gray-300 rounded-lg"
+              />
+            </div>
           </section>
-
           {/* Available Repairs Section */}
           <section className="p-4">
-            <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-4 gap-4">
-              {filteredRepairs.map((repair, index) => (
-                <div key={index}>
-                  <ScreenRepaircard
-                    repair={repair}
-                    index={index}
-                    handleBooking={handleBooking}
-                  />
+            {filteredRepairs.length === 0 ? (
+              <p>No repairs found matching your criteria.</p>
+            ) : (
+              filteredRepairs.map((item) => (
+                <div key={item.id}>
+                  <h2 className="text-xl font-semibold mb-4">{item.title}</h2>
+                  <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-4 gap-4">
+                    {item.screen.map((repair,index) => (
+                      <ScreenRepaircard
+                        key={index}
+                        repair={repair}
+                        handleBooking={handleBooking}
+                      />
+                    ))}
+                  </div>
                 </div>
-              ))}
-            </div>
+              ))
+            )}
           </section>
         </section>
       </div>
@@ -181,5 +202,4 @@ const CategoriesDetailedView: React.FC = () => {
     </>
   );
 };
-
 export default CategoriesDetailedView;

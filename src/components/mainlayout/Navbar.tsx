@@ -33,7 +33,7 @@ const Navbar: React.FC = () => {
     if (e.target.value.trim() === "") {
       setSearchResults([]);
     } else {
-      const results = ["Tecno Screen", "Samsung Screen", "Itel Screen"].filter(
+      const results = ["Tecno Screen", "Samsung Screen", "Itel Screen","oppo"].filter(
         (item) => item.toLowerCase().includes(e.target.value.toLowerCase())
       );
       setSearchResults(results);
@@ -131,7 +131,7 @@ const Navbar: React.FC = () => {
             type="text"
             value={searchInput}
             onChange={handleSearchChange}
-            placeholder="Search all phone screens (e.g Tecno, Samsung)"
+            placeholder="Search all phone screens & phone accessories(e.g tecno ,sim trays,batteries)"
             className="border p-3 border-gray-300 outline-none focus:ring-2 focus:ring-green-500 rounded-md w-full h-full pl-4 pr-12 text-gray-700 placeholder-gray-500"
           />
           <p className="absolute inset-y-0 right-0 bg-green-800 p-2 rounded-r-md flex items-center">
