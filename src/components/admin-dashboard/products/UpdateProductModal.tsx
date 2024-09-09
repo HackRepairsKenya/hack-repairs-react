@@ -1,11 +1,32 @@
-import React, {useEffect, useState} from "react";
+import  {useEffect, useState} from "react";
 import { useFormik } from "formik";
 import axios from "axios"
+import { Category,Subcategory } from "@/utils/types";
 
-const UpdateProductModal = ({ handleCallClose, product }) =>{
+interface Product {
+  id: number;
+  productName: string;
+  categoryId: number;
+  subcategoryId: number;
+  yearOfManufacture: string;
+  productModel: string;
+  marketPrice: number;
+  supplierName: string;
+  productQuantity: number;
+  productPrice: number;
+  productColor: string;
+  coverImage: string;
+  productDescription: string;
+}
+interface UpdateProductModalProps {
+  handleCallClose: () => void;
+  product: Product;
+}
+
+const UpdateProductModal = ({ handleCallClose, product }:UpdateProductModalProps) =>{
     const [category, setCategory] = useState([])
     const [subcategory, setSubCategory] = useState([])
-    const [isLoading, setIsLoading] = useState(false);
+    const [isLoading, setIsLoading] = useState<boolean>(false);
 
     useEffect(() => {
         fetchCategories();
@@ -43,6 +64,7 @@ const UpdateProductModal = ({ handleCallClose, product }) =>{
                     handleCallClose();
                     setIsLoading(false)
                 }
+            // eslint-disable-next-line @typescript-eslint/no-unused-vars
             }catch(error){
                 console.log("Error updating the product")
             }
@@ -67,7 +89,7 @@ const UpdateProductModal = ({ handleCallClose, product }) =>{
                 value={formik.values.productName}
                 id="productName"
                 className="bg-white border border-gray-500 text-black placeholder-black dark:placeholder-green-500 text-sm rounded focus:ring-black focus:border-gray block w-full p-2 outline-none"
-                placeHolder="Product Name"
+                placeholder="Product Name"
               />
             </div>
             {/* Product Category */}
@@ -75,7 +97,7 @@ const UpdateProductModal = ({ handleCallClose, product }) =>{
               <label className="text-sm font-semibold">Product Category</label>
               <select
                 name="categoryId"
-                type="text"
+            
                 id="categoryId"
                 required
                 onChange={formik.handleChange}
@@ -83,7 +105,7 @@ const UpdateProductModal = ({ handleCallClose, product }) =>{
                 className="bg-white border border-gray-500 text-black placeholder-black dark:placeholder-green-500 text-sm rounded focus:ring-black focus:border-gray block w-full p-2 outline-none"
               >
                 <option>Select Category</option>
-                {category.map((category, key) => {
+                {category.map((category:Category, key) => {
                   return (
                     <option key={key} className="capitalize" value={category.id}>
                       {category.name}
@@ -99,7 +121,7 @@ const UpdateProductModal = ({ handleCallClose, product }) =>{
               </label>
               <select
                 name="subcategoryId"
-                type="text"
+              
                 required
                 id="subcategoryId"
                 onChange={formik.handleChange}
@@ -107,7 +129,7 @@ const UpdateProductModal = ({ handleCallClose, product }) =>{
                 className="bg-white border border-gray-500 text-black placeholder-black dark:placeholder-green-500 text-sm rounded focus:ring-black focus:border-gray block w-full p-2 outline-none"
               >
                 <option>Select Subcategory</option>
-                {subcategory.map((subcategory, key) => {
+                {subcategory.map((subcategory:Subcategory, key) => {
                   return (
                     <option key={ key } className="capitalize" value={subcategory.id}>
                       {subcategory.name}
@@ -130,7 +152,7 @@ const UpdateProductModal = ({ handleCallClose, product }) =>{
                 value={formik.values.yearOfManufacture}
                 id="yearOfManufacture"
                 className="bg-white border border-gray-500 text-black placeholder-black dark:placeholder-green-500 text-sm rounded focus:ring-black focus:border-gray block w-full p-2 outline-none"
-                placeHolder="Manufacturing Year"
+                placeholder="Manufacturing Year"
               />
             </div>
             {/* Product Model */}
@@ -141,7 +163,7 @@ const UpdateProductModal = ({ handleCallClose, product }) =>{
                 value={formik.values.productModel}
                 id="productModel"
                 className="bg-white border border-gray-500 text-black placeholder-black dark:placeholder-green-500 text-sm rounded focus:ring-black focus:border-gray block w-full p-2 outline-none"
-                placeHolder="Product Model"
+                placeholder="Product Model"
               />
             </div>
             {/* Market Price */}
@@ -153,7 +175,7 @@ const UpdateProductModal = ({ handleCallClose, product }) =>{
                 id="marketPrice"
                 type="number"
                 className="bg-white border border-gray-500 text-black placeholder-black dark:placeholder-green-500 text-sm rounded focus:ring-black focus:border-gray block w-full p-2 outline-none"
-                placeHolder="Market Price"
+                placeholder="Market Price"
               />
             </div>
             {/* Supplier Name */}
@@ -164,7 +186,7 @@ const UpdateProductModal = ({ handleCallClose, product }) =>{
                 value={formik.values.supplierName}
                 id="supplierName"
                 className="bg-white border border-gray-500 text-black placeholder-black dark:placeholder-green-500 text-sm rounded focus:ring-black focus:border-gray block w-full p-2 outline-none"
-                placeHolder="Supplier Name"
+                placeholder="Supplier Name"
               />
             </div>
           </div>
@@ -180,7 +202,7 @@ const UpdateProductModal = ({ handleCallClose, product }) =>{
                 value={formik.values.productQuantity}
                 id="productQuantity"
                 className="bg-white border border-gray-500 text-black placeholder-black dark:placeholder-green-500 text-sm rounded focus:ring-black focus:border-gray block w-full p-2 outline-none"
-                placeHolder="Available Quantity"
+                placeholder="Available Quantity"
               />
             </div>
             {/* Product's Price */}
@@ -192,7 +214,7 @@ const UpdateProductModal = ({ handleCallClose, product }) =>{
                 id="productPrice"
                 type="number"
                 className="bg-white border border-gray-500 text-black placeholder-black dark:placeholder-green-500 text-sm rounded focus:ring-black focus:border-gray block w-full p-2 outline-none"
-                placeHolder="Product's Price"
+                placeholder="Product's Price"
               />
             </div>
             {/* Product's Colors */}
@@ -203,7 +225,7 @@ const UpdateProductModal = ({ handleCallClose, product }) =>{
                 value={formik.values.productColor}
                 id="productColor"
                 className="bg-white border border-gray-500 text-black placeholder-black dark:placeholder-green-500 text-sm rounded focus:ring-black focus:border-gray block w-full p-2 outline-none"
-                placeHolder="Product's Colors"
+                placeholder="Product's Colors"
               />
             </div>
             {/* Product cover image */}
@@ -215,7 +237,7 @@ const UpdateProductModal = ({ handleCallClose, product }) =>{
                 value={formik.values.coverImage}
                 onChange={formik.handleChange}
                 id="coverImage"
-                placeHolder="Cover Image"
+                placeholder="Cover Image"
                 className="bg-white border border-gray-500 text-black placeholder-black dark:placeholder-green-500 text-sm rounded focus:ring-black focus:border-gray block w-full p-2 outline-none"
                 type="text"
               />
@@ -229,15 +251,15 @@ const UpdateProductModal = ({ handleCallClose, product }) =>{
               </label>
               <textarea
                 name="productDescription"
-                type="text"
+                
                 id="productDescription"
                 required
                 onChange={formik.handleChange}
                 value={formik.values.productDescription}
-                rows="4"
-                cols="100"
+                rows={4}
+                cols={100}
                 className="block outline-none p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                placeHolder="Product Description ..."
+                placeholder="Product Description ..."
               ></textarea>
             </div>
           </div>
@@ -246,7 +268,7 @@ const UpdateProductModal = ({ handleCallClose, product }) =>{
             <button
               className="bg-red-500 hover:bg-red-600 mr-2 text-sm text-white font-bold py-2 px-4 rounded"
               onClick={handleCallClose}
-              isLoading={isLoading}
+              // isLoading={isLoading}
             >
               Close
             </button>

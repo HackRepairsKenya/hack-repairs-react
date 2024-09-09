@@ -1,13 +1,38 @@
-import React, { useEffect, useState, createContext } from "react";
+import  { useEffect, useState, createContext, ReactNode } from "react";
 import axios from "axios";
 
-// Provide a default value for context to prevent undefined errors
-export const categoriesContext = createContext({
+interface CategoriesContextType {
+  categories: Category[];
+}
+// eslint-disable-next-line react-refresh/only-export-components
+export const categoriesContext = createContext<CategoriesContextType>({
   categories: [],
 });
 
-export default function CategoriesProvider({ children }) {
-  const [categories, setCategories] = useState([
+interface Product {
+  id: number;
+  productName: string;
+  productQuantity: number;
+  productColor: string;
+}
+interface Subcategory {
+  id: number;
+  name: string;
+  products: Product[];
+}
+
+interface Category {
+  id: number;
+  name: string;
+  subcategories: Subcategory[];
+}
+
+interface CategoriesProviderProps {
+  children: ReactNode;
+}
+
+export default function CategoriesProvider({ children }:CategoriesProviderProps) {
+  const [categories, setCategories] = useState<Category []>([
     {
       id: 1,
       name: 'Electronics',
@@ -28,17 +53,16 @@ export default function CategoriesProvider({ children }) {
 
   const getCategories = async () => {
     try {
-      const response = await axios.get('https://api.wemitraders.co.ke/categories');
+      const response = await axios.get<Category []>('https://api.wemitraders.co.ke/categories');
       setCategories(response.data);
     } catch (error) {
       console.error("Error fetching categories:", error);
     }
   };
 
-  // Run only once when the component mounts
   useEffect(() => {
     getCategories();
-  }, []); // Empty dependency array means this will run only once
+  }, []); 
 
   return (
     <categoriesContext.Provider value={{ categories }}>

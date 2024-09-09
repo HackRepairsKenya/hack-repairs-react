@@ -1,8 +1,8 @@
-import { React, useEffect,useState } from "react";
+import { useEffect,useState } from "react";
 import axios from "axios";
-import UsersTable from "./usersTable";
-import AdminModal from "./adminModal";
-import UserModal from "./customerModal";
+import UsersTable from "./UsersTable";
+import AdminModal from "./AdminModal";
+import UserModal from "./CustomerModal";
 
 const Customers = ()=>{
 	const [customers, setCustomers] = useState([])

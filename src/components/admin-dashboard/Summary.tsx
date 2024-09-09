@@ -9,13 +9,38 @@ import Announcements from "./Announcements";
 
 import axios from "axios";
 
-const orders = []
+
+interface Order {
+	id: number;
+	customerName: string;
+	date: string;
+	totalAmount: number;
+	shippingAddress: string;
+	paymentMethod: string;
+	status: string;
+  }
+
+  interface Customer {
+	id: number;
+	name: string;
+	email: string;
+	totalOrders: number;
+  }
+
+  interface Product {
+  id: number;
+  productName: string;
+  productQuantity: number;
+  productColor: string;
+}
+const orders:Order[] = []
 
 
 const Summary = ()=>{
 	const [showModal, setShodal] = useState(false);
 	const [customers, setCustomers] = useState([])
 	const [products, setProducts]= useState([])
+	const [activeTab, setActiveTab] = useState(0);
 
 	// function to fetch customers
 	const fetchCustomers =async ()=>{
@@ -31,6 +56,7 @@ const Summary = ()=>{
 
 	};
 
+
 	const fetchProducts = async ()=>{
 		try {
 			const response = await axios.get("https://api.wemitraders.co.ke/products");
@@ -45,7 +71,7 @@ const Summary = ()=>{
 
 	useEffect(()=>{
 		fetchCustomers()
-	}, [customers])
+	}, [])
 
 	fetchProducts()
 
@@ -63,8 +89,8 @@ const Summary = ()=>{
 	// total products
 	const getTotalProducts = ()=>{
 		let totalProducts = 0
-		categories.forEach((category)=>{
-			category.subcategories.forEach((subcategory)=>{
+		categories.forEach((category:unknown)=>{
+			category.subcategories.forEach((subcategory: { products: string | any[]; })=>{
 				totalProducts += subcategory.products.length
 			})
 		})
@@ -79,7 +105,7 @@ const Summary = ()=>{
 		{ name: 'Announcements', content: <Announcements/> },
 		{ name: 'Recent Updates', content:"No updates yet." }
 	  ];
-	  const [activeTab, setActiveTab] = useState(0);
+	
 	
 	
 	return (
@@ -201,7 +227,7 @@ const Summary = ()=>{
 								</tr>
 							</thead>
 							<tbody>
-								{products.slice(0, 5).map((product, index) => (
+								{products.slice(0, 5).map((product:Product, index) => (
 									<tr key={index} className="bg-white border-b">
 										<td className="px-6 py-4 text-black">{product.id}</td>
 										<td className="px-6 py-4 text-black">{product.productName}</td>
@@ -237,7 +263,7 @@ const Summary = ()=>{
 						</tr>
 					</thead>
 				<tbody>
-					{customers.slice(1).map((customer, index) => (
+					{customers.slice(1).map((customer:Customer, index) => (
 						<tr key={index} className="bg-white border-b">
 							<td className="px-6 py-4 text-black">{customer.name}</td>
 							<td className="px-6 py-4 text-black">{customer.email}</td>
