@@ -9,6 +9,8 @@ import Footer from "@/components/mainlayout/Footer";
 import Navbar from "@/components/mainlayout/Navbar.tsx";
 import SEO from "@/components/seo/SEO";
 import FloatingButton from "@/components/shared/FloatingButton";
+import  { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import {
   Dialog,
   DialogContent,
@@ -16,10 +18,11 @@ import {
   DialogHeader,
   DialogTitle,
 } from "@/components/ui/dialog";
-import { useEffect, useState } from "react";
+
 
 export default function Home() {
   const [showModal, setShowModal] = useState<boolean>(false);
+  const navigate = useNavigate();
 
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -29,6 +32,12 @@ export default function Home() {
     // Clear the timeout if the component is unmounted before the timeout completes
     return () => clearTimeout(timer);
   }, []);
+
+  // Handle the "Book Now" button click
+  const handleBookNow = () => {
+    navigate('/booking'); // Navigate to the booking page
+  };
+
 
   return (
     <div>
@@ -69,7 +78,7 @@ export default function Home() {
             <li><strong>Expert Technicians:</strong> Our skilled professionals handle your device with care and precision.</li>
           </ul> */}
           <p>Book your appointment today and enjoy a hassle-free repair experience. Your phone will look and work like new again!</p>
-          <button className="bg-button p-2  rounded-lg text-white">book now</button>
+          <button onClick={handleBookNow} className="bg-button p-2  rounded-lg text-white">book now</button>
         </DialogDescription>
       </DialogHeader>
     </DialogContent>

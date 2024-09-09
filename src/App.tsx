@@ -15,7 +15,15 @@ import Cart from './pages/Cart.tsx';
 import RepairDetail from './pages/RepairDetail.tsx';
 import CategoryDetail from './pages/CategoryDetail.tsx'
 import Checkout from './pages/Checkout.tsx';
-
+import BookingPage from './pages/BookingPage.tsx';
+import Dashboard from "./pages/Dashboard";
+import Login from "./components/auth/Login";
+import Products from "./pages/Products";
+import Users from "./pages/users";
+import Feedback from "./pages/Feedback";
+import AdminProtectedRoutes from "./utils/AdminProtectedRoutes.tsx";
+import Orders from "./pages/Orders";
+import Transactions from './components/admin-dashboard/transactions/Transactions.tsx'
 // Lazy load the Home component
 const Home = React.lazy(() => import('./pages/Home.tsx'));
 
@@ -45,6 +53,15 @@ function App() {
             <Route path='/category/:id' element={<CategoryDetail />} />
             <Route path='/cart' element={<Cart />} />
             <Route  path='/checkout' element={<Checkout />} />
+            <Route path='/booking' element={<BookingPage />} />
+
+            <Route path="/admin/dashboard/home" element={<Dashboard />} />
+            <Route path="/admin/dashboard/products" element={<Products />} />
+            <Route path="/admin/dashboard/transactions" element={<Transactions />} />
+            <Route path="/admin/dashboard/orders" element={<Orders />} />
+            <Route path="/admin/dashboard/feedback" element={<Feedback />} />
+            <Route path="/admin/dashboard/users" element={<Users />} />
+
             <Route path='*' element={<PageNotFound />} />
           </Routes>
         </Suspense>
