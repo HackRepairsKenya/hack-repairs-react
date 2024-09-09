@@ -73,7 +73,7 @@ const Customers = ()=>{
 			<div className="flex justify-between">
 				<div>
 					<button
-					className="bg-blue-500 hover:bg-blue-700 text-sm text-white font-bold py-2 px-4 rounded mb-4 outline-none"
+					className="bg-green-500 hover:bg-green-700 text-sm text-white font-bold py-2 px-4 rounded mb-4 outline-none"
 					onClick={() => {
 						activateUser();
 					}}

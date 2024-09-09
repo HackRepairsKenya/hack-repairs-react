@@ -1,14 +1,14 @@
-import { React, useEffect, useState } from "react";
-import CreateProducts from "./products";
-import PTable from "./tableHandler";
-import CreateCategory from "./categories";
-import CreateSubCategory from "./subcategories";
+import { useEffect, useState } from "react";
+import CreateProducts from "./Products";
+import PTable from "./Tablehandler";
+import CreateCategory from "./Categories";
+import CreateSubCategory from "./SubCategories";
 import axios from "axios";
-import CategoriesTable from "./categoriesTable";
-import SubCategoriesTable from "./subcategoriesTable";
-import PostersTable from "./postersTable.jsx";
-import CreateAdd from "../createAdd.jsx";
-import CreateImages from "./imageHandler.jsx";
+import CategoriesTable from "./CategoriesTable";
+import SubCategoriesTable from "./SubCategoriesTable";
+import PostersTable from "./PostersTable.jsx";
+import CreateAdd from "../CreateAdd.jsx";
+import CreateImages from "./ImageHandler.jsx";
 
 const initialProducts = [];
 
@@ -83,7 +83,7 @@ const fetchProducts = async()=>{
       <div className="flex justify-between">
         <div>
           <button
-            className="bg-blue-500 hover:bg-blue-700 text-sm text-white font-bold py-2 px-4 rounded mb-4 outline-none"
+            className="bg-green-500 hover:bg-green-700 text-sm text-white font-bold py-2 px-4 rounded mb-4 outline-none"
             onClick={() => {
               handleCall();
             }}
@@ -93,7 +93,7 @@ const fetchProducts = async()=>{
         </div>
         <div>
         <button
-            className="bg-blue-500 mr-5 hover:bg-blue-700 text-sm text-white font-bold py-2 px-4 rounded mb-4 outline-none"
+            className="bg-green-500 mr-5 hover:bg-green-700 text-sm text-white font-bold py-2 px-4 rounded mb-4 outline-none"
             onClick={() => {
               handleCatCall();
             }}
@@ -101,7 +101,7 @@ const fetchProducts = async()=>{
             Create Category
         </button>
           <button
-            className="bg-blue-500 hover:bg-blue-700 text-sm text-white font-bold py-2 px-4 rounded mb-4 outline-none"
+            className="bg-green-500 hover:bg-green-700 text-sm text-white font-bold py-2 px-4 rounded mb-4 outline-none"
             onClick={() => {
               handleSubCatCall();
             }}
@@ -111,7 +111,7 @@ const fetchProducts = async()=>{
         </div>
       </div>
       <div className="flex flex-col justify-between bg-gray-100 w-full">
-        <div className="w-full bg-blue-900">
+        <div className="w-full bg-green-900">
           <div className="flex space-x-4 border-gray-300">
             {tabs.map((tab, index) => (
               <button

@@ -1,4 +1,4 @@
-import { React } from "react";
+
 import Header from "../components/admin-dashboard/Header";
 import ProductsTable from "../components/admin-dashboard/products/ProductsTable";
 

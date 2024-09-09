@@ -38,7 +38,7 @@ const Header = ()=>{
 	const admin_token = sessionStorage.getItem("admin_token");
 
 	return (
-		<><div className="min-h-[10vh] mb-1 w-full shadow-xl bg-blue-900 text-white flex justify-between items-center rounded">
+		<><div className="min-h-[10vh] mb-1 w-full shadow-xl bg-button text-white flex justify-between items-center rounded">
 			<ul className="w-[50%] flex justify-around">
 				{urls.map((item, index)=> {
 					return (
@@ -51,10 +51,10 @@ const Header = ()=>{
 				{!admin_token ? <Link className="cursor-pointer bg-gray rounded-lg p-2 text-xs font-semibold" to="/admin/dashboard/login">
 					<span>
 						Login
-					</span></Link>:<Link className="cursor-pointer bg-gray rounded-lg p-2 text-xs font-semibold" onClick={()=>{
+					</span></Link>:<p className="cursor-pointer bg-gray rounded-lg p-2 text-xs font-semibold" onClick={()=>{
 					sessionStorage.clear()
 					location.reload()
-				}}>Logout</Link>}
+				}}>Logout</p>}
 			</div>	
 		</div></>
 	)

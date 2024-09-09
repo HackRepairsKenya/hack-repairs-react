@@ -157,7 +157,7 @@ const Summary = ()=>{
 							className={`text-sm py-3 px-4 font-semibold 
 								transition outline-none duration-300 ${
 							index === activeTab
-								? 'border-b-2 border-blue-500 bg-white text-black'
+								? 'border-b-2 border-green-500 bg-white text-black'
 								: 'text-black'
 							}`}
 							onClick={() => setActiveTab(index)}
@@ -223,7 +223,7 @@ const Summary = ()=>{
 							</div>
 					</div>
 				<table className="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
-        			<thead className="text-xs text-white bg-blue-900">
+        			<thead className="text-xs text-white bg-green-900">
 						<tr>
 							<th scope="col" className="px-6 py-3">
 								Name
@@ -260,7 +260,7 @@ const Summary = ()=>{
 					</div>
 					<div className="relative overflow-x-auto shadow-md">
 						<table className="table-auto min-w-full">
-							<thead className="bg-blue-900 font-semibold">
+							<thead className="bg-green-900 font-semibold">
 							<tr>
 								<th className="px-6 py-3 text-left text-sm text-white tracking-wider">Order ID</th>
 								<th className="px-6 py-3 text-left text-sm text-white tracking-wider">Customer Name</th>
