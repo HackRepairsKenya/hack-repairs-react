@@ -1,35 +1,32 @@
-import { useEffect, useState } from "react";
+import { React, useEffect, useState } from "react";
 import { useFormik } from "formik";
 import axios from "axios";
 
-const CreateCategory = ({ handleCatClose }) => {
+const UpdateCategoryModal = ({ handleCatClose, category }) => {
   const [isLoading,setIsLoading] = useState(false)
   const formik = useFormik({
-    initialValues: {
-      name: "",
-    },
+    initialValues: category,
     onSubmit: async (values) => {
       try {
         setIsLoading(true)
-        const response = await axios.post(
+        const response = await axios.put(
           "https://api.wemitraders.co.ke/categories",
           values
         );
 
-        if (response.status === 201) {
+        if (response.status === 200) {
         
-          alert("Category created successfully!");
+          alert("Category updated successfully!");
           setIsLoading(false)
-         
           handleCatClose();
         } else {
-          throw new Error("Failed to create category");
+          throw new Error("Failed to update category");
           
         }
       } catch (error) {
-        console.error("Error creating category:", error);
+        console.error("Error updating category:", error);
         // Handle error creating category
-        alert("Failed to create category. Please try again later.");
+        alert("Failed to update category. Please try again later.");
         setIsLoading(false)
       }
     },
@@ -55,7 +52,7 @@ const CreateCategory = ({ handleCatClose }) => {
     <div className="fixed w-full left-0 top-0 h-full bg-black bg-opacity-50 flex justify-center">
       <div className="bg-white rounded-lg h-[40%] w-[50%] mt-[5rem] p-5">
         <form onSubmit={formik.handleSubmit}>
-          <h1 className="font-semibold text-lg">Create Category</h1>
+          <h1 className="font-semibold text-lg">Update Category</h1>
           <div className="grid grid-cols-1 gap-3 mt-3">
             <div>
               <label className="text-sm font-semibold">Category Name</label>
@@ -81,7 +78,7 @@ const CreateCategory = ({ handleCatClose }) => {
               type="submit"
               className="bg-blue-500 hover:bg-blue-600 text-sm text-white font-bold py-2 px-4 rounded"
             >
-           {isLoading?"Please wait ...":" Create Category"}  
+           {isLoading ? "Updating Category ...":" Update Category"}  
             </button>
           </div>
         </form>
@@ -90,4 +87,4 @@ const CreateCategory = ({ handleCatClose }) => {
   );
 };
 
-export default CreateCategory;
+export default UpdateCategoryModal;

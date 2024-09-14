@@ -24,6 +24,8 @@ import Feedback from "./pages/Feedback";
 import AdminProtectedRoutes from "./utils/AdminProtectedRoutes.tsx";
 import Orders from "./pages/Orders";
 import Transactions from './components/admin-dashboard/transactions/Transactions.tsx'
+import ServicesDashboard from './pages/ServicesDashboard.tsx';
+import HowItWorks from './pages/HowItWorks.tsx';
 // Lazy load the Home component
 const Home = React.lazy(() => import('./pages/Home.tsx'));
 
@@ -49,6 +51,7 @@ function App() {
             {/* About us */}
             <Route path='/about' element={<AboutUs />} />
             <Route path='/contact' element={<Contact />} />
+            <Route path='how-it-works' element={<HowItWorks />} />
             <Route path='/brand/:id' element={<RepairDetail />} />
             <Route path='/category/:id' element={<CategoryDetail />} />
             <Route path='/cart' element={<Cart />} />
@@ -57,6 +60,7 @@ function App() {
 
             <Route path="/admin/dashboard/home" element={<Dashboard />} />
             <Route path="/admin/dashboard/products" element={<Products />} />
+            <Route path="/admin/dashboard/services" element={<ServicesDashboard />} />
             <Route path="/admin/dashboard/transactions" element={<Transactions />} />
             <Route path="/admin/dashboard/orders" element={<Orders />} />
             <Route path="/admin/dashboard/feedback" element={<Feedback />} />

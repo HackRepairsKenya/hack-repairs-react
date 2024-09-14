@@ -1,74 +1,78 @@
-import {  useEffect, useState } from "react";
+import  {useEffect, useState} from "react";
 import { useFormik } from "formik";
-import axios from "axios";
+import axios from "axios"
+import { Category,Subcategory } from "@/utils/types";
 
-const CreateService = ({ handleCallClose }) => {
-  const [category, setCategory] = useState([]);
-  const [subcategory, setSubCategory] = useState([]);
-  const [isLoading, setIsLoading] = useState(false);
-  const formik = useFormik({
-    initialValues: {
-      productPrice: 0,
-      productName: "",
-      productDescription: "",
-      categoryId: "",
-      yearOfManufacture: 0,
-      productModel: "",
-      marketPrice: 0,
-      supplierName: "",
-      productQuantity: 0,
-      productColor: "",
-      subcategoryId: "",
-      coverImage: "",
-    },
-    onSubmit: async (values) => {
-      try {
-        setIsLoading(true);
-        const response = await axios.post(
-          "https://api.wemitraders.co.ke/products",
-          values
-        );
+interface Product {
+  id: number;
+  productName: string;
+  categoryId: number;
+  subcategoryId: number;
+  yearOfManufacture: string;
+  productModel: string;
+  marketPrice: number;
+  supplierName: string;
+  productQuantity: number;
+  productPrice: number;
+  productColor: string;
+  coverImage: string;
+  productDescription: string;
+}
+interface UpdateProductModalProps {
+  handleCallClose: () => void;
+  product: Product;
+}
 
-        setIsLoading(false);
-        if (response.status === 201) {
-          alert("Product created successfully!");
-          handleCallClose()
+const UpdateServiceModal = ({ handleCallClose, product }:UpdateProductModalProps) =>{
+    const [category, setCategory] = useState([])
+    const [subcategory, setSubCategory] = useState([])
+    const [isLoading, setIsLoading] = useState<boolean>(false);
+
+    useEffect(() => {
+        fetchCategories();
+        fetchSubCategories();
+      }, []);
+      // fetch categories
+      const fetchCategories = async () => {
+        try {
+          const response = await axios.get(
+            "https://api.wemitraders.co.ke/categories"
+          );
+          setCategory(response.data);
+        } catch (error) {
+          console.log(error);
         }
-      } catch (error) {
-        console.error("Error creating product:", error);
-        setIsLoading(false);
-      }
-    },
-  });
-  useEffect(() => {
-    fetchCategories();
-    fetchSubCategories();
-  }, []);
-  // fetch categories
-  const fetchCategories = async () => {
-    try {
-      const response = await axios.get(
-        "https://api.wemitraders.co.ke/categories"
-      );
-      setCategory(response.data);
-    } catch (error) {
-      console.log(error);
-    }
-  };
-  // fetch sub categories
-  const fetchSubCategories = async () => {
-    try {
-      const response = await axios.get(
-        "https://api.wemitraders.co.ke/subcategories"
-      );
-      setSubCategory(response.data);
-    } catch (error) {
-      console.log(error);
-    }
-  };
+      };
+      // fetch sub categories
+      const fetchSubCategories = async () => {
+        try {
+          const response = await axios.get(
+            "https://api.wemitraders.co.ke/subcategories"
+          );
+          setSubCategory(response.data);
+        } catch (error) {
+          console.log(error);
+        }
+      };
+    const formik = useFormik({
+        initialValues: product,
+        onSubmit: async (values) => {
+            try {
+                const response = await axios.put("https://api.wemitraders.co.ke/products", values);
+                setIsLoading(true);
+                if (response.status === 200){
+                    handleCallClose();
+                    setIsLoading(false)
+                }
+            // eslint-disable-next-line @typescript-eslint/no-unused-vars
+            }catch(error){
+                console.log("Error updating the product")
+            }
+        }
+    })  
 
-  return (
-    <div className="w-[100%] border h-[100vh] bg-black bg-opacity-50 flex justify-center fixed top-[0vh] left-0">
+    return (
+        <div className="w-[100%] border h-[100vh] bg-black bg-opacity-50 flex justify-center fixed top-[0vh] left-0">
       <div
         id="product-info"
         className="bg-white relative  p-5 rounded-lg h-[90%] mt-[2.5rem]"
@@ -85,7 +89,7 @@ const CreateService = ({ handleCallClose }) => {
                 value={formik.values.productName}
                 id="productName"
                 className="bg-white border border-gray-500 text-black placeholder-black dark:placeholder-green-500 text-sm rounded focus:ring-black focus:border-gray block w-full p-2 outline-none"
-                placeHolder="Product Name"
+                placeholder="Product Name"
               />
             </div>
             {/* Product Category */}
@@ -93,7 +97,7 @@ const CreateService = ({ handleCallClose }) => {
               <label className="text-sm font-semibold">Product Category</label>
               <select
                 name="categoryId"
-                type="text"
+            
                 id="categoryId"
                 required
                 onChange={formik.handleChange}
@@ -101,7 +105,7 @@ const CreateService = ({ handleCallClose }) => {
                 className="bg-white border border-gray-500 text-black placeholder-black dark:placeholder-green-500 text-sm rounded focus:ring-black focus:border-gray block w-full p-2 outline-none"
               >
                 <option>Select Category</option>
-                {category.map((category, key) => {
+                {category.map((category:Category, key) => {
                   return (
                     <option key={key} className="capitalize" value={category.id}>
                       {category.name}
@@ -112,13 +116,45 @@ const CreateService = ({ handleCallClose }) => {
             </div>
             {/* Product Subcategory */}
             <div>
+              <label className="text-sm font-semibold">
+                Product Subcategory
+              </label>
+              <select
+                name="subcategoryId"
               
+                required
+                id="subcategoryId"
+                onChange={formik.handleChange}
+                value={formik.values.subcategoryId}
+                className="bg-white border border-gray-500 text-black placeholder-black dark:placeholder-green-500 text-sm rounded focus:ring-black focus:border-gray block w-full p-2 outline-none"
+              >
+                <option>Select Subcategory</option>
+                {subcategory.map((subcategory:Subcategory, key) => {
+                  return (
+                    <option key={ key } className="capitalize" value={subcategory.id}>
+                      {subcategory.name}
+                    </option>
+                  );
+                })}
+              </select>
             </div>
           </div>
           {/* More form fields */}
           {/* Image upload */}
           <div className="grid grid-cols-4 gap-3 mt-3">
             {/* Manufacturing Year */}
+            <div>
+              <label className="text-sm font-semibold">
+                Manufacturing Year
+              </label>
+              <input
+                onChange={formik.handleChange}
+                value={formik.values.yearOfManufacture}
+                id="yearOfManufacture"
+                className="bg-white border border-gray-500 text-black placeholder-black dark:placeholder-green-500 text-sm rounded focus:ring-black focus:border-gray block w-full p-2 outline-none"
+                placeholder="Manufacturing Year"
+              />
+            </div>
             {/* Product Model */}
             <div>
               <label className="text-sm font-semibold">Product Model</label>
@@ -127,7 +163,7 @@ const CreateService = ({ handleCallClose }) => {
                 value={formik.values.productModel}
                 id="productModel"
                 className="bg-white border border-gray-500 text-black placeholder-black dark:placeholder-green-500 text-sm rounded focus:ring-black focus:border-gray block w-full p-2 outline-none"
-                placeHolder="Product Model"
+                placeholder="Product Model"
               />
             </div>
             {/* Market Price */}
@@ -139,7 +175,7 @@ const CreateService = ({ handleCallClose }) => {
                 id="marketPrice"
                 type="number"
                 className="bg-white border border-gray-500 text-black placeholder-black dark:placeholder-green-500 text-sm rounded focus:ring-black focus:border-gray block w-full p-2 outline-none"
-                placeHolder="Market Price"
+                placeholder="Market Price"
               />
             </div>
             {/* Supplier Name */}
@@ -181,7 +217,17 @@ const CreateService = ({ handleCallClose }) => {
                 placeholder="Product's Price"
               />
             </div>
-           
+            {/* Product's Colors */}
+            <div>
+              <label className="text-sm font-semibold">Product's Colors</label>
+              <input
+                onChange={formik.handleChange}
+                value={formik.values.productColor}
+                id="productColor"
+                className="bg-white border border-gray-500 text-black placeholder-black dark:placeholder-green-500 text-sm rounded focus:ring-black focus:border-gray block w-full p-2 outline-none"
+                placeholder="Product's Colors"
+              />
+            </div>
             {/* Product cover image */}
             <div className="flex flex-col justify-center">
               <label className="text-sm font-semibold">
@@ -205,6 +251,7 @@ const CreateService = ({ handleCallClose }) => {
               </label>
               <textarea
                 name="productDescription"
+                
                 id="productDescription"
                 required
                 onChange={formik.handleChange}
@@ -227,15 +274,15 @@ const CreateService = ({ handleCallClose }) => {
             </button>
             <button
               type="submit"
-              className="bg-button hover:bg-blue-600 text-sm text-white font-bold py-2 px-4 rounded"
+              className="bg-blue-500 hover:bg-blue-600 text-sm text-white font-bold py-2 px-4 rounded"
             >
-              {isLoading ? "Please wait ..." : "Create Product"}
+              {isLoading ? "Updating Product ..." : "Update"}
             </button>
           </div>
         </form>
       </div>
     </div>
-  );
-};
+    )  
+}
 
-export default CreateService;
+export default UpdateServiceModal;

@@ -1,19 +1,17 @@
 import { useEffect, useState } from "react";
-import CreateProducts from "./Products";
-import PTable from "./Tablehandler";
+import CreateProducts from "./CreateService";
+import PTable from "./TableHandler";
 import CreateCategory from "./Categories";
-import CreateSubCategory from "./SubCategories";
+
 import axios from "axios";
 import CategoriesTable from "./CategoriesTable";
-import SubCategoriesTable from "./SubCategoriesTable";
-import PostersTable from "./PostersTable.jsx";
-import CreateAdd from "../CreateAdd.jsx";
-import CreateImages from "./ImageHandler.jsx";
-import { Product } from "@/utils/types.js";
 
+import CreateAdd from "../CreateAdd.jsx";
+import CreateImages from "./ImageHandler.tsx";
+import { Product } from "@/utils/types.js";
 const initialProducts:Product = [];
 
-const ProductsTable = () => {
+const ServicesTable = () => {
   const [showModal, setShodal] = useState(false);
   const [showAddModal, setShowModal] = useState(false)
   const [showCategoriesModal, setCategories] = useState(false);
@@ -70,7 +68,7 @@ const fetchProducts = async()=>{
   }
 }
   const tabs = [
-    { name: 'Products', content: <PTable products={products} fetchProducts={fetchProducts} outOffStock={false}/> },
+    { name: 'Services', content: <PTable products={products} fetchProducts={fetchProducts} outOffStock={false}/> },
     { name: 'Categories', content: <CategoriesTable/> },
     { name: 'Images & Videos', content: <CreateImages products={products}/> },
     { name: 'Out Of Stock', content: <PTable products={products} fetchProducts={fetchProducts} outOffStock={true}/> },
@@ -86,7 +84,7 @@ const fetchProducts = async()=>{
               handleCall();
             }}
           >
-            Create Product
+            Create Service
           </button>
         </div>
         <div>
@@ -134,10 +132,10 @@ const fetchProducts = async()=>{
     		</div>
       {showModal && <CreateProducts handleCallClose={handleCallClose} />}
       {showCategoriesModal && <CreateCategory handleCatClose={handleCatCallClose}/>}
-      {showSubCategoriesModal && <CreateSubCategory handleSubcatclose={handleSubCatCallClose}/>}
+    
       {showAddModal && <CreateAdd handleCallClose={closeAdd} />}
     </div>
   );
 };
 
-export default ProductsTable;
+export default ServicesTable;

@@ -161,7 +161,7 @@ export default function Contact() {
                 <span className="text-button"><FaPhoneAlt className="mr-2 h-5 w-5"/></span>+254 741 699 821
               </p>
               <p className="flex text-sm font-semibold mt-3">
-                <span className="text-button"><IoMdMail className="mr-2 h-5 w-5"/></span>jobwafulabg@gmail.com
+                <span className="text-button"><IoMdMail className="mr-2 h-5 w-5"/></span>info@hackrepairs.co.ke
               </p>
             </div>
           </div>

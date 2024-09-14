@@ -13,6 +13,11 @@ const urls = [
 		img: "/assets/products.svg"
 	},
 	{
+		path: "/admin/dashboard/services",
+		name: "services",
+		img: "/assets/products.svg"
+	},
+	{
 		path: "/admin/dashboard/users",
 		name: "Users",
 		img: "/assets/users.svg"

@@ -2,7 +2,7 @@ import {  useEffect, useState } from "react";
 import { useFormik } from "formik";
 import axios from "axios";
 
-const CreateService = ({ handleCallClose }) => {
+const CreateProducts = ({ handleCallClose }) => {
   const [category, setCategory] = useState([]);
   const [subcategory, setSubCategory] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
@@ -238,4 +238,4 @@ const CreateService = ({ handleCallClose }) => {
   );
 };
 
-export default CreateService;
+export default CreateProducts;

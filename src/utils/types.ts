@@ -3,7 +3,8 @@ export interface Product {
     productName: string;
     productQuantity: number;
     productColor: string;
-    productModel:string
+    productModel:string;
+    description:string
   }
   
   export interface Subcategory {
