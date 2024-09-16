@@ -11,6 +11,7 @@ interface Repair {
   img: string;
   oldPrice: number;
   newPrice: number;
+  type:string
 }
 
 const ServiceDetailedView: React.FC = () => {
@@ -20,26 +21,31 @@ const ServiceDetailedView: React.FC = () => {
       img: "/screens/tecno/tecnoscreen.png",
       oldPrice: 2000,
       newPrice: 1800,
+      type: "Screen", // Add type here
     },
     {
       title: "Samsung",
       img: "/screens/tecno/tecnoscreen.png",
       oldPrice: 2500,
       newPrice: 2300,
+      type: "Screen", // Add type here
     },
     {
       title: "Itel",
       img: "/screens/tecno/tecnoscreen.png",
       oldPrice: 1500,
       newPrice: 1400,
+      type: "Screen", // Add type here
     },
     {
       title: "Xiaomi",
       img: "/screens/tecno/tecnoscreen.png",
       oldPrice: 2200,
       newPrice: 2000,
+      type: "Screen", // Add type here
     },
   ];
+  
 
   const [searchTerm, setSearchTerm] = useState<string>("");
   const [selectedBrands, setSelectedBrands] = useState<string[]>([]);
@@ -161,7 +167,7 @@ const ServiceDetailedView: React.FC = () => {
                 <div key={index}>
                   <ScreenRepaircard
                     repair={repair}
-                    index={index}
+                    
                     handleBooking={handleBooking}
                   />
                 </div>

@@ -5,13 +5,14 @@ const Footer: React.FC = () => {
   // our services
   const services = [
     {
-      title:'Screen Repairs'
+      title:'Screen Replacement & Repairs'
+    
     },
     {
-      title:'Screen Replacement'
+      title:'Laptop & Computer services'
     },
     {
-      title:'Phone Accessories'
+      title:'Phone Repairs'
     }
   ]
   return (

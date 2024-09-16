@@ -1,10 +1,13 @@
 import {  useEffect, useState } from "react";
 import { useFormik } from "formik";
 import axios from "axios";
+import { Category } from "@/utils/types";
+interface CreateServiceProptypes{
+  handleCallClose: () => void;
+}
 
-const CreateService = ({ handleCallClose }) => {
+const CreateService = ({ handleCallClose }:CreateServiceProptypes) => {
   const [category, setCategory] = useState([]);
-  const [subcategory, setSubCategory] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const formik = useFormik({
     initialValues: {
@@ -61,7 +64,7 @@ const CreateService = ({ handleCallClose }) => {
       const response = await axios.get(
         "https://api.wemitraders.co.ke/subcategories"
       );
-      setSubCategory(response.data);
+      console.log(response.data);
     } catch (error) {
       console.log(error);
     }
@@ -85,7 +88,7 @@ const CreateService = ({ handleCallClose }) => {
                 value={formik.values.productName}
                 id="productName"
                 className="bg-white border border-gray-500 text-black placeholder-black dark:placeholder-green-500 text-sm rounded focus:ring-black focus:border-gray block w-full p-2 outline-none"
-                placeHolder="Product Name"
+                placeholder="Product Name"
               />
             </div>
             {/* Product Category */}
@@ -93,7 +96,7 @@ const CreateService = ({ handleCallClose }) => {
               <label className="text-sm font-semibold">Product Category</label>
               <select
                 name="categoryId"
-                type="text"
+                
                 id="categoryId"
                 required
                 onChange={formik.handleChange}
@@ -101,7 +104,7 @@ const CreateService = ({ handleCallClose }) => {
                 className="bg-white border border-gray-500 text-black placeholder-black dark:placeholder-green-500 text-sm rounded focus:ring-black focus:border-gray block w-full p-2 outline-none"
               >
                 <option>Select Category</option>
-                {category.map((category, key) => {
+                {category.map((category:Category, key) => {
                   return (
                     <option key={key} className="capitalize" value={category.id}>
                       {category.name}
@@ -127,7 +130,7 @@ const CreateService = ({ handleCallClose }) => {
                 value={formik.values.productModel}
                 id="productModel"
                 className="bg-white border border-gray-500 text-black placeholder-black dark:placeholder-green-500 text-sm rounded focus:ring-black focus:border-gray block w-full p-2 outline-none"
-                placeHolder="Product Model"
+                placeholder="Product Model"
               />
             </div>
             {/* Market Price */}
@@ -139,7 +142,7 @@ const CreateService = ({ handleCallClose }) => {
                 id="marketPrice"
                 type="number"
                 className="bg-white border border-gray-500 text-black placeholder-black dark:placeholder-green-500 text-sm rounded focus:ring-black focus:border-gray block w-full p-2 outline-none"
-                placeHolder="Market Price"
+                placeholder="Market Price"
               />
             </div>
             {/* Supplier Name */}

@@ -21,7 +21,7 @@ const services: Services[] = [
   {
     title: "Computer/laptop services",
     link: "/services/screen-replacement",
-    img: "/repair.png",
+    img: "/laptop-repair.png",
   },
   {
     title: "Other services",
@@ -37,7 +37,7 @@ const Services = () => {
      description="We provide top-notch phone screen repair services and sell high-quality replacement screens for all major brands."
      name="HackRepairs."
      type="website"
-     url="https://hackrepairs.co.ke"
+     url="https://hackrepairs.co.ke/services"
      metaKeywords="services,screen replacement, computer services, laptop services"
      image="/hack-repairs.jpg"/>
       <Navbar />

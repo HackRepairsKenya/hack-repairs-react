@@ -4,15 +4,15 @@ interface Repair {
   type: string;
   oldPrice: number;
   newPrice: number;
+  
 }
 interface ScreenRepairCardProps {
   repair: Repair;
-  index: number;
+  
   handleBooking: (title: string) => void;
 }
 const ScreenRepairCard: React.FC<ScreenRepairCardProps> = ({
   repair,
-  index,
   handleBooking,
 }) => {
   // calculate discount
@@ -23,7 +23,7 @@ const ScreenRepairCard: React.FC<ScreenRepairCardProps> = ({
   return (
     <div
     onClick={() => handleBooking(repair.type)}
-      key={index}
+      
       className="bg-white w-40 md:w-52
        h-auto mb-4 hover:cursor-pointer relative border border-gray-200 rounded-lg shadow-md overflow-hidden transition-transform duration-300 ease-in-out transform hover:scale-105 hover:shadow-lg"
     >

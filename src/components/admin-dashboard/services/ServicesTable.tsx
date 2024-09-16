@@ -2,100 +2,80 @@ import { useEffect, useState } from "react";
 import CreateProducts from "./CreateService";
 import PTable from "./TableHandler";
 import CreateCategory from "./Categories";
-
 import axios from "axios";
 import CategoriesTable from "./CategoriesTable";
 
-import CreateAdd from "../CreateAdd.jsx";
-import CreateImages from "./ImageHandler.tsx";
-import { Product } from "@/utils/types.js";
-const initialProducts:Product = [];
+import CreateImages from "./ImageHandler";
+import { Product } from "@/utils/types.ts"; // Adjust the path to your types file
 
-const ServicesTable = () => {
-  const [showModal, setShodal] = useState(false);
-  const [showAddModal, setShowModal] = useState(false)
-  const [showCategoriesModal, setCategories] = useState(false);
-  const [showSubCategoriesModal, setSubcategories] = useState(false);
-  const [products, setProducts] = useState(initialProducts);
+const initialProducts: Product[] = [];
 
-  const activateAdd = ()=>{
-    setShowModal(true)
-  }
+const ServicesTable: React.FC = () => {
+  const [showModal, setShowModal] = useState(false);
+  const [showCategoriesModal, setShowCategoriesModal] = useState(false);
 
-  const closeAdd = () =>{
-    setShowModal(false)
-  }
+  const [products, setProducts] = useState<Product[]>(initialProducts);
+
+
 
   const handleCall = () => {
-    setShodal(true);
+    setShowModal(true);
   };
+
   const handleCallClose = () => {
-    setShodal(false);
+    setShowModal(false);
   };
 
-  // Categories Modal
   const handleCatCall = () => {
-    setCategories(true);
+    setShowCategoriesModal(true);
   };
+
   const handleCatCallClose = () => {
-    setCategories(false);
+    setShowCategoriesModal(false);
   };
 
-  // Subcategories Modal
-  const handleSubCatCall = () => {
-    setSubcategories(true);
-  };
-  
-  const handleSubCatCallClose = () => {
-    setSubcategories(false);
-  };
-  
-// fetch products
-useEffect(()=>{
-  fetchProducts()
-},[])
+  // Fetch products
+  useEffect(() => {
+    fetchProducts();
+  }, []);
 
-// function to fetch products
-const fetchProducts = async()=>{
-  try {
-    const response = await axios.get("https://api.wemitraders.co.ke/products")
-    
-    setProducts(response.data)
-    
-  } catch (error) {
-    console.log(error)
-    
-  }
-}
+  // Function to fetch products
+  const fetchProducts = async () => {
+    try {
+      const response = await axios.get<Product[]>("https://api.wemitraders.co.ke/products");
+      setProducts(response.data);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   const tabs = [
-    { name: 'Services', content: <PTable products={products} fetchProducts={fetchProducts} outOffStock={false}/> },
-    { name: 'Categories', content: <CategoriesTable/> },
-    { name: 'Images & Videos', content: <CreateImages products={products}/> },
-    { name: 'Out Of Stock', content: <PTable products={products} fetchProducts={fetchProducts} outOffStock={true}/> },
+    { name: 'Services', content: <PTable products={products} fetchProducts={fetchProducts} outOffStock={false} /> },
+    { name: 'Categories', content: <CategoriesTable /> },
+    { name: 'Images & Videos', content: <CreateImages products={products} /> },
+    { name: 'Out Of Stock', content: <PTable products={products} fetchProducts={fetchProducts} outOffStock={true} /> },
   ];
+
   const [activeTab, setActiveTab] = useState(0);
+
   return (
     <div className="bg-white rounded-lg min-h-[85vh] mt-2 shadow-lg p-5">
       <div className="flex justify-between">
         <div>
           <button
             className="bg-green-500 hover:bg-green-700 text-sm text-white font-bold py-2 px-4 rounded mb-4 outline-none"
-            onClick={() => {
-              handleCall();
-            }}
+            onClick={handleCall}
           >
             Create Service
           </button>
         </div>
         <div>
-        <button
+          <button
             className="bg-green-500 mr-5 hover:bg-green-700 text-sm text-white font-bold py-2 px-4 rounded mb-4 outline-none"
-            onClick={() => {
-              handleCatCall();
-            }}
+            onClick={handleCatCall}
           >
             Create Category
-        </button>        
+          </button>
         </div>
       </div>
       <div className="flex flex-col justify-between bg-gray-100 w-full">
@@ -122,18 +102,10 @@ const fetchProducts = async()=>{
         </div>
       </div>
       <div className="fixed bottom-4 right-4">
-				<button className='bg-orange-500 w-[60px] h-[60px] rounded-full flex justify-center p-5 animate-bounce' onClick={() => {
-          			activateAdd();
-        		}}>
-					<span>
-								<img src="/assets/plus.svg" alt="" className="w-[20px] h-[20px]"/>
-					</span>
-				</button>
-    		</div>
+      
+      </div>
       {showModal && <CreateProducts handleCallClose={handleCallClose} />}
-      {showCategoriesModal && <CreateCategory handleCatClose={handleCatCallClose}/>}
-    
-      {showAddModal && <CreateAdd handleCallClose={closeAdd} />}
+      {showCategoriesModal && <CreateCategory handleCatClose={handleCatCallClose} />}
     </div>
   );
 };

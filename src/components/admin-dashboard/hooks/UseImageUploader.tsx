@@ -1,12 +1,13 @@
 import { useState } from "react";
 import axios from "axios";
+import { ImageUploaderHook } from "@/utils/types"; // Adjust the path as necessary
 
-const useImageUploader = () => {
-  const [image, setImage] = useState("");
-  const [imagePreview, setImagePreview] = useState(null);
-  const [isLoading, setIsLoading] = useState(false);
+const useImageUploader = (): ImageUploaderHook => {
+  const [image, setImage] = useState<File | null>(null);
+  const [imagePreview, setImagePreview] = useState<string | null>(null);
+  const [isLoading, setIsLoading] = useState<boolean>(false);
 
-  const uploadImageToCloudinary = async (file, cloudName, uploadPreset) => {
+  const uploadImageToCloudinary = async (file: File, cloudName: string, uploadPreset: string): Promise<string | null> => {
     setIsLoading(true);
     try {
       const formData = new FormData();
@@ -15,7 +16,7 @@ const useImageUploader = () => {
       formData.append("cloud_name", cloudName);
 
       const response = await axios.post(
-        "https://api.cloudinary.com/v1_1/ddrzo561w/image/upload",
+        `https://api.cloudinary.com/v1_1/${cloudName}/image/upload`, // Corrected URL to use cloudName dynamically
         formData
       );
 
@@ -34,10 +35,12 @@ const useImageUploader = () => {
     }
   };
 
-  const handleImageChange = (e) => {
-    const file = e.target.files[0];
-    setImage(file);
-    setImagePreview(URL.createObjectURL(file));
+  const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>): void => {
+    const file = e.target.files ? e.target.files[0] : null;
+    if (file) {
+      setImage(file);
+      setImagePreview(URL.createObjectURL(file));
+    }
   };
 
   return { image, imagePreview, isLoading, uploadImageToCloudinary, handleImageChange };

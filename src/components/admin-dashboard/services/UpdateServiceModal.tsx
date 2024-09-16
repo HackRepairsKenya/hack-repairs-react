@@ -1,23 +1,8 @@
 import  {useEffect, useState} from "react";
 import { useFormik } from "formik";
 import axios from "axios"
-import { Category,Subcategory } from "@/utils/types";
+import { Category,Product } from "@/utils/types";
 
-interface Product {
-  id: number;
-  productName: string;
-  categoryId: number;
-  subcategoryId: number;
-  yearOfManufacture: string;
-  productModel: string;
-  marketPrice: number;
-  supplierName: string;
-  productQuantity: number;
-  productPrice: number;
-  productColor: string;
-  coverImage: string;
-  productDescription: string;
-}
 interface UpdateProductModalProps {
   handleCallClose: () => void;
   product: Product;
@@ -25,7 +10,6 @@ interface UpdateProductModalProps {
 
 const UpdateServiceModal = ({ handleCallClose, product }:UpdateProductModalProps) =>{
     const [category, setCategory] = useState([])
-    const [subcategory, setSubCategory] = useState([])
     const [isLoading, setIsLoading] = useState<boolean>(false);
 
     useEffect(() => {
@@ -49,7 +33,7 @@ const UpdateServiceModal = ({ handleCallClose, product }:UpdateProductModalProps
           const response = await axios.get(
             "https://api.wemitraders.co.ke/subcategories"
           );
-          setSubCategory(response.data);
+          console.log(response.data);
         } catch (error) {
           console.log(error);
         }
@@ -128,14 +112,7 @@ const UpdateServiceModal = ({ handleCallClose, product }:UpdateProductModalProps
                 value={formik.values.subcategoryId}
                 className="bg-white border border-gray-500 text-black placeholder-black dark:placeholder-green-500 text-sm rounded focus:ring-black focus:border-gray block w-full p-2 outline-none"
               >
-                <option>Select Subcategory</option>
-                {subcategory.map((subcategory:Subcategory, key) => {
-                  return (
-                    <option key={ key } className="capitalize" value={subcategory.id}>
-                      {subcategory.name}
-                    </option>
-                  );
-                })}
+                
               </select>
             </div>
           </div>

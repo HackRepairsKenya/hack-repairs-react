@@ -1,8 +1,13 @@
-import { React, useEffect, useState } from "react";
+import {  useEffect, useState } from "react";
 import { useFormik } from "formik";
 import axios from "axios";
+import { Category } from "@/utils/types";
+interface UpdateCategoriesModalPropTypes{
+  handleCatClose: () => void;
+  category:Category
+}
 
-const UpdateCategoryModal = ({ handleCatClose, category }) => {
+const UpdateCategoryModal = ({ handleCatClose, category }:UpdateCategoriesModalPropTypes) => {
   const [isLoading,setIsLoading] = useState(false)
   const formik = useFormik({
     initialValues: category,
@@ -41,6 +46,7 @@ const UpdateCategoryModal = ({ handleCatClose, category }) => {
   const fetchCategories = async()=>{
     try {
       const response = await axios.get('https://api.wemitraders.co.ke/categories')      
+      console.log(response)
     } catch (error) {
       console.log(error) 
     }

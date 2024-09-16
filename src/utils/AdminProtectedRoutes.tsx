@@ -1,17 +1,15 @@
-import React from 'react';
-import {Navigate, Outlet} from "react-router-dom";
+import { Navigate, Outlet } from "react-router-dom";
 
-const AdminProtectedRoutes = ()=> {
-	const getAdminToken = () => {
-		var token = sessionStorage.getItem('admin_token')
-		return token
-	}
+const AdminProtectedRoutes: React.FC = () => {
+  const getAdminToken = (): string | null => {
+    return sessionStorage.getItem('admin_token');
+  };
 
-    const token = getAdminToken()
+  const token = getAdminToken();
 
-	return (
-		token ? <Outlet/> : <Navigate to="/admin/dashboard/login"/>	
-	)
-}
+  return (
+    token ? <Outlet /> : <Navigate to="/admin/dashboard/login" />
+  );
+};
 
 export default AdminProtectedRoutes;

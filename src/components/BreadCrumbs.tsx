@@ -2,6 +2,7 @@
 import { Link } from 'react-router-dom';
 import useBreadcrumbs from 'use-react-router-breadcrumbs';
 import { routes } from './routes';
+import { MdNavigateNext } from "react-icons/md";
 
 const Breadcrumbs = () => {
   const breadcrumbs = useBreadcrumbs(routes);
@@ -18,7 +19,7 @@ const Breadcrumbs = () => {
                 <Link to={match.pathname} className="hover:text-button">
                   {breadcrumb}
                 </Link>
-                <span className="mx-2">/</span>
+                <span className="mx-2"><MdNavigateNext /></span>
               </>
             )}
           </li>

@@ -2,12 +2,12 @@ import {  useContext, useState, useEffect } from "react";
 import { IoStatsChartSharp } from "react-icons/io5";
 import { Link } from "react-router-dom";
 import { CiClock1 } from "react-icons/ci";
-import CreateAdd from "./CreateAdd";
+
 import { categoriesContext } from "../../context/CategoriesContext";
 import GettingStarted from "./GettingStarted";
-import Announcements from "./Announcements";
 
 import axios from "axios";
+
 
 
 interface Order {
@@ -37,7 +37,7 @@ const orders:Order[] = []
 
 
 const Summary = ()=>{
-	const [showModal, setShodal] = useState(false);
+
 	const [customers, setCustomers] = useState([])
 	const [products, setProducts]= useState([])
 	const [activeTab, setActiveTab] = useState(0);
@@ -75,34 +75,26 @@ const Summary = ()=>{
 
 	fetchProducts()
 
-  	const handleCall = () => {
-   		setShodal(true);
-  	};
-  	const handleCallClose = () => {
-    	setShodal(false);
-  	};
+ 
 	const {categories} = useContext(categoriesContext)
 	if (!categories) {
 		return <div>Loading...</div>;  // Handle the case where categories are not yet loaded
 	  }
 
 	// total products
-	const getTotalProducts = ()=>{
-		let totalProducts = 0
-		categories.forEach((category:unknown)=>{
-			category.subcategories.forEach((subcategory: { products: string | any[]; })=>{
-				totalProducts += subcategory.products.length
-			})
-		})
-		return totalProducts
-	};
+	const getTotalProducts = () => {
+		let totalProducts = 0;
+		categories.forEach((category) => {
+		  totalProducts += category.products.length;
+		});
+		return totalProducts;
+	  };
 	
 	// call the function to get total products 
 	const totalProducts = getTotalProducts()
 
 	const tabs = [
 		{ name: 'Getting Started', content: <GettingStarted/> },
-		{ name: 'Announcements', content: <Announcements/> },
 		{ name: 'Recent Updates', content:"No updates yet." }
 	  ];
 	
@@ -322,15 +314,9 @@ const Summary = ()=>{
 				</div>
 			</div>
 			<div className="fixed bottom-4 right-4">
-				<button className='bg-orange-500 w-[60px] h-[60px] rounded-full flex justify-center p-5 animate-bounce' onClick={() => {
-          			handleCall();
-        		}}>
-					<span>
-								<img src="/assets/plus.svg" alt="" className="w-[20px] h-[20px]"/>
-					</span>
-				</button>
+				
     		</div>
-			{showModal && <CreateAdd handleCallClose={handleCallClose} />}
+			
 		</div></>
 	)
 }

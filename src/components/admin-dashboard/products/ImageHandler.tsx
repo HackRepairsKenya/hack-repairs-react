@@ -1,8 +1,12 @@
-import React from "react";
+
 import { useFormik } from "formik";
 import axios from "axios";
+import { Product } from "@/utils/types";
 
-const CreateImages = ( {products} )=>{
+interface PropTypes{
+    products:Product[]
+}
+const CreateImages = ( {products}:PropTypes )=>{
     const formik = useFormik({
         initialValues: {
             name: "",

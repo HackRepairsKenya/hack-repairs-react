@@ -1,8 +1,11 @@
-import { useEffect, useState } from "react";
+import {  useState } from "react";
 import { useFormik } from "formik";
 import axios from "axios";
+interface CreateCategoryPropTypes{
+  handleCatClose: () => void;
+}
 
-const CreateCategory = ({ handleCatClose }) => {
+const CreateCategory = ({ handleCatClose }:CreateCategoryPropTypes) => {
   const [isLoading,setIsLoading] = useState(false)
   const formik = useFormik({
     initialValues: {
@@ -36,18 +39,7 @@ const CreateCategory = ({ handleCatClose }) => {
   });
 
   
-
-  useEffect(()=>{
-    fetchCategories()
-  },[])
-  // fetch categories
-  const fetchCategories = async()=>{
-    try {
-      const response = await axios.get('https://api.wemitraders.co.ke/categories')      
-    } catch (error) {
-      console.log(error) 
-    }
-  }
+  
 
 
 

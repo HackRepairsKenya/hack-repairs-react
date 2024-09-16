@@ -3,10 +3,11 @@ import { TiWorld } from "react-icons/ti";
 import { MdDashboard, MdSecurity, MdSupportAgent } from "react-icons/md";
 import Navbar from '@/components/mainlayout/Navbar';
 import Footer from '@/components/mainlayout/Footer';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import SEO from '@/components/seo/SEO';
 import Breadcrumbs from '@/components/BreadCrumbs';
 const SellWithUsPage: React.FC = () => {
+  const navigate  = useNavigate()
   return (
     <>
     <SEO
@@ -24,6 +25,7 @@ const SellWithUsPage: React.FC = () => {
     
       {/* Hero Section */}
       <section className="relative ">
+        <button onClick={()=>navigate('/')} className='capitalize bg-button text-white absolute top-4 left-4 z-50 p-2 rounded-lg'>shop now</button>
         <img
         width={600}
         height={500}
@@ -34,6 +36,7 @@ const SellWithUsPage: React.FC = () => {
         <div className="absolute inset-0 flex items-center justify-center bg-black bg-opacity-50 rounded-lg">
           <h1 className="text-white text-4xl font-bold text-center">Start Selling with Us</h1>
         </div>
+        <button onClick={()=>navigate('/services')}  className='capitalize absolute right-4 bottom-4 bg-button text-white p-2 rounded-lg'>Book repair service</button>
       </section>
       
       {/* Why Sell With Us Section */}

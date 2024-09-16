@@ -1,6 +1,8 @@
-import React from "react";
+interface ViewPropTypes{
+    closeOrder:()=>void
+}
 
-const ViewOrders = ({ closeOrder })=>{
+const ViewOrders = ({ closeOrder }:ViewPropTypes)=>{
     return (
         <div className="fixed bg-black bg-opacity-50 w-full left-0 top-0 flex justify-center h-full">
             <div className="bg-white h-[40%] w-[40%] rounded-lg p-5 mt-[5rem]">

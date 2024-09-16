@@ -116,7 +116,7 @@ export default function Contact() {
      type="website"
      url="https://hackrepairs.co.ke/contact"
      metaKeywords="hack repairs,call,kilifi"
-      image="/hack-repairs.jpg"/>
+      image="https://hackrepairs.co.ke/contact.png"/>
     <Navbar />
     <Breadcrumbs />
       {/* Hero Section */}
@@ -124,7 +124,7 @@ export default function Contact() {
         <img
         width={600}
         height={500}
-          src="/images/sell-with-us-hero.jpg"
+          src="/contact.png"
           alt="Sell with us"
           className="w-full h-96 object-cover rounded-lg shadow-lg"
         />

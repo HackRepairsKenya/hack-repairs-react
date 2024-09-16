@@ -1,14 +1,30 @@
-import  { useState } from 'react';
+import React, { useState } from 'react';
 import ViewTransactions from './View';
 
-const Transactions = ({ transactions }) => {
-  const [showModal, setShodal] = useState(false);
+// Define the type for transaction item
+interface Transaction {
+  id: string;
+  date: string;
+  customerName: string;
+  totalAmount: number;
+  paymentMethod: string;
+  status: string;
+}
+
+// Define the type for props
+interface TransactionsProps {
+  transactions: Transaction[];
+}
+
+const Transactions: React.FC<TransactionsProps> = ({ transactions }) => {
+  const [showModal, setShowModal] = useState<boolean>(false);
 
   const handleCall = () => {
-    setShodal(true);
+    setShowModal(true);
   };
+
   const handleCallClose = () => {
-    setShodal(false);
+    setShowModal(false);
   };
 
   return (
@@ -26,7 +42,7 @@ const Transactions = ({ transactions }) => {
           </tr>
         </thead>
         <tbody className="bg-white divide-y divide-gray-200">
-        {transactions.map((transaction, index) => (
+          {transactions.map((transaction, index) => (
             <tr key={index}>
               <td className="px-6 py-4 whitespace-nowrap text-sm">{transaction.id}</td>
               <td className="px-6 py-4 whitespace-nowrap text-sm">{transaction.date}</td>
@@ -35,7 +51,10 @@ const Transactions = ({ transactions }) => {
               <td className="px-6 py-4 whitespace-nowrap text-sm">{transaction.paymentMethod}</td>
               <td className="px-6 py-4 whitespace-nowrap text-sm">{transaction.status}</td>
               <td className="px-6 py-4 whitespace-nowrap text-sm">
-                <button onClick={handleCall} className="bg-blue-500 hover:bg-blue-700 text-white text-sm font-bold py-2 px-4 rounded">
+                <button
+                  onClick={handleCall}
+                  className="bg-blue-500 hover:bg-blue-700 text-white text-sm font-bold py-2 px-4 rounded"
+                >
                   View
                 </button>
               </td>
@@ -43,7 +62,7 @@ const Transactions = ({ transactions }) => {
           ))}
         </tbody>
       </table>
-      {showModal && <ViewTransactions closeTransactions={ handleCallClose} />}
+      {showModal && <ViewTransactions closeTransactions={handleCallClose} />}
     </div>
   );
 };

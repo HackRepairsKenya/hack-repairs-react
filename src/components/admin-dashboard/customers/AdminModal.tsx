@@ -1,8 +1,10 @@
-import React from "react";
+
 import { useFormik } from "formik";
 import axios from 'axios'
-
-const AdminModal = ({ handleClose })=>{
+interface AdminModalPropTypes{
+    handleClose: () => void;
+}
+const AdminModal = ({ handleClose }:AdminModalPropTypes)=>{
     const formik = useFormik({
         initialValues: {
             name: "",

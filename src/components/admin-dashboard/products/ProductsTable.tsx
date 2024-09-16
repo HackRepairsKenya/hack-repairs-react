@@ -2,31 +2,21 @@ import { useEffect, useState } from "react";
 import CreateProducts from "./Products";
 import PTable from "./Tablehandler";
 import CreateCategory from "./Categories";
-import CreateSubCategory from "./SubCategories";
 import axios from "axios";
 import CategoriesTable from "./CategoriesTable";
-import SubCategoriesTable from "./SubCategoriesTable";
-import PostersTable from "./PostersTable.jsx";
-import CreateAdd from "../CreateAdd.jsx";
 import CreateImages from "./ImageHandler.jsx";
 import { Product } from "@/utils/types.js";
 
-const initialProducts:Product = [];
+const initialProducts:Product[] = [];
 
 const ProductsTable = () => {
   const [showModal, setShodal] = useState(false);
-  const [showAddModal, setShowModal] = useState(false)
+  
   const [showCategoriesModal, setCategories] = useState(false);
-  const [showSubCategoriesModal, setSubcategories] = useState(false);
+
   const [products, setProducts] = useState(initialProducts);
 
-  const activateAdd = ()=>{
-    setShowModal(true)
-  }
-
-  const closeAdd = () =>{
-    setShowModal(false)
-  }
+  
 
   const handleCall = () => {
     setShodal(true);
@@ -43,14 +33,8 @@ const ProductsTable = () => {
     setCategories(false);
   };
 
-  // Subcategories Modal
-  const handleSubCatCall = () => {
-    setSubcategories(true);
-  };
   
-  const handleSubCatCallClose = () => {
-    setSubcategories(false);
-  };
+  
   
 // fetch products
 useEffect(()=>{
@@ -124,18 +108,12 @@ const fetchProducts = async()=>{
         </div>
       </div>
       <div className="fixed bottom-4 right-4">
-				<button className='bg-orange-500 w-[60px] h-[60px] rounded-full flex justify-center p-5 animate-bounce' onClick={() => {
-          			activateAdd();
-        		}}>
-					<span>
-								<img src="/assets/plus.svg" alt="" className="w-[20px] h-[20px]"/>
-					</span>
-				</button>
+		
     		</div>
       {showModal && <CreateProducts handleCallClose={handleCallClose} />}
       {showCategoriesModal && <CreateCategory handleCatClose={handleCatCallClose}/>}
-      {showSubCategoriesModal && <CreateSubCategory handleSubcatclose={handleSubCatCallClose}/>}
-      {showAddModal && <CreateAdd handleCallClose={closeAdd} />}
+      
+  
     </div>
   );
 };

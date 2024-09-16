@@ -22,6 +22,7 @@ interface Subcategory {
 }
 
 interface Category {
+  products: Product[];
   id: number;
   name: string;
   subcategories: Subcategory[];
@@ -33,22 +34,8 @@ interface CategoriesProviderProps {
 
 export default function CategoriesProvider({ children }:CategoriesProviderProps) {
   const [categories, setCategories] = useState<Category []>([
-    {
-      id: 1,
-      name: 'Electronics',
-      subcategories: [
-        {
-          id: 101,
-          name: 'Mobile Phones',
-          products: [{ id: 1001, productName: 'iPhone 12', productQuantity: 50, productColor: 'Black' }]
-        },
-        {
-          id: 102,
-          name: 'Laptops',
-          products: [{ id: 1002, productName: 'MacBook Pro', productQuantity: 30, productColor: 'Silver' }]
-        }
-      ]
-    }
+    
+  
   ]);
 
   const getCategories = async () => {
