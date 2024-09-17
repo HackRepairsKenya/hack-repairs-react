@@ -1,6 +1,17 @@
 
 import React from 'react';
 const Footer: React.FC = () => {
+  interface TermsPolicies{
+    title:string
+    link:string
+  }
+  // terms and policies
+  const termsPolicies:TermsPolicies[] =[
+    {
+      title:'Terms and Conditions',
+      link:'/terms-and-conditions'
+    }
+  ]
 
   // our services
   const services = [
@@ -38,6 +49,22 @@ const Footer: React.FC = () => {
              
             </ul>
           </div>
+
+          {/* policies and terms */}
+          <div className="w-full md:w-1/3 px-6 mb-6 md:mb-0">
+            <h5 className="text-xl font-bold mb-4">Terms & Policies</h5>
+            <ul className="list-none">
+              {termsPolicies.map((link,index)=>{
+                return (
+                  <li className="mb-2" key={index}>
+                  <a href="/terms-and-conditions" className="text-gray-400 hover:text-white transition">{link.title}</a>
+                </li>
+                ) 
+              })}
+             
+            </ul>
+          </div>
+          
           <div className="w-full md:w-1/3 px-6">
             <h5 className="text-xl font-bold mb-4">Contact Us</h5>
             <ul className="list-none">
