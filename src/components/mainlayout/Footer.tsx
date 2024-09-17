@@ -10,7 +10,8 @@ const Footer: React.FC = () => {
     {
       title:'Terms and Conditions',
       link:'/terms-and-conditions'
-    }
+    },
+    
   ]
 
   // our services
