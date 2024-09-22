@@ -2,22 +2,10 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { motion, useAnimation } from "framer-motion";
-interface Category {
-  name: string;
-  id: number;
-  image: string;
-}
+import { categories } from "@/data";
 
-// Sample categories data
-const categories: Category[] = [
-  { id: 1, name: "Tecno", image: "/categories/tecno.png" },
-  { id: 2, name: "Samsung", image: "/categories/samsung.png" },
-  { id: 3, name: "Itel", image: "/categories/itel.png" },
-  { id: 4, name: "Oppo", image: "/categories/samsung.png" },
-  { id: 4, name: "Nokia", image: "/categories/samsung.png" },
-  { id: 4, name: "Realme", image: "/categories/samsung.png" },
 
-];
+
 
 // Typing animation variants
 const typingAnimation = {
@@ -54,7 +42,7 @@ const Categories: React.FC = () => {
 
   const handleCategoryClick = (categoryName: string) => {
     // Navigate to the category page
-    navigate(`/categories/${categoryName.toLowerCase()}`);
+    navigate(`/category/${categoryName.toLowerCase()}`);
   };
 
   return (

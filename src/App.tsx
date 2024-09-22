@@ -42,7 +42,7 @@ function App() {
             <Route path='/services' element={<Services />} />
             <Route path='/services/:id' element={<ServiceDetailedView />} />
             {/* Categories */}
-            <Route path='/categories/:id' element={<CategoriesDetailedView />} />
+            <Route path='/category/:id' element={<CategoriesDetailedView />} />
             {/* About our products */}
             <Route path='/about-our-products' element={<AboutOurProducts />} />
             {/* About us */}

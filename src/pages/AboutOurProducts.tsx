@@ -41,8 +41,8 @@ function AboutOurProducts() {
   ];
   return (
     <div>
-      <SEO
-        title="About Our Products - HackRepairs"
+      <SEO  
+        title="About Our Products"
         description="We provide top-notch phone screen repair services and sell high-quality replacement screens for all major brands."
         name="HackRepairs."
         type="website"
@@ -52,15 +52,14 @@ function AboutOurProducts() {
       <Navbar />
       <Breadcrumbs />
       {/* Hero Section */}
-      <section className="relative ">
+      <section className="relative  h-96">
         <img
-          width={600}
-          height={500}
+        
           src="/about-our-products.png"
           alt="Sell with us"
-          className="w-full h-96 object-cover rounded-lg shadow-lg"
+          className="w-full h-full object-contain"
         />
-        <div className="absolute inset-0 flex items-center justify-center bg-black bg-opacity-50 rounded-lg">
+        <div className="absolute inset-0 flex items-center justify-center bg-black bg-opacity-50 ">
           <h1 className="text-white text-4xl font-bold text-center">
             About Our Products
           </h1>
@@ -70,7 +69,7 @@ function AboutOurProducts() {
         <h1 className="text-4xl font-bold mb-4">About Our Products</h1>
         <p className="text-lg max-w-3xl mx-auto">
           At Hackrepairs, we offer a wide range of high-quality phone screens,
-          phone accessories, and professional repair services. Our products are
+          phone accessories, laptop accessories and professional repair services. Our products are
           designed to enhance your mobile experience and keep your devices in
           optimal condition.
         </p>
@@ -84,14 +83,14 @@ function AboutOurProducts() {
           {productCategories.map((p, index) => (
             <div
               key={index}
-              className="bg-white p-6 rounded-lg shadow-md text-center hover:cursor-pointer  transition-transform duration-300 ease-in-out transform hover:scale-105 hover:shadow-lg"
+              className="bg-white p-2 rounded-lg shadow-md text-center hover:cursor-pointer  transition-transform duration-300 ease-in-out transform hover:scale-105 hover:shadow-lg"
             >
               <div className="flex justify-center items-center">
                 
                 <img
                   src={p.image}
                   alt={p.name}
-                  className="w-48 h-48 object-cover rounded-lg mb-4"
+                  className="w-48 h-48 object-contain  mb-4"
                 />
               </div>
               <h3 className="text-xl font-semibold mb-2">{p.name}</h3>

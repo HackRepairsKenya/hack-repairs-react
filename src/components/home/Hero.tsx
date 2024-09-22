@@ -6,10 +6,10 @@ const Hero = () => {
       <div className="container mx-auto px-6 md:px-12 grid grid-cols-1 lg:grid-cols-2  gap-8 h-full">
         <div className="text-center flex flex-col justify-center  lg:items-start z-10 lg:text-left h-full">
           <h2 className="text-4xl font-bold text-white md:text-black md:text-6xl">
-            Phone Screen Repair & Sales
+            Phone Screen Repair & Accessories 
           </h2>
           <p className="mt-6 text-xl md:text-lg text-white md:text-gray-600">
-            We provide top-notch phone screen repair services and sell high-quality replacement screens for all major brands.
+            We provide top-notch phone screen repair services and sell high-quality accessories for all major brands.
           </p>
           <div className="mt-8 bg-[#003300] hover:bg-green-800 transition duration-300 p-4 text-white py-2 px-6 rounded-full text-lg">
             <Link to='/services'>Explore Services</Link>

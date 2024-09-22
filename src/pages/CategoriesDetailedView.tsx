@@ -31,7 +31,13 @@ const CategoriesDetailedView: React.FC = () => {
           oldPrice: 2000,
           newPrice: 1800,
         },
-        // Add more screen data here...
+        {
+          type: "Tecno Spark 7p",
+          img: "/screens/tecno/tecnoscreen.png",
+          oldPrice: 2500,
+          newPrice: 2300,
+        },
+        
       ],
     },
     {
@@ -113,16 +119,16 @@ const CategoriesDetailedView: React.FC = () => {
             <div>
               <h3 className="text-lg font-semibold mb-2">Filter by Brand</h3>
               <div className="space-y-2">
-                {["Tecno", "Samsung", "Itel", "Xiaomi"].map((brand) => (
-                  <label key={brand} className="flex items-center">
+                {availableRepairs.map((brand,index) => (
+                  <label key={index} className="flex items-center">
                     <input
                       type="checkbox"
-                      value={brand}
-                      checked={selectedBrands.includes(brand)}
+                      value={brand.title}
+                      checked={selectedBrands.includes(brand.title)}
                       onChange={handleBrandChange}
-                      className="form-checkbox h-4 w-4 text-blue-600"
+                      className="form-checkbox h-4 w-4 text-green-800"
                     />
-                    <span className="ml-2 text-gray-700">{brand}</span>
+                    <span className="ml-2 text-gray-700">{brand.title}</span>
                   </label>
                 ))}
               </div>
@@ -171,7 +177,7 @@ const CategoriesDetailedView: React.FC = () => {
                 placeholder="Search phone screen type"
                 value={searchTerm}
                 onChange={handleSearchChange}
-                className="w-full max-w-xs border-gray-300 rounded-lg"
+                className="w-full  md:w-[400px] border-gray-300 rounded-lg"
               />
             </div>
           </section>
