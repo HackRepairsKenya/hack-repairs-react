@@ -198,8 +198,7 @@ const CategoriesDetailedView: React.FC = () => {
                       <ScreenRepaircard
                         key={index}
                         repair={product}
-                        handleBooking={() => handleBooking(category.id, product.id)} 
-                      />
+                        handleBooking={() => handleBooking(category.id, product.id)} category={0} product={0}                      />
                     ))}
                   </div>
                 </div>

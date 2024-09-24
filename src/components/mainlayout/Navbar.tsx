@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 
 import { FiShoppingCart } from "react-icons/fi";
 import { FaRegUser } from "react-icons/fa6";
@@ -8,13 +8,24 @@ import { CiSearch } from "react-icons/ci";
 import { Link } from "react-router-dom";
 import SignIn from "../auth/SignIn";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
+import { CartContext } from "@/context/cart";
 
 const Navbar: React.FC = () => {
   const [searchInput, setSearchInput] = useState("");
   const [searchResults, setSearchResults] = useState<string[]>([]);
   const [isHamburgerClicked, setIsHamburgerClicked] = useState<boolean>(false);
   const [showmodal, setShowModal] = useState<boolean>(false);
+   // Access CartContext safely
+   const cartContext = useContext(CartContext);
 
+   // Check if CartContext is undefined
+   if (!cartContext) {
+     return <p>Cart context is not available.</p>;
+   }
+ 
+   const {  cartItems } = cartContext;
+  
+ 
   const closeModal = () => {
     setShowModal(false);
   };
@@ -108,15 +119,21 @@ const Navbar: React.FC = () => {
           <div className="flex items-center space-x-4">
             <a
               href="/cart"
-              className={`flex items-center gap-2 py-2 ${
+              className={`flex items-center relative gap-2 py-2 ${
                 window.location.pathname === "/cart"
                   ? "text-green-500"
                   : "text-black"
               }`}
             >
+              <div className="w-4 h-4 bg-green-800 text-white  rounded-full animate-pulse absolute top-0 right-0 flex items-center justify-center text-xs">
+                {cartItems.length <= 0 ?'0': cartItems.length} 
+
+              </div>
               <FiShoppingCart />
               Cart
             </a>
+
+            
             <a
               href="/orders"
               className={`hidden md:flex items-center gap-2 py-2 ${

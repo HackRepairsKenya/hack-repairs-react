@@ -1,11 +1,11 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { SiTicktick } from "react-icons/si";
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
 import Navbar from "@/components/mainlayout/Navbar";
 import Footer from "@/components/mainlayout/Footer";
 import { Link, useParams } from "react-router-dom";
 import Breadcrumbs from "@/components/BreadCrumbs";
-
+import { CartContext } from "@/context/cart";
 interface Product {
   type: string;
   img: string;
@@ -56,11 +56,21 @@ const categories: Repair[] = [
   },
 ];
 
+
 const CategoryDetail = () => {
   const { categoryId, productId } = useParams<{ categoryId: string; productId: string }>();
   const [product, setProduct] = useState<Product | null>(null);
   const [category, setCategory] = useState<Repair | null>(null);
   const [quantity, setQuantity] = useState(1); // Track quantity
+  
+  const cartContext = useContext(CartContext);
+
+  // Check if CartContext is undefined
+  if (!cartContext) {
+    return <p>Cart context is not available.</p>;
+  }
+  const { addToCart,decreaseQuantity, increaseQuantity} = cartContext;
+  
 
   useEffect(() => {
     // Find the category and product based on the params
@@ -74,13 +84,19 @@ const CategoryDetail = () => {
   if (!product || !category) return <div>Product or category not found</div>;
 
   // Increment and decrement quantity handlers
-  const handleIncrement = () => {
-    setQuantity(prevQuantity => prevQuantity + 1);
+  const handleIncrement = (item) => {
+    increaseQuantity(item)
+    
   };
 
-  const handleDecrement = () => {
-    setQuantity(prevQuantity => (prevQuantity > 1 ? prevQuantity - 1 : 1));
+  const handleDecrement = (item) => {
+    decreaseQuantity(item)
+   
   };
+  const handleClick =(product:Product)=>{
+    addToCart(product)
+
+  }
 
   return (
     <>
@@ -120,7 +136,7 @@ const CategoryDetail = () => {
               </button>
               <span className="text-xl">{quantity}</span>
               <button
-                onClick={handleIncrement}
+                onClick={()=>handleIncrement(product)}
                 className="px-4 py-2 bg-gray-300 rounded-lg hover:bg-gray-400"
               >
                 +
@@ -137,7 +153,7 @@ const CategoryDetail = () => {
             {/* Add to Cart Button with Dialog */}
             <Dialog>
               <DialogTrigger>
-                <button className="mt-4 px-6 py-3 bg-green-600 text-white rounded-lg hover:bg-green-700">
+                <button onClick={()=>handleClick(product)} className="mt-4 px-6 py-3 bg-green-600 text-white rounded-lg hover:bg-green-700">
                   Add to Cart
                 </button>
               </DialogTrigger>

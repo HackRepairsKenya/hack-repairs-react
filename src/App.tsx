@@ -26,6 +26,7 @@ const Home = React.lazy(() => import('./pages/Home.tsx'));
 const HowItWorks = React.lazy(() => import('./pages/HowItWorks'));
 const Orders = React.lazy(() => import('./pages/Orders'));
 const AboutUs = React.lazy(() => import('./pages/AboutUs.tsx'));
+import { CartProvider } from './context/cart.tsx';
 const helmetContext = {};
 
 function App() {
