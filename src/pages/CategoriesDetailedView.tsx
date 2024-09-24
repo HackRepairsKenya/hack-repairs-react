@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Navbar from "@/components/mainlayout/Navbar";
 import Footer from "@/components/mainlayout/Footer";
@@ -105,6 +105,9 @@ const CategoriesDetailedView: React.FC = () => {
       ),
     }))
     .filter((repair) => repair.screen.length > 0);
+    useEffect(()=>{
+      window.scroll(0,0)
+    })
 
   return (
     <>
