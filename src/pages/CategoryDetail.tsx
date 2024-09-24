@@ -21,104 +21,42 @@ interface SalesData {
 
 };
 
-const salesData: SalesData[] = [
+
+
+const salesData = [
   {
+    id: 0,
     title: "Tecno",
-    products: [
+    screen: [
       {
-        title: "Tecno X20",
-        description: "High-quality Tecno X20 phone screen replacement services.",
-        img: "/screens/tecno/tecnos.jpeg",
-        price: 1800,
+        type: "Tecno Camon 15",
+        img: "/screens/tecno/tecnoscreen.png",
+        oldPrice: 2000,
+        newPrice: 1800,
       },
       {
-        title: "Tecno X30",
-        description: "Premium Tecno X30 phone screen replacement services.",
-        img: "/screens/tecno/tecnos.jpeg",
-        price: 2200,
+        type: "Tecno Spark 7p",
+        img: "/screens/tecno/tecnoscreen.png",
+        oldPrice: 2500,
+        newPrice: 2300,
       },
-      {
-        title: "Tecno X30 Pro",
-        description: "Excellent Tecno X30 Pro phone screen replacement services.",
-        img: "/screens/tecno/tecnos.jpeg",
-        price: 2500,
-      },
-
-    ]
-
+      
+    ],
   },
   {
+    id: 1,
     title: "Samsung",
-    products: [
+    screen: [
       {
-        title: "Samsung Galaxy S21",
-        description: "Premium Samsung Galaxy S21 phone screen replacement services.",
-        img: "/screens/samsung/samsung.jpg",
-        price: 2800,
+        type: "Samsung Galaxy S10",
+        img: "/screens/samsung/samsungscreen.png",
+        oldPrice: 3000,
+        newPrice: 2800,
       },
-      {
-        title: "Samsung Galaxy S21 Ultra",
-        description: "Excellent Samsung Galaxy S21 Ultra phone screen replacement services.",
-        img: "/screens/samsung/samsung.jpg",
-        price: 3500,
-      },
-      {
-        title: "Samsung Galaxy S21+ 5G",
-        description: "Amazing Samsung Galaxy S21+ 5G phone screen replacement services.",
-        img: "/screens/samsung/samsung.jpg",
-        price: 4000,
-      },
-    ]
-
+      
+    ],
   },
-  {
-    title: "Itel",
-    products: [
-      {
-        title: "Itel M21",
-        description: "Premium Itel M21 phone screen replacement services.",
-        img: "/screens/itel/itel.jpg",
-        price: 2800,
-      },
-      {
-        title: "Itel M21 Pro",
-        description: "Excellent Itel M21 Pro phone screen replacement services.",
-        img: "/screens/itel/itel.jpg",
-        price: 3500,
-      },
-      {
-        title: "Itel M21+ 5G",
-        description: "Amazing Itel M21+ 5G phone screen replacement services.",
-        img: "/screens/itel/itel.jpg",
-        price: 4000,
-      },
-    ]
-
-  },
-  {
-    title: "Xiaomi",
-    products: [
-      {
-        title: "Xiaomi Mi 11",
-        description: "Affordable Xiaomi Mi 11 phone screen replacement services.",
-        img: "/screens/xiaomi/xiaomi.jpg",
-        price: 1800,
-      },
-      {
-        title: "Xiaomi Mi 11 Pro",
-        description: "Premium Xiaomi Mi 11 Pro phone screen replacement services.",
-        img: "/screens/xiaomi/xiaomi.jpg",
-        price: 2200,
-      },
-      {
-        title: "Xiaomi Mi 11 Ultra",
-        description: "Excellent Xiaomi Mi 11 Ultra phone screen replacement services.",
-        img: "/screens/xiaomi/xiaomi.jpg",
-        price: 2500,
-      },
-    ]
-
-  },
+  
 ];
 const CategoryDetail = () => {
   const { id: category } = useParams(); // Access the dynamic route parameter

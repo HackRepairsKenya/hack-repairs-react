@@ -160,7 +160,7 @@ const CategoriesDetailedView: React.FC = () => {
         <section className="w-full ">
           {/* Search Section */}
           <section className="flex gap-4 items-center w-full p-4">
-            {/* filter */}
+           
             {/* Filter Toggle Button for Small Screens */}
             <div className="md:hidden">
               <button
