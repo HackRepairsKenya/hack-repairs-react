@@ -1,5 +1,4 @@
-
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { SiTicktick } from "react-icons/si";
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
 import Navbar from "@/components/mainlayout/Navbar";
@@ -8,39 +7,38 @@ import { Link, useParams } from "react-router-dom";
 import Breadcrumbs from "@/components/BreadCrumbs";
 
 interface Product {
-  title: string;
-  description: string;
+  type: string;
   img: string;
-  price: number
+  oldPrice: number;
+  newPrice: number;
+  id: number;
 }
-interface SalesData {
 
+interface Repair {
+  id: number;
   title: string;
+  screen: Product[];
+}
 
-  products: Product[]
-
-};
-
-
-
-const salesData = [
+const categories: Repair[] = [
   {
     id: 0,
     title: "Tecno",
     screen: [
       {
+        id: 1,
         type: "Tecno Camon 15",
         img: "/screens/tecno/tecnoscreen.png",
         oldPrice: 2000,
         newPrice: 1800,
       },
       {
+        id: 2,
         type: "Tecno Spark 7p",
         img: "/screens/tecno/tecnoscreen.png",
         oldPrice: 2500,
         newPrice: 2300,
       },
-      
     ],
   },
   {
@@ -48,35 +46,40 @@ const salesData = [
     title: "Samsung",
     screen: [
       {
+        id: 3,
         type: "Samsung Galaxy S10",
         img: "/screens/samsung/samsungscreen.png",
         oldPrice: 3000,
         newPrice: 2800,
       },
-      
     ],
   },
-  
 ];
+
 const CategoryDetail = () => {
-  const { id: category } = useParams(); // Access the dynamic route parameter
-  const [quantity, setQuantity] = useState(1); // State to track quantity
+  const { categoryId, productId } = useParams<{ categoryId: string; productId: string }>();
+  const [product, setProduct] = useState<Product | null>(null);
+  const [category, setCategory] = useState<Repair | null>(null);
+  const [quantity, setQuantity] = useState(1); // Track quantity
 
-  const repairDetail = salesData[category?.toLowerCase() as keyof typeof salesData];
+  useEffect(() => {
+    // Find the category and product based on the params
+    const foundCategory = categories.find(cat => cat.id === parseInt(categoryId || ""));
+    const foundProduct = foundCategory?.screen.find(prod => prod.id === parseInt(productId || ""));
 
-  if (!repairDetail) {
-    return <p>Category details not found</p>; // Handle case where brand is not found
-  }
+    setCategory(foundCategory || null);
+    setProduct(foundProduct || null);
+  }, [categoryId, productId]);
 
+  if (!product || !category) return <div>Product or category not found</div>;
 
-
-  // Handlers for increment and decrement
+  // Increment and decrement quantity handlers
   const handleIncrement = () => {
-    setQuantity((prevQuantity) => prevQuantity + 1);
+    setQuantity(prevQuantity => prevQuantity + 1);
   };
 
   const handleDecrement = () => {
-    setQuantity((prevQuantity) => (prevQuantity > 1 ? prevQuantity - 1 : 1));
+    setQuantity(prevQuantity => (prevQuantity > 1 ? prevQuantity - 1 : 1));
   };
 
   return (
@@ -88,30 +91,26 @@ const CategoryDetail = () => {
           {/* Image Section */}
           <div className="md:w-1/2">
             <img
-              width={500}
-              height={500}
-
-              src={repairDetail.img}
-              alt={repairDetail.title}
-              className=""
+              src={product.img}
+              alt={product.type}
+              className="rounded-lg shadow-md"
             />
           </div>
 
           {/* Details Section */}
           <div className="md:w-1/2">
-            <h1 className="text-3xl font-bold mb-4">
-              {repairDetail.title} Phone Screen
-            </h1>
-            <p className="text-gray-600 mb-4">{repairDetail.description}</p>
+            <h1 className="text-3xl font-bold mb-4">{product.type} Screen</h1>
+            <p className="text-gray-600 mb-4">
+              Get the best quality screen replacement for {product.type}.
+            </p>
 
+            {/* Price Details */}
             <div className="mb-4">
-              <p className="text-lg text-gray-500 line-through">
-                Ksh {repairDetail.oldPrice}
-              </p>
-              <p className="text-2xl font-bold">Ksh {repairDetail.newPrice}</p>
+              <p className="text-lg text-gray-500 line-through">Ksh {product.oldPrice}</p>
+              <p className="text-2xl font-bold">Ksh {product.newPrice}</p>
             </div>
 
-            {/* Quantity Section */}
+            {/* Quantity Selector */}
             <div className="mb-4 flex items-center space-x-4">
               <button
                 onClick={handleDecrement}
@@ -131,31 +130,39 @@ const CategoryDetail = () => {
             {/* Total Price */}
             <div className="mb-4">
               <p className="text-xl font-semibold">
-                Total Price: Ksh {repairDetail.newPrice * quantity}
+                Total Price: Ksh {product.newPrice * quantity}
               </p>
             </div>
+
+            {/* Add to Cart Button with Dialog */}
             <Dialog>
-              <DialogTrigger> <button className="mt-4 px-6 py-3 bg-button text-white rounded-lg hover:bg-green-700">
-                Add To cart
-              </button>
+              <DialogTrigger>
+                <button className="mt-4 px-6 py-3 bg-green-600 text-white rounded-lg hover:bg-green-700">
+                  Add to Cart
+                </button>
               </DialogTrigger>
-              <DialogContent className="">
+              <DialogContent>
                 <DialogHeader>
-                  <DialogTitle className="text-center text-button text-3xl"><SiTicktick /></DialogTitle>
-                  <h1>Product added to cart successfully</h1>
-                  <DialogDescription>
-                    Do you want to continue browsing for more screen repair services or go to cart?
+                  <DialogTitle className="text-center text-green-600 text-3xl">
+                    <SiTicktick />
+                  </DialogTitle>
+                  <h1 className="text-center text-lg">
+                    Product added to cart successfully
+                  </h1>
+                  <DialogDescription className="text-center">
+                    Do you want to continue browsing or go to your cart for checkout?
                   </DialogDescription>
                 </DialogHeader>
 
-                <div className='flex justify-between capitalize'> <button className="bg-button hover:bg-green-800 text-white p-2 rounded"><Link to='/cart'>View Cart and checkout</Link></button>
-                  <button className="border  border-button p-2 rounded">
-                    <Link to='/'>Continue browsing</Link>  </button>
+                {/* Actions */}
+                <div className="flex justify-between mt-4">
+                  <button className="bg-green-600 hover:bg-green-700 text-white p-2 rounded">
+                    <Link to="/cart">View Cart and Checkout</Link>
+                  </button>
+                  <button className="border border-green-600 p-2 rounded">
+                    <Link to="/">Continue Browsing</Link>
+                  </button>
                 </div>
-
-
-
-
               </DialogContent>
             </Dialog>
           </div>

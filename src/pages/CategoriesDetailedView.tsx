@@ -11,6 +11,7 @@ interface Screen {
   newPrice: number;
   img: string;
   type: string;
+  id:number
 }
 
 interface Repair {
@@ -26,12 +27,14 @@ const CategoriesDetailedView: React.FC = () => {
       title: "Tecno",
       screen: [
         {
+          id:1,
           type: "Tecno Camon 15",
           img: "/screens/tecno/tecnoscreen.png",
           oldPrice: 2000,
           newPrice: 1800,
         },
         {
+          id:1,
           type: "Tecno Spark 7p",
           img: "/screens/tecno/tecnoscreen.png",
           oldPrice: 2500,
@@ -45,6 +48,7 @@ const CategoriesDetailedView: React.FC = () => {
       title: "Samsung",
       screen: [
         {
+          id:1,
           type: "Samsung Galaxy S10",
           img: "/screens/samsung/samsungscreen.png",
           oldPrice: 3000,
@@ -67,10 +71,10 @@ const CategoriesDetailedView: React.FC = () => {
     setSearchTerm(event.target.value.toLowerCase());
   };
 
-  const handleBooking = (type: string) => {
-    navigate(`/brand/${type.toLowerCase()}`);
+  const handleBooking = (category:number,Product:number) => {
+    // Navigate to the detailed view page using the type as part of the URL.
+    navigate(`/category/${category}/product/${Product}}`);
   };
-
   const handleBrandChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const brand = event.target.value;
     setSelectedBrands((prevSelected) =>
@@ -186,15 +190,15 @@ const CategoriesDetailedView: React.FC = () => {
             {filteredRepairs.length === 0 ? (
               <p>No repairs found matching your criteria.</p>
             ) : (
-              filteredRepairs.map((item) => (
-                <div key={item.id}>
-                  <h2 className="text-xl font-semibold mb-4">{item.title}</h2>
+              filteredRepairs.map((category) => (
+                <div key={category.id}>
+                  <h2 className="text-xl font-semibold mb-4">{category.title}</h2>
                   <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-4 gap-4">
-                    {item.screen.map((repair,index) => (
+                    {category.screen.map((product,index) => (
                       <ScreenRepaircard
                         key={index}
-                        repair={repair}
-                        handleBooking={handleBooking}
+                        repair={product}
+                        handleBooking={() => handleBooking(category.id, product.id)} 
                       />
                     ))}
                   </div>

@@ -52,7 +52,7 @@ export default function CarouselBanner() {
             {data.map((item: { title: string; list: string; list2: string; image: string ; }, index: React.Key | null | undefined) => (
               <CarouselItem key={index} className="flex-shrink-0  hover:cursor-pointer relative h-64 md:h-72 bg-gray-800 w-full">
                 <div className="w-[30%] p-4">
-                  <h1 className="text-white absolute top-4 left-4 z-50 font-bold capitalize text-3xl">{item.title}</h1>
+                  <h1 className="ml-2 text-white absolute top-4 left-4 z-50 font-bold capitalize text-3xl">{item.title}</h1>
                 </div>
                 <div className="absolute z-50 top-[50%] left-[50%] text-white">
                   <ul className="list-disc">

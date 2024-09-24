@@ -61,12 +61,12 @@ const Navbar: React.FC = () => {
   return (
     <div>
       {showmodal && <SignIn closeModal={closeModal} />}
-      <nav className="bg-gray-800 relative text-white">
+      <nav className="relative bg-white shadow-lg ">
         <div className="container mx-auto flex justify-between items-center p-4">
           {/* hamburger */}
           <Sheet>
             <div
-              className="text-white flex md:hidden"
+              className="flex md:hidden"
               onClick={() => setIsHamburgerClicked(!isHamburgerClicked)}
             >
               <SheetTrigger>
@@ -111,7 +111,7 @@ const Navbar: React.FC = () => {
               className={`flex items-center gap-2 py-2 ${
                 window.location.pathname === "/cart"
                   ? "text-green-500"
-                  : "text-white"
+                  : "text-black"
               }`}
             >
               <FiShoppingCart />
@@ -122,7 +122,7 @@ const Navbar: React.FC = () => {
               className={`hidden md:flex items-center gap-2 py-2 ${
                 window.location.pathname === "/orders"
                   ? "text-green-500"
-                  : "text-white"
+                  : "text-black"
               }`}
             >
               <FaBus /> Orders
@@ -132,7 +132,7 @@ const Navbar: React.FC = () => {
               className={`flex items-center hover:cursor-pointer gap-2 py-2 ${
                 window.location.pathname === "/profile"
                   ? "text-green-500"
-                  : "text-white"
+                  : "text-black"
               }`}
             >
               <FaRegUser />
@@ -140,14 +140,14 @@ const Navbar: React.FC = () => {
           </div>
         </div>
       </nav>
-      <div className="container bg-gray-700 md:bg-white mx-auto flex flex-col md:flex-row items-center p-4 relative">
+      <div className="container mx-auto flex flex-col md:flex-row items-center p-4 relative">
         <div className="relative w-full md:w-1/2">
           <input
             type="text"
             value={searchInput}
             onChange={handleSearchChange}
             placeholder="Search all phone screens & phone accessories (e.g Tecno, sim trays, batteries)"
-            className="border p-3 border-gray-300 outline-none focus:ring-2 focus:ring-green-500 rounded-md w-full h-full pl-4 pr-12 text-gray-700 placeholder-gray-500"
+            className="border p-3 border-gray-300 shadow-lg md:shadow-none outline-none focus:ring-2 focus:ring-green-500 rounded-md w-full h-full pl-4 pr-12 text-gray-700 placeholder-gray-500"
           />
           <p className="absolute inset-y-0 right-0 bg-green-800 p-2 rounded-r-md flex items-center">
             <CiSearch className="text-white" />
