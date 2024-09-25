@@ -7,7 +7,7 @@ interface CartItem {
   img: string ;
   id: number;
   name: string;
-  productPrice: number;
+  newPrice: number;
   quantity: number;
 }
 
@@ -66,7 +66,7 @@ export const CartProvider = ({ children }: CartProviderProps) => {
   };
 
   const getCartItemTotal = (item: CartItem) => {
-    return item.productPrice * item.quantity;
+    return item.newPrice * item.quantity;
   };
 
   const getCartTotal = () => {

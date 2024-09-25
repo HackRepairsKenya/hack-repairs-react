@@ -6,10 +6,8 @@ import { Link } from "react-router-dom";
 import Breadcrumbs from "@/components/BreadCrumbs";
 
 const Cart = () => {
-  // Access CartContext safely
+  
   const cartContext = useContext(CartContext);
-
-  // Check if CartContext is undefined
   if (!cartContext) {
     return <p>Cart context is not available.</p>;
   }
@@ -38,9 +36,9 @@ const Cart = () => {
           <h2 className="font-bold text-xl leading-8 text-gray-900">
            Your cart ({cartItems.length})
           </h2>
-          <button onClick={() => clearCart()} className='bg-red-500 text-sm hover:cursor-pointer text-white p-2 rounded'>
+          <p onClick={() => clearCart()} className=' text-sm hover:cursor-pointer text-red-500 p-2 rounded'>
             <h2>Clear All</h2>
-          </button>
+          </p>
         </div>
 
         <div className="bg-white shadow-md rounded-lg p-4">
@@ -48,7 +46,10 @@ const Cart = () => {
             <p className="text-center text-gray-500">Your cart is empty.</p>
           ) : (
             <div>
-              {cartItems.map((item) => (
+              {cartItems.map((item) =>{
+               
+              
+                return (
                 <div key={item.id} className="flex items-center border-b border-gray-200 py-4">
                   <img
                     width={200}
@@ -79,15 +80,15 @@ const Cart = () => {
                         onClick={() => handleRemoveItem(item.id)}
                         className="ml-4 px-4 py-2 text-red-500 hover:text-red-400 rounded-lg"
                       >
-                        Remove
+                        remove
                       </button>
                     </div>
                   </div>
                   <div className="text-right">
-                    <p className="text-lg font-bold">Ksh {item.productPrice * item.quantity}</p>
+                    <p className="text-lg font-bold">Ksh {item.newPrice *item.quantity}</p>
                   </div>
                 </div>
-              ))}
+              )})}
             </div>
           )}
 
