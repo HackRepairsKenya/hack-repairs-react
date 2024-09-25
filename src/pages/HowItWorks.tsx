@@ -15,7 +15,7 @@ interface Testimonies{
         },
         
         {
-            name:'Effie Onyango',
+            name:'Elvis Kiprop',
             descriptiom:'Fast delivery on accessories and very affordable prices. Will shop again'
         },
         {
@@ -40,9 +40,9 @@ interface Testimonies{
         height={500}
           src="/images/sell-with-us-hero.jpg"
           alt="Sell with us"
-          className="w-full h-96 object-cover rounded-lg shadow-lg"
+          className="w-full h-96 object-cover "
         />
-        <div className="absolute inset-0 flex items-center justify-center bg-black bg-opacity-50 rounded-lg">
+        <div className="absolute inset-0 flex items-center justify-center bg-gradient-to-r from-gray-800  ">
           <h1 className="text-white text-4xl font-bold text-center">How It Works</h1>
         </div>
       </section>
@@ -61,28 +61,28 @@ interface Testimonies{
           <div className="lg:w-1/4">
             <div className="text-center p-4">
               <span className="text-3xl text-button">1</span>
-              <h2 className="text-xl font-semibold my-2">Choose Your Product or Service</h2>
+              <h2 className="text-xl font-semibold text-green-800 my-2">Choose Your Product or Service</h2>
               <p>Select from a wide range of phone screens, accessories, and services for your devices.</p>
             </div>
           </div>
           <div className="lg:w-1/4">
             <div className="text-center p-4">
               <span className="text-3xl text-button">2</span>
-              <h2 className="text-xl font-semibold my-2">Add to Cart or Request Service</h2>
+              <h2 className="text-xl text-green-800 font-semibold my-2">Add to Cart or Request Service</h2>
               <p>Add products to your cart or schedule repair services for your device.</p>
             </div>
           </div>
           <div className="lg:w-1/4">
             <div className="text-center p-4">
               <span className="text-3xl text-button">3</span>
-              <h2 className="text-xl font-semibold my-2">Secure Checkout</h2>
+              <h2 className="text-xl font-semibold my-2 text-green-800">Secure Checkout</h2>
               <p>Proceed to checkout with secure payment options and provide billing details.</p>
             </div>
           </div>
           <div className="lg:w-1/4">
             <div className="text-center p-4">
               <span className="text-3xl text-button">4</span>
-              <h2 className="text-xl font-semibold my-2">Confirmation & Delivery</h2>
+              <h2 className="text-xl font-semibold text-green-800 my-2">Confirmation & Delivery</h2>
               <p>Receive a confirmation and have your product delivered or service scheduled.</p>
             </div>
           </div>

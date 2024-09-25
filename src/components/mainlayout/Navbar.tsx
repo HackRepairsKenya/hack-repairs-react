@@ -117,8 +117,8 @@ const Navbar: React.FC = () => {
             </p>
           </div>
           <div className="flex items-center space-x-4">
-            <a
-              href="/cart"
+            <Link
+              to="/cart"
               className={`flex items-center relative gap-2 py-2 ${
                 window.location.pathname === "/cart"
                   ? "text-green-500"
@@ -131,7 +131,7 @@ const Navbar: React.FC = () => {
               </div>
               <FiShoppingCart />
               Cart
-            </a>
+            </Link>
 
             
             <a
@@ -201,11 +201,11 @@ const Navbar: React.FC = () => {
                   key={link.title}
                   className={`text-white md:text-gray-800 hover:underline ${
                     window.location.pathname === link.href
-                      ? "text-green-500 font-bold"
-                      : ""
+                      ? "text-green-800 underline font-bold "
+                      : "text-gray-800"
                   }`}
                 >
-                  <a href={link.href}>{link.title}</a>
+                  <Link to={link.href}>{link.title}</Link>
                 </li>
               ))}
             </ul>

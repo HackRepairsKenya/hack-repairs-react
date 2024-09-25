@@ -59,7 +59,7 @@ function AboutOurProducts() {
           alt="Sell with us"
           className="w-full h-full object-contain"
         />
-        <div className="absolute inset-0 flex items-center justify-center bg-black bg-opacity-50 ">
+        <div className="absolute inset-0 flex items-center justify-center bg-gradient-to-r from-gray-800  ">
           <h1 className="text-white text-4xl font-bold text-center">
             About Our Products
           </h1>

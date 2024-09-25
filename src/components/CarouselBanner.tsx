@@ -40,8 +40,8 @@ export default function CarouselBanner() {
     Autoplay({ delay: 3000, stopOnInteraction: true })
   );
   return (
-    <div className="w-full  md:mx-4 lg:mx-auto md:mt-8 md:mb-8">
-      <div className=" w-full relative h-64 lg:w-[92%] md:w-[92%] mx-auto">
+    <div className="w-full md:mt-8 md:mb-8">
+      <div className=" w-full relative h-64 lg:w-[100%] md:w-[92%] mx-auto">
         <Carousel
           plugins={[plugin.current]}
           className="w-full"
@@ -69,8 +69,8 @@ export default function CarouselBanner() {
               </CarouselItem>
             ))}
           </CarouselContent>
-          <CarouselPrevious className="hidden sm:block" />
-          <CarouselNext className="hidden sm:block" />
+          <CarouselPrevious className="hidden " />
+          <CarouselNext className="hidden " />
         </Carousel>
       </div>
     </div>

@@ -126,9 +126,9 @@ export default function Contact() {
         height={500}
           src="/contact.png"
           alt="Sell with us"
-          className="w-full h-96 object-cover rounded-lg shadow-lg"
+          className="w-full h-96 object-cover "
         />
-        <div className="absolute inset-0 flex items-center justify-center bg-black bg-opacity-50 rounded-lg">
+        <div className="absolute inset-0 flex items-center justify-center bg-gradient-to-r from-gray-800  ">
           <h1 className="text-white text-4xl font-bold text-center">Contact Us</h1>
         </div>
       </section>

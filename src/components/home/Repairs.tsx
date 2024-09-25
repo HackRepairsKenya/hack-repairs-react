@@ -1,16 +1,23 @@
 import { useState, useEffect } from 'react';
 import { motion, useAnimation } from 'framer-motion';
 import { FaArrowRightLong } from 'react-icons/fa6';
-import ScreenRepairCard from '../shared/ScreenRepaircard';
 import { Link, useNavigate } from 'react-router-dom';
+import ScreenRepaircard from '../shared/ScreenRepaircard';
 
-interface Repair {
-  title: string;
-  img: string;
+interface Screen {
   oldPrice: number;
   newPrice: number;
-  type: string; // Added type as a required field
+  img: string;
+  type: string;
+  id:number
 }
+
+interface Repair {
+  id: number;
+  title: string;
+  screen: Screen[];
+}
+
 
 const typingAnimation = {
   hidden: { width: 0 },
@@ -28,41 +35,63 @@ const Repairs: React.FC = () => {
   const controls = useAnimation();
   const [hasAnimated, setHasAnimated] = useState<boolean>(false);
 
-  const handleBooking = (title: string) => {
-    navigate(`/brand/${title.toLowerCase()}`);
+  const handleBooking = (category:number,Product:number) => {
+    // Navigate to the detailed view page using the type as part of the URL.
+    navigate(`/category/${category}/product/${Product}}`);
   };
 
   const availableRepairs: Repair[] = [
     {
-      title: 'Tecno',
-      img: '/screens/tecno/tecnoscreen.png',
-      oldPrice: 2000,
-      newPrice: 1800,
-      type: 'screen', // Added type field with a valid string value
+      id: 0,
+      title: "Tecno",
+      screen: [
+        {
+          id:1,
+          type: "Tecno Camon 15",
+          img: "/screens/tecno/tecnoscreen.png",
+          oldPrice: 2000,
+          newPrice: 1800,
+        },
+        {
+          id:1,
+          type: "Tecno Spark 7p",
+          img: "/screens/tecno/tecnoscreen.png",
+          oldPrice: 2500,
+          newPrice: 2300,
+        },
+        {
+          id:1,
+          type: "Tecno Spark 7p",
+          img: "/screens/tecno/tecnoscreen.png",
+          oldPrice: 2500,
+          newPrice: 2300,
+        },
+        {
+          id:1,
+          type: "Tecno Spark 7p",
+          img: "/screens/tecno/tecnoscreen.png",
+          oldPrice: 2500,
+          newPrice: 2300,
+        },
+        
+      ],
     },
     {
-      title: 'Samsung',
-      img: '/screens/tecno/tecnoscreen.png',
-      oldPrice: 2500,
-      newPrice: 2300,
-      type: 'screen', // Added type field with a valid string value
+      id: 1,
+      title: "Samsung",
+      screen: [
+        {
+          id:1,
+          type: "Samsung Galaxy S10",
+          img: "/screens/samsung/samsungscreen.png",
+          oldPrice: 3000,
+          newPrice: 2800,
+        },
+        
+      ],
     },
-    {
-      title: 'Itel',
-      img: '/screens/tecno/tecnoscreen.png',
-      oldPrice: 1500,
-      newPrice: 1400,
-      type: 'screen', // Added type field with a valid string value
-    },
-    {
-      title: 'Xiaomi',
-      img: '/screens/tecno/tecnoscreen.png',
-      oldPrice: 2200,
-      newPrice: 2000,
-      type: 'screen', // Added type field with a valid string value
-    },
+    
   ];
-
   useEffect(() => {
     const handleScroll = () => {
       const element = document.getElementById('animatedText');
@@ -93,16 +122,18 @@ const Repairs: React.FC = () => {
         Repair Your Screen Now !!
       </motion.h1>
       <section className="md:p-4 mt-6">
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-          {availableRepairs.map((repair, index) => (
-            <div key={index}>
-              <ScreenRepairCard
-                repair={repair}
+        <div className="">
+          
+                  <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-4  gap-4">
+                    {availableRepairs[0].screen.map((product,index) => (
+                      <ScreenRepaircard
+                        key={index}
+                        repair={product}
+                        handleBooking={() => handleBooking(0, product.id)} category={0} product={0}                      />
+                    ))}
+                  </div>
                 
-                handleBooking={handleBooking}
-              />
-            </div>
-          ))}
+              
         </div>
         <div className="mt-8 md:w-[20%] bg-[#003300] hover:bg-green-800 transition duration-300 p-4 text-white py-2 px-6 rounded-full text-lg">
           <Link to="/services/screen-replacement" className="flex items-center justify-center gap-2">

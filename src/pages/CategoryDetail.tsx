@@ -42,11 +42,11 @@ const categories: Repair[] = [
     ],
   },
   {
-    id: 1,
+    id: 2,
     title: "Samsung",
     screen: [
       {
-        id: 3,
+        id: 1,
         type: "Samsung Galaxy S10",
         img: "/screens/samsung/samsungscreen.png",
         oldPrice: 3000,
@@ -61,7 +61,7 @@ const CategoryDetail = () => {
   const { categoryId, productId } = useParams<{ categoryId: string; productId: string }>();
   const [product, setProduct] = useState<Product | null>(null);
   const [category, setCategory] = useState<Repair | null>(null);
-  const [quantity, setQuantity] = useState(1); // Track quantity
+  const [quantity, setQuantity] = useState(1); 
   
   const cartContext = useContext(CartContext);
 

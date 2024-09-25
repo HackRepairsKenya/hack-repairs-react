@@ -26,7 +26,7 @@ export default function AboutUs() {
           alt="Sell with us"
           className="w-full h-96 object-cover rounded-lg shadow-lg"
         />
-        <div className="absolute inset-0 flex items-center justify-center bg-black bg-opacity-50 rounded-lg">
+        <div className="absolute inset-0 flex items-center justify-center bg-gradient-to-r from-gray-800 rounded-lg">
           <h1 className="text-white text-4xl font-bold text-center">About us</h1>
         </div>
        
@@ -77,23 +77,23 @@ export default function AboutUs() {
           <div className="text-center">
             <img
               className="w-32 h-32 mx-auto rounded-full object-cover mb-4"
-              src=""
+              src="/clarah.jpg"
               alt="Team Member 2"
             />
             <h3 className="text-xl font-semibold">None</h3>
             <p className="text-gray-600">Chief Technician</p>
-            <p className="text-sm mt-2">Jane is a certified technician with extensive expertise in phone and laptop repairs. She ensures every repair meets the highest standards.</p>
+            <p className="text-sm mt-2">Clarah  is a certified technician with extensive expertise in phone and laptop repairs. She ensures every repair meets the highest standards.</p>
           </div>
           {/* Team Member 3 */}
           <div className="text-center">
             <img
               className="w-32 h-32 mx-auto rounded-full object-cover mb-4"
-              src="/path-to-image/team-member-3.jpg"
+              src="/brighton.jpg"
               alt="Team Member 3"
             />
-            <h3 className="text-xl font-semibold">None</h3>
+            <h3 className="text-xl font-semibold">Brighton Chebor</h3>
             <p className="text-gray-600">Customer Support Manager</p>
-            <p className="text-sm mt-2">Alex leads our customer support team, ensuring all customer inquiries are handled efficiently and professionally.</p>
+            <p className="text-sm mt-2">Brighton leads our customer support team, ensuring all customer inquiries are handled efficiently and professionally.</p>
           </div>
         </div>
       </section>
