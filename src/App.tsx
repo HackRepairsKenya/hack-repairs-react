@@ -10,7 +10,7 @@ const Services = React.lazy(() => import('./pages/Services.tsx'));
 const AboutOurProducts = React.lazy(() => import('./pages/AboutOurProducts.tsx'));
 const ServiceDetailedView = React.lazy(() => import('./pages/ServiceDetailedView.tsx'));
 const CategoriesDetailedView = React.lazy(() => import('./pages/CategoriesDetailedView.tsx'));
-const RepairDetail = React.lazy(() => import('./pages/RepairDetail.tsx'));
+
 const CategoryDetail = React.lazy(() => import('./pages/CategoryDetail.tsx'));
 const Checkout = React.lazy(() => import('./pages/Checkout.tsx'));
 const BookingPage = React.lazy(() => import('./pages/BookingPage.tsx'));
@@ -26,7 +26,7 @@ const Home = React.lazy(() => import('./pages/Home.tsx'));
 const HowItWorks = React.lazy(() => import('./pages/HowItWorks'));
 const Orders = React.lazy(() => import('./pages/Orders'));
 const AboutUs = React.lazy(() => import('./pages/AboutUs.tsx'));
-import { CartProvider } from './context/cart.tsx';
+
 const helmetContext = {};
 
 function App() {
@@ -50,7 +50,7 @@ function App() {
             <Route path='/about' element={<AboutUs />} />
             <Route path='/contact' element={<Contact />} />
             <Route path='/how-it-works' element={<HowItWorks />} />
-            <Route path='/brand/:id' element={<RepairDetail />} />
+            
             <Route path='/category/:categoryId/product/:productId' element={<CategoryDetail />} />
             <Route path='/cart' element={<Cart />} />
             <Route path='/checkout' element={<Checkout />} />

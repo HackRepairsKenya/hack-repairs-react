@@ -2,11 +2,11 @@ import  { createContext, useState, useEffect, ReactNode } from 'react';
 
 // Define the CartItem type
 interface CartItem {
-  title: string | undefined;
-  price: ReactNode;
+  title: string ;
+  
   img: string ;
   id: number;
-  name: string;
+  
   newPrice: number;
   quantity: number;
 }

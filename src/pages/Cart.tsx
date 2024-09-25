@@ -60,7 +60,7 @@ const Cart = () => {
                   />
                   <div className="flex-grow">
                     <h2 className="text-xl font-semibold">{item.title}</h2>
-                    <p className="text-gray-600">Ksh {item.price}</p>
+                    <p className="text-gray-600">Ksh {item.newPrice}</p>
                     <div className="flex items-center mt-2">
                       <button
                         onClick={() => decreaseQuantity(item)}

@@ -80,7 +80,7 @@ export default function AboutUs() {
               src="/clarah.jpg"
               alt="Team Member 2"
             />
-            <h3 className="text-xl font-semibold">None</h3>
+            <h3 className="text-xl font-semibold">Clarah Karembo</h3>
             <p className="text-gray-600">Chief Technician</p>
             <p className="text-sm mt-2">Clarah  is a certified technician with extensive expertise in phone and laptop repairs. She ensures every repair meets the highest standards.</p>
           </div>

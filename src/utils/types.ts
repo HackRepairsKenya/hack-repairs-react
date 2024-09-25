@@ -48,3 +48,15 @@ export interface Product {
     uploadImageToCloudinary: (file: File, cloudName: string, uploadPreset: string) => Promise<string | null>;
     handleImageChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
   }
+
+
+
+  export interface CartItem {
+    title: string | undefined;
+    price: number;
+    img: string ;
+    id: number;
+    name: string;
+    newPrice: number;
+    quantity: number;
+  }

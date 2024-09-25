@@ -6,9 +6,11 @@ import Footer from "@/components/mainlayout/Footer";
 import { Link, useParams } from "react-router-dom";
 import Breadcrumbs from "@/components/BreadCrumbs";
 import { CartContext } from "@/context/cart";
+;
 interface Product {
-  type: string;
+  title: string;
   img: string;
+  quantity:number;
   oldPrice: number;
   newPrice: number;
   id: number;
@@ -27,17 +29,19 @@ const categories: Repair[] = [
     screen: [
       {
         id: 1,
-        type: "Tecno Camon 15",
+        title: "Tecno Camon 15",
         img: "/screens/tecno/tecnoscreen.png",
         oldPrice: 2000,
         newPrice: 1800,
+        quantity:1
       },
       {
         id: 2,
-        type: "Tecno Spark 7p",
+        title: "Tecno Spark 7p",
         img: "/screens/tecno/tecnoscreen.png",
         oldPrice: 2500,
         newPrice: 2300,
+        quantity:1
       },
     ],
   },
@@ -47,9 +51,11 @@ const categories: Repair[] = [
     screen: [
       {
         id: 1,
-        type: "Samsung Galaxy S10",
+        title: "Samsung Galaxy S10",
         img: "/screens/samsung/samsungscreen.png",
         oldPrice: 3000,
+        quantity:1,
+
         newPrice: 2800,
       },
     ],
@@ -61,7 +67,7 @@ const CategoryDetail = () => {
   const { categoryId, productId } = useParams<{ categoryId: string; productId: string }>();
   const [product, setProduct] = useState<Product | null>(null);
   const [category, setCategory] = useState<Repair | null>(null);
-  const [quantity, setQuantity] = useState(1); 
+  const [quantity] = useState(1); 
   
   const cartContext = useContext(CartContext);
 
@@ -83,20 +89,6 @@ const CategoryDetail = () => {
 
   if (!product || !category) return <div>Product or category not found</div>;
 
-  // Increment and decrement quantity handlers
-  const handleIncrement = (item) => {
-    increaseQuantity(item)
-    
-  };
-
-  const handleDecrement = (item) => {
-    decreaseQuantity(item)
-   
-  };
-  const handleClick =(product:Product)=>{
-    addToCart(product)
-
-  }
 
   return (
     <>
@@ -108,16 +100,16 @@ const CategoryDetail = () => {
           <div className="md:w-1/2">
             <img
               src={product.img}
-              alt={product.type}
+              alt={product.title}
               className="rounded-lg shadow-md"
             />
           </div>
 
           {/* Details Section */}
           <div className="md:w-1/2">
-            <h1 className="text-3xl font-bold mb-4">{product.type} Screen</h1>
+            <h1 className="text-3xl font-bold mb-4">{product.title} Screen</h1>
             <p className="text-gray-600 mb-4">
-              Get the best quality screen replacement for {product.type}.
+              Get the best quality screen replacement for {product.title}.
             </p>
 
             {/* Price Details */}
@@ -129,14 +121,14 @@ const CategoryDetail = () => {
             {/* Quantity Selector */}
             <div className="mb-4 flex items-center space-x-4">
               <button
-                onClick={handleDecrement}
+                onClick={()=>decreaseQuantity(product)}
                 className="px-4 py-2 bg-gray-300 rounded-lg hover:bg-gray-400"
               >
                 -
               </button>
               <span className="text-xl">{quantity}</span>
               <button
-                onClick={()=>handleIncrement(product)}
+                onClick={()=>increaseQuantity(product)}
                 className="px-4 py-2 bg-gray-300 rounded-lg hover:bg-gray-400"
               >
                 +
@@ -153,7 +145,7 @@ const CategoryDetail = () => {
             {/* Add to Cart Button with Dialog */}
             <Dialog>
               <DialogTrigger>
-                <button onClick={()=>handleClick(product)} className="mt-4 px-6 py-3 bg-green-600 text-white rounded-lg hover:bg-green-700">
+                <button onClick={()=>addToCart(product)} className="mt-4 px-6 py-3 bg-green-600 text-white rounded-lg hover:bg-green-700">
                   Add to Cart
                 </button>
               </DialogTrigger>

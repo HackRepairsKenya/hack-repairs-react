@@ -1,67 +1,80 @@
+import React, { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import Navbar from "@/components/mainlayout/Navbar";
 import Footer from "@/components/mainlayout/Footer";
 import { Input } from "@/components/ui/input";
-import React, { useState } from "react";
-import { useNavigate } from 'react-router-dom';
 import ScreenRepaircard from "@/components/shared/ScreenRepaircard";
 import Breadcrumbs from "@/components/BreadCrumbs";
 
-interface Repair {
-  title: string;
-  img: string;
+interface Screen {
   oldPrice: number;
   newPrice: number;
-  type:string
+  img: string;
+  type: string;
+  id:number
 }
 
-const ServiceDetailedView: React.FC = () => {
+interface Repair {
+  id: number;
+  title: string;
+  screen: Screen[];
+}
+
+const serviceDetailedView: React.FC = () => {
   const availableRepairs: Repair[] = [
     {
+      id: 0,
       title: "Tecno",
-      img: "/screens/tecno/tecnoscreen.png",
-      oldPrice: 2000,
-      newPrice: 1800,
-      type: "Screen", // Add type here
+      screen: [
+        {
+          id:1,
+          type: "Tecno Camon 15",
+          img: "/screens/tecno/tecnoscreen.png",
+          oldPrice: 2000,
+          newPrice: 1800,
+        },
+        {
+          id:1,
+          type: "Tecno Spark 7p",
+          img: "/screens/tecno/tecnoscreen.png",
+          oldPrice: 2500,
+          newPrice: 2300,
+        },
+        
+      ],
     },
     {
+      id: 1,
       title: "Samsung",
-      img: "/screens/tecno/tecnoscreen.png",
-      oldPrice: 2500,
-      newPrice: 2300,
-      type: "Screen", // Add type here
+      screen: [
+        {
+          id:1,
+          type: "Samsung Galaxy S10",
+          img: "/screens/samsung/samsungscreen.png",
+          oldPrice: 3000,
+          newPrice: 2800,
+        },
+        
+      ],
     },
-    {
-      title: "Itel",
-      img: "/screens/tecno/tecnoscreen.png",
-      oldPrice: 1500,
-      newPrice: 1400,
-      type: "Screen", // Add type here
-    },
-    {
-      title: "Xiaomi",
-      img: "/screens/tecno/tecnoscreen.png",
-      oldPrice: 2200,
-      newPrice: 2000,
-      type: "Screen", // Add type here
-    },
+    
   ];
-  
 
   const [searchTerm, setSearchTerm] = useState<string>("");
   const [selectedBrands, setSelectedBrands] = useState<string[]>([]);
   const [priceRange, setPriceRange] = useState<[number, number]>([0, 5000]);
-  const [isFilterOpen, setIsFilterOpen] = useState<boolean>(false);
+  const [isFilterOpen, setIsFilterOpen] = useState<boolean>(false); 
+
+  const navigate = useNavigate();
 
   const handleSearchChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setSearchTerm(event.target.value.toLowerCase());
   };
 
-  const navigate = useNavigate();
-
-  const handleBooking = (title: string) => {
-    navigate(`/brand/${title.toLowerCase()}`);
+  const handleBooking = (category:number,Product:number) => {
+    // Navigate to the detailed view page using the type as part of the URL.
+    navigate(`/category/${category}/product/${Product}}`);
   };
-
   const handleBrandChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const brand = event.target.value;
     setSelectedBrands((prevSelected) =>
@@ -71,25 +84,36 @@ const ServiceDetailedView: React.FC = () => {
     );
   };
 
-  const handlePriceRangeChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+  const handlePriceRangeChange = (
+    event: React.ChangeEvent<HTMLInputElement>
+  ) => {
     const value = Number(event.target.value);
     setPriceRange((prevRange) => [prevRange[0], value]);
   };
 
-  const filteredRepairs = availableRepairs.filter((repair) => {
-    const matchesSearchTerm = repair.title.toLowerCase().includes(searchTerm);
-    const matchesBrand =
-      selectedBrands.length === 0 || selectedBrands.includes(repair.title);
-    const matchesPrice =
-      repair.newPrice >= priceRange[0] && repair.newPrice <= priceRange[1];
-    return matchesSearchTerm && matchesBrand && matchesPrice;
-  });
+  const filteredRepairs = availableRepairs
+    .filter((repair) => {
+      const matchesSearchTerm = repair.title.toLowerCase().includes(searchTerm);
+      const matchesBrand =
+        selectedBrands.length === 0 || selectedBrands.includes(repair.title);
+      return matchesSearchTerm && matchesBrand;
+    })
+    .map((repair) => ({
+      ...repair,
+      screen: repair.screen.filter(
+        (screen) => screen.newPrice >= priceRange[0] && screen.newPrice <= priceRange[1]
+      ),
+    }))
+    .filter((repair) => repair.screen.length > 0);
+    useEffect(()=>{
+      window.scroll(0,0)
+    })
 
   return (
     <>
       <Navbar />
       <Breadcrumbs />
-      <div className="flex flex-col md:flex-row  w-full">
+      <div className="flex flex-col md:flex-row w-full">
         {/* Filter Section */}
         <section
           id="filter-section"
@@ -102,16 +126,16 @@ const ServiceDetailedView: React.FC = () => {
             <div>
               <h3 className="text-lg font-semibold mb-2">Filter by Brand</h3>
               <div className="space-y-2">
-                {["Tecno", "Samsung", "Itel", "Xiaomi"].map((brand) => (
-                  <label key={brand} className="flex items-center">
+                {availableRepairs.map((brand,index) => (
+                  <label key={index} className="flex items-center">
                     <input
                       type="checkbox"
-                      value={brand}
-                      checked={selectedBrands.includes(brand)}
+                      value={brand.title}
+                      checked={selectedBrands.includes(brand.title)}
                       onChange={handleBrandChange}
-                      className="form-checkbox h-4 w-4 text-blue-600"
+                      className="form-checkbox h-4 w-4 text-green-800"
                     />
-                    <span className="ml-2 text-gray-700">{brand}</span>
+                    <span className="ml-2 text-gray-700">{brand.title}</span>
                   </label>
                 ))}
               </div>
@@ -139,40 +163,50 @@ const ServiceDetailedView: React.FC = () => {
           </div>
         </section>
 
-        <section className="wfull md:w-[80%]">
+        {/* Main Content Section */}
+        <section className="w-full ">
           {/* Search Section */}
-          <section className="flex gap-4 items-center p-4 ">
-          <div className="md:hidden">
-          <button
-            onClick={() => setIsFilterOpen(!isFilterOpen)}
-            className="px-4 py-1 border  rounded-md focus:outline-none focus:ring-2 focus:ring-button"
-            aria-expanded={isFilterOpen}
-            aria-controls="filter-section"
-          >
-            {isFilterOpen ? "Filters" : "Filters"}
-          </button>
-        </div>
-            <Input
-              placeholder="Search phone screen type"
-              value={searchTerm}
-              onChange={handleSearchChange}
-              className="w-full max-w-xs border-gray-300 rounded-lg"
-            />
+          <section className="flex gap-4 items-center w-full p-4">
+           
+            {/* Filter Toggle Button for Small Screens */}
+            <div className="md:hidden">
+              <button
+                onClick={() => setIsFilterOpen(!isFilterOpen)}
+                className="px-4 py-1 border  rounded-md focus:outline-none focus:ring-2 focus:ring-button"
+                aria-expanded={isFilterOpen}
+                aria-controls="filter-section"
+              >
+                {isFilterOpen ? "Hide Filters" : "Show Filters"}
+              </button>
+            </div>
+            <div>
+              <Input
+                placeholder="Search phone screen type"
+                value={searchTerm}
+                onChange={handleSearchChange}
+                className="w-full  md:w-[400px] border-gray-300 rounded-lg"
+              />
+            </div>
           </section>
-
           {/* Available Repairs Section */}
           <section className="p-4">
-            <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-4 gap-4">
-              {filteredRepairs.map((repair, index) => (
-                <div key={index}>
-                  <ScreenRepaircard
-                    repair={repair}
-                    
-                    handleBooking={handleBooking}
-                  />
+            {filteredRepairs.length === 0 ? (
+              <p>No repairs found matching your criteria.</p>
+            ) : (
+              filteredRepairs.map((category) => (
+                <div key={category.id}>
+                  <h2 className="text-xl font-semibold mb-4">{category.title}</h2>
+                  <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-4 gap-4">
+                    {category.screen.map((product,index) => (
+                      <ScreenRepaircard
+                        key={index}
+                        repair={product}
+                        handleBooking={() => handleBooking(category.id, product.id)} category={0} product={0}                      />
+                    ))}
+                  </div>
                 </div>
-              ))}
-            </div>
+              ))
+            )}
           </section>
         </section>
       </div>
@@ -180,5 +214,4 @@ const ServiceDetailedView: React.FC = () => {
     </>
   );
 };
-
-export default ServiceDetailedView;
+export default serviceDetailedView;
