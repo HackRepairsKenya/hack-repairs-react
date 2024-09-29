@@ -111,16 +111,22 @@ const Repairs: React.FC = () => {
   return (
     <div className="mx-6 md:ml-8 md:mx-0 my-8">
       {/* Available Repairs Section */}
-      <motion.h1
-        id="animatedText"
+      <h1
+        
         className="text-2xl font-bold capitalize overflow-hidden whitespace-nowrap"
-        variants={typingAnimation}
-        initial="hidden"
-        animate={controls}
-        custom={20} // Adjust this value based on the length of your text
+      
       >
-        Repair Your Screen Now !!
-      </motion.h1>
+        <div className='flex justify-between'>
+       <p>Phone Screen Replacement</p> 
+       
+        <div className=" bg-green-800 md:mr-8 hover:bg-green-700 transition duration-300 p-4 text-white py-2  rounded-lg text-lg">
+          <Link to="/services/screen-replacement" className="flex items-center justify-center gap-2">
+            <span>View All</span>
+        
+          </Link>
+        </div>
+        </div>
+      </h1>
       <section className="md:p-4 mt-6">
         <div className="">
           
@@ -135,14 +141,7 @@ const Repairs: React.FC = () => {
                 
               
         </div>
-        <div className="mt-8 md:w-[20%] bg-[#003300] hover:bg-green-800 transition duration-300 p-4 text-white py-2 px-6 rounded-full text-lg">
-          <Link to="/services/screen-replacement" className="flex items-center justify-center gap-2">
-            <span>Explore More</span>
-            <span className="animate-ping">
-              <FaArrowRightLong />
-            </span>
-          </Link>
-        </div>
+        
       </section>
     </div>
   );
