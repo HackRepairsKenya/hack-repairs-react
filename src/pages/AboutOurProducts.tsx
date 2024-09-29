@@ -52,7 +52,7 @@ function AboutOurProducts() {
       <Navbar />
       <Breadcrumbs />
       {/* Hero Section */}
-      <section className="relative  h-96">
+      {/* <section className="relative  h-96">
         <img
         
           src="/about-our-products.png"
@@ -64,7 +64,7 @@ function AboutOurProducts() {
             About Our Products
           </h1>
         </div>
-      </section>
+      </section> */}
       <section className="text-center py-12 bg-gray-100 rounded-lg">
         <h1 className="text-4xl font-bold mb-4">About Our Products</h1>
         <p className="text-lg max-w-3xl mx-auto">

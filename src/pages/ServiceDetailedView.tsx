@@ -29,14 +29,14 @@ const serviceDetailedView: React.FC = () => {
         {
           id:1,
           type: "Tecno Camon 15",
-          img: "/screens/tecno/tecnoscreen.png",
+          img: "/phone-screen.png",
           oldPrice: 2000,
           newPrice: 1800,
         },
         {
           id:1,
           type: "Tecno Spark 7p",
-          img: "/screens/tecno/tecnoscreen.png",
+          img: "/phone-screen.png",
           oldPrice: 2500,
           newPrice: 2300,
         },
@@ -50,7 +50,7 @@ const serviceDetailedView: React.FC = () => {
         {
           id:1,
           type: "Samsung Galaxy S10",
-          img: "/screens/samsung/samsungscreen.png",
+          img: "/phone-screen.png",
           oldPrice: 3000,
           newPrice: 2800,
         },

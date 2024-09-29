@@ -34,7 +34,7 @@ interface Testimonies{
      metaKeywords="hackrepairs,hack repairs, how-it-works,Hack,Repairs,How it works,How It Works"
      image="/hack-repairs.jpg" />
         <Breadcrumbs />
-        <section className="relative ">
+        {/* <section className="relative ">
         <img
         width={600}
         height={500}
@@ -45,7 +45,7 @@ interface Testimonies{
         <div className="absolute inset-0 flex items-center justify-center bg-gradient-to-r from-gray-800  ">
           <h1 className="text-white text-4xl font-bold text-center">How It Works</h1>
         </div>
-      </section>
+      </section> */}
     <div className="max-w-7xl mx-auto p-6">
       {/* Introduction Section */}
       <section className="text-center py-10">

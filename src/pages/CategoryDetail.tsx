@@ -30,7 +30,7 @@ const categories: Repair[] = [
       {
         id: 1,
         title: "Tecno Camon 15",
-        img: "/screens/tecno/tecnoscreen.png",
+        img: "/phone-screen.png",
         oldPrice: 2000,
         newPrice: 1800,
         quantity:1
@@ -38,7 +38,7 @@ const categories: Repair[] = [
       {
         id: 2,
         title: "Tecno Spark 7p",
-        img: "/screens/tecno/tecnoscreen.png",
+        img: "/phone-screen.png",
         oldPrice: 2500,
         newPrice: 2300,
         quantity:1
@@ -52,7 +52,7 @@ const categories: Repair[] = [
       {
         id: 1,
         title: "Samsung Galaxy S10",
-        img: "/screens/samsung/samsungscreen.png",
+        img: "/phone-screen.png",
         oldPrice: 3000,
         quantity:1,
 

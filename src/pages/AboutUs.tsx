@@ -18,7 +18,7 @@ export default function AboutUs() {
         <Navbar />
         <Breadcrumbs />
          {/* Hero Section */}
-      <section className="relative ">
+      {/* <section className="relative ">
         <img
         width={600}
         height={500}
@@ -30,7 +30,7 @@ export default function AboutUs() {
           <h1 className="text-white text-4xl font-bold text-center">About us</h1>
         </div>
        
-      </section>
+      </section> */}
       <section className="text-center py-12 bg-gray-100 rounded-lg">
         <h1 className="text-4xl font-bold mb-4">About Us</h1>
         <p className="text-lg max-w-3xl mx-auto">

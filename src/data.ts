@@ -5,12 +5,16 @@ interface Category {
   }
   
   
+  // fetch categories 
+  const fetchCategories = asynch() =>{
+       const repsonse = await axios.get('https://api.hackrepairs.co.ke/categories')
+  }
   export const  categories: Category[] = [
-    { id: 1, name: "Tecno", image: "/categories/tecno.png" },
-    { id: 2, name: "Samsung", image: "/categories/samsung.png" },
-    { id: 3, name: "Itel", image: "/categories/itel.png" },
-    { id: 4, name: "Oppo", image: "/categories/samsung.png" },
-    { id: 4, name: "Nokia", image: "/categories/samsung.png" },
-    { id: 4, name: "Realme", image: "/categories/samsung.png" },
+    { id: 1, name: "Tecno", image: "/phone-screen.png" },
+    { id: 2, name: "Samsung", image: "/phone-screen.png" },
+    { id: 3, name: "Itel", image: "/phone-screen.png" },
+    { id: 4, name: "Oppo", image: "/phone-screen.png" },
+    { id: 4, name: "Nokia", image: "/phone-screen.png" },
+    { id: 4, name: "Realme", image: "/phone-screen.png" },
   
   ];

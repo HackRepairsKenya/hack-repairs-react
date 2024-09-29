@@ -29,12 +29,12 @@ const ScreenRepairCard: React.FC<ScreenRepairCardProps> = ({
   return (
     <div
       onClick={() => handleBooking(category, product)}
-      className="bg-white w-40 md:w-52 h-auto mb-4 hover:cursor-pointer relative border border-gray-200 rounded-lg shadow-md overflow-hidden transition-transform duration-300 ease-in-out transform hover:scale-105 hover:shadow-lg"
+      className="bg-gradient-to-b from-slate-200 w-40 md:w-52 h-auto mb-4 hover:cursor-pointer relative border border-gray-200 rounded-lg shadow-md overflow-hidden transition-transform duration-300 ease-in-out transform hover:scale-105 hover:shadow-lg"
     >
       <div className="bg-button absolute right-2 z-50 rounded-lg top-2 text-white h-[2rem] flex items-center justify-center w-[4rem]">
         <p className="text-sm animate-pulse text-center">{discount()}% off</p>
       </div>
-      <img className="" src={repair.img} alt={repair.type} />
+      <img className="w-36 h-auto" src={repair.img} alt={repair.type} />
 
       <div className="p-2 flex text-gray-800 justify-between items-center w-full">
         <div>

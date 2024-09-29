@@ -42,7 +42,7 @@ const PTable: React.FC<PTableProps> = ({ products, fetchProducts, outOffStock })
 
   const deleteProduct = async () => {
     try {
-      const delReq = await axios.delete("https://api.wemitraders.co.ke/products", {
+      const delReq = await axios.delete("https://api.hackrepairs.co.ke/products", {
         data: {
           id: tobeDeleted,
         },

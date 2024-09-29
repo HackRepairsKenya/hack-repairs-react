@@ -2,9 +2,7 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { motion, useAnimation } from "framer-motion";
-import { categories } from "@/data";
-
-
+import axios from "axios";
 
 
 // Typing animation variants
@@ -23,6 +21,19 @@ const Categories: React.FC = () => {
   const navigate = useNavigate();
   const controls = useAnimation();
   const [hasAnimated, setHasAnimated] = useState<boolean>(false);
+  const [categories, setCategories] = useState<Category[]>([]);
+ 
+
+  // fetch categories 
+  const fetchCategories = async() =>{
+    const response = await axios.get('https://api.hackrepairs.co.ke/categories')
+    console.log(response.data)
+    setCategories(response.data)
+}
+
+useEffect(()=>{
+  fetchCategories()
+},[])
 
   useEffect(() => {
     const handleScroll = () => {
@@ -66,7 +77,7 @@ const Categories: React.FC = () => {
             onClick={() => handleCategoryClick(category.name)}
             className="transition-transform duration-500 ease-in-out hover:scale-105  w-40 md:w-48 hover:cursor-pointer h-40 md:h-48 relative p-4 flex flex-col items-center"
           >
-            <div className="border p-4 rounded-full flex items-center justify-center w-full h-full">
+            <div className="border bg-gradient-to-b from-slate-300 p-4 rounded-full flex items-center justify-center w-full h-full">
               <img
                 src={category.image}
                 alt={category.name}
@@ -82,5 +93,4 @@ const Categories: React.FC = () => {
     </div>
   );
 };
-
 export default Categories;

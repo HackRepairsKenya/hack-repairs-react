@@ -30,7 +30,7 @@ const CategoriesTable: React.FC = () => {
 
   const fetchCategories = async () => {
     try {
-      const response = await axios.get<Category[]>('https://api.wemitraders.co.ke/categories');
+      const response = await axios.get<Category[]>('https://api.hackrepairs.co.ke/categories');
       setCategories(response.data);
     } catch (error) {
       console.error('Error fetching categories:', error);
@@ -50,7 +50,7 @@ const CategoriesTable: React.FC = () => {
     if (toBeDeleted === null) return;
 
     try {
-      const delReq = await axios.delete('https://api.wemitraders.co.ke/categories', {
+      const delReq = await axios.delete('https://api.hackrepairs.co.ke/categories', {
         data: {
           id: toBeDeleted,
         },

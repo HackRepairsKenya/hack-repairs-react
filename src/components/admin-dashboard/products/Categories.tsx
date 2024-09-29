@@ -15,7 +15,7 @@ const CreateCategory = ({ handleCatClose }:CreateCategoryPropTypes) => {
       try {
         setIsLoading(true)
         const response = await axios.post(
-          "https://api.wemitraders.co.ke/categories",
+          "https://api.hackrepairs.co.ke/categories",
           values
         );
 

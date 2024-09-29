@@ -20,7 +20,7 @@ const UpdateProductModal = ({ handleCallClose, product }: UpdateProductModalProp
   // fetch categories
   const fetchCategories = async () => {
     try {
-      const response = await axios.get("https://api.wemitraders.co.ke/categories");
+      const response = await axios.get("https://api.hackrepairs.co.ke/categories");
       setCategory(response.data);
     } catch (error) {
       console.log(error);
@@ -30,7 +30,7 @@ const UpdateProductModal = ({ handleCallClose, product }: UpdateProductModalProp
   // fetch sub categories
   const fetchSubCategories = async () => {
     try {
-      const response = await axios.get("https://api.wemitraders.co.ke/subcategories");
+      const response = await axios.get("https://api.hackrepairs.co.ke/subcategories");
       console.log(response.data);
     } catch (error) {
       console.log(error);
@@ -54,7 +54,7 @@ const UpdateProductModal = ({ handleCallClose, product }: UpdateProductModalProp
     },
     onSubmit: async (values) => {
       try {
-        const response = await axios.put("https://api.wemitraders.co.ke/products", values);
+        const response = await axios.put("https://api.hackrepairs.co.ke/products", values);
         setIsLoading(true);
         if (response.status === 200) {
           handleCallClose();

@@ -44,7 +44,7 @@ useEffect(()=>{
 // function to fetch products
 const fetchProducts = async()=>{
   try {
-    const response = await axios.get("https://api.wemitraders.co.ke/products")
+    const response = await axios.get("https://api.hackrepairs.co.ke/products")
     
     setProducts(response.data)
     

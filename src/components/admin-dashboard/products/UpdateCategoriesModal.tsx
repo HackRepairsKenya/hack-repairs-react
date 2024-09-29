@@ -15,7 +15,7 @@ const UpdateCategoryModal = ({ handleCatClose, category }:UpdateCategoriesModalP
       try {
         setIsLoading(true)
         const response = await axios.put(
-          "https://api.wemitraders.co.ke/categories",
+          "https://api.hackrepairs.co.ke/categories",
           values
         );
 
@@ -45,7 +45,7 @@ const UpdateCategoryModal = ({ handleCatClose, category }:UpdateCategoriesModalP
   // fetch categories
   const fetchCategories = async()=>{
     try {
-      const response = await axios.get('https://api.wemitraders.co.ke/categories')      
+      const response = await axios.get('https://api.hackrepairs.co.ke/categories')      
       console.log(response)
     } catch (error) {
       console.log(error) 

@@ -18,15 +18,19 @@ import {
   DialogHeader,
   DialogTitle,
 } from "@/components/ui/dialog";
+import Ad from "@/components/Ad";
 
 
 export default function Home() {
   const [showModal, setShowModal] = useState<boolean>(false);
   const navigate = useNavigate();
+  const [showNavModal, setShowNavModal] = useState<boolean>(true);
+  
 
   useEffect(() => {
     const timer = setTimeout(() => {
       setShowModal(true);
+      setShowNavModal(false)
     }, 7000);
 
     // Clear the timeout if the component is unmounted before the timeout completes
@@ -38,19 +42,21 @@ export default function Home() {
     navigate('/booking'); // Navigate to the booking page
   };
 
-
+const handleClose =()=>{
+  setShowNavModal(false)
+}
   return (
     <div>
       <SEO
-        title="HackRepairs - Quality Screens, Quality Services"
+        title="Home -Hack Repairs"
         description="We provide top-notch phone screen repair services and sell high-quality replacement screens for all major brands."
         name="HackRepairs."
         type="website"
         url="https://hackrepairs.co.ke/"
         image="https://hackrepairs.co.ke/hack-repairs.jpg"
-        metaKeywords="home,hack repairs, kilifi,screens, screen replacement,phone spares,tecno ,nokia,samsung,oppo"
+        metaKeywords="hackrepairs,hack repairs, kilifi,screens, screen replacement,phone spares,tecno ,nokia,samsung,oppo"
       />
-
+{showNavModal && <Ad handleClose={handleClose} />}
       <Navbar />
       <Hero />
       <CarouselBanner />

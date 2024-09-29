@@ -44,7 +44,7 @@ const Services = () => {
       <Breadcrumbs />
       <div className="container mx-auto p-6">
         {/* hero section */}
-        <section className="relative mb-12">
+        {/* <section className="relative mb-12">
           <img
             width={600}
             height={500}
@@ -57,7 +57,7 @@ const Services = () => {
               Explore Our services
             </h1>
           </div>
-        </section>
+        </section> */}
        
       </div>
       

@@ -1,34 +1,80 @@
 import React, { useContext, useState } from "react";
-
 import { FiShoppingCart } from "react-icons/fi";
 import { FaRegUser } from "react-icons/fa6";
 import { FaBus } from "react-icons/fa";
+import { RiArrowDropDownLine } from "react-icons/ri"
 import { GiHamburgerMenu } from "react-icons/gi";
-import { CiSearch } from "react-icons/ci";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuLabel,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu"
 import { Link } from "react-router-dom";
 import SignIn from "../auth/SignIn";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import { CartContext } from "@/context/cart";
+import { CiSearch } from "react-icons/ci";
 
 const Navbar: React.FC = () => {
   const [searchInput, setSearchInput] = useState("");
-  const [searchResults, setSearchResults] = useState<string[]>([]);
   const [isHamburgerClicked, setIsHamburgerClicked] = useState<boolean>(false);
-  const [showmodal, setShowModal] = useState<boolean>(false);
-   // Access CartContext safely
-   const cartContext = useContext(CartContext);
+  const [showModal, setShowModal] = useState<boolean>(false);
+  const [products] = useState([
+    {
+      id: 1,
+      title: "Wireless Earbuds",
+      category: "Phone Accessories",
+      price: "500",
+      tags: "earbuds wireless bluetooth noise-cancelling black",
+    },
+    {
+      id: 2,
+      title: "Laptop Mouse",
+      category: "Computer Accessories",
+      price: "350",
+      tags: "mouse wireless optical laptop computer ergonomic",
+    },
+    {
+      id: 3,
+      title: "Laptop Battery",
+      category: "Laptop Spares",
+      price: "4500",
+      tags: "battery laptop replacement lithium-ion high-capacity",
+    },
+    {
+      id: 4,
+      title: "Phone Screen Protector",
+      category: "Phone Accessories",
+      price: "250",
+      tags: "screen protector tempered glass phone anti-scratch",
+    },
+    {
+      id: 5,
+      title: "External Hard Drive",
+      category: "Computer Accessories",
+      price: "5000",
+      tags: "hard drive external storage portable 1TB laptop",
+    },
+    {
+      id: 6,
+      title: "Laptop Keyboard",
+      category: "Laptop Spares",
+      price: "4500",
+      tags: "keyboard replacement laptop backlit wireless",
+    },
+  ]);
 
-   // Check if CartContext is undefined
-   if (!cartContext) {
-     return <p>Cart context is not available.</p>;
-   }
- 
-   const {  cartItems } = cartContext;
-  
- 
-  const closeModal = () => {
-    setShowModal(false);
-  };
+
+  const cartContext = useContext(CartContext);
+  if (!cartContext) {
+    return <p>Cart context is not available.</p>;
+  }
+  const { cartItems } = cartContext;
+
+  const closeModal = () => setShowModal(false);
 
   const extraLinks = [
     { title: "Sell With Us", href: "/sell-with-us" },
@@ -39,47 +85,23 @@ const Navbar: React.FC = () => {
   ];
 
   const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setSearchInput(e.target.value);
-    if (e.target.value.trim() === "") {
-      setSearchResults([]);
-    } else {
-      const results = [
-        "Tecno Screen",
-        "Samsung Screen",
-        "Itel Screen",
-        "Oppo",
-        "Sim Trays for Tecno",
-      "Sim Trays for Samsung",
-      "Sim Trays for iPhone",
-      "Phone Chargers",
-      "USB Cables",
-      "Phone Cases",
-      "Screen Protectors",
-      "Earphones",
-      "Wireless Headsets",
-      "Phone Repair Service",
-      "Screen Replacement Service",
-      "Battery Replacement Service",
-      "Waterproofing Service",
-      "silicone phone covers"
-      ].filter((item) =>
-        item.toLowerCase().includes(e.target.value.toLowerCase())
-      );
-      setSearchResults(results);
-    }
+    setSearchInput(e.target.value.toLowerCase());
   };
+
+  const filteredProducts = products.filter((product) =>
+    product.tags.toLowerCase().includes(searchInput) ||
+    product.title.toLowerCase().includes(searchInput) ||
+    product.category.toLowerCase().includes(searchInput)
+  );
 
   return (
     <div>
-      {showmodal && <SignIn closeModal={closeModal} />}
-      <nav className="relative bg-white shadow-lg ">
+      {showModal && <SignIn closeModal={closeModal} />}
+      <nav className="relative bg-white">
         <div className="container mx-auto flex justify-between items-center p-4">
-          {/* hamburger */}
+          {/* Hamburger menu for mobile */}
           <Sheet>
-            <div
-              className="flex md:hidden"
-              onClick={() => setIsHamburgerClicked(!isHamburgerClicked)}
-            >
+            <div className="flex md:hidden" onClick={() => setIsHamburgerClicked(!isHamburgerClicked)}>
               <SheetTrigger>
                 <GiHamburgerMenu />
               </SheetTrigger>
@@ -88,128 +110,118 @@ const Navbar: React.FC = () => {
               {isHamburgerClicked && (
                 <div>
                   <ul className="flex flex-col gap-8">
-                    {extraLinks.map((link, index) => {
-                      return (
-                        <Link
-                          to={link.href}
-                          key={index}
-                          className="hover:underline"
-                        >
-                          {link.title}
-                        </Link>
-                      );
-                    })}
+                    {extraLinks.map((link, index) => (
+                      <Link key={index} to={link.href} className="hover:underline">
+                        {link.title}
+                      </Link>
+                    ))}
                   </ul>
                 </div>
               )}
             </SheetContent>
           </Sheet>
           <div className="flex items-center">
-            <img
-              src="/hack-repairs.jpg"
-              alt="logo"
-              width={30}
-              height={30}
-              className="rounded-full"
-            />
-            <p className="text-sm ml-2 font-semibold md:text-2xl">
-              Hack-Repairs
-            </p>
+            <img src="/hack-repairs.jpg" alt="logo" width={30} height={30} className="rounded-full" />
+            <p className="text-sm ml-2 font-semibold md:text-2xl">Hack-Repairs</p>
           </div>
           <div className="flex items-center space-x-4">
-            <Link
-              to="/cart"
-              className={`flex items-center relative gap-2 py-2 ${
-                window.location.pathname === "/cart"
-                  ? "text-green-500"
-                  : "text-black"
-              }`}
-            >
-              <div className="w-4 h-4 bg-green-800 text-white  rounded-full animate-pulse absolute top-0 right-0 flex items-center justify-center text-xs">
-                {cartItems.length <= 0 ?'0': cartItems.length} 
-
+            <Link to="/cart" className="flex items-center relative gap-2 py-2 text-black">
+              <div className="w-4 h-4 bg-green-800 text-white rounded-full animate-pulse absolute top-0 right-0 flex items-center justify-center text-xs">
+                {cartItems.length}
               </div>
-              <FiShoppingCart />
-              Cart
+              <FiShoppingCart /> Cart
             </Link>
-
-            
-            <a
-              href="/orders"
-              className={`hidden md:flex items-center gap-2 py-2 ${
-                window.location.pathname === "/orders"
-                  ? "text-green-500"
-                  : "text-black"
-              }`}
-            >
+            <a href="/orders" className="hidden md:flex items-center gap-2 py-2 text-black">
               <FaBus /> Orders
             </a>
-            <p
-              onClick={() => setShowModal(!showmodal)}
-              className={`flex items-center hover:cursor-pointer gap-2 py-2 ${
-                window.location.pathname === "/profile"
-                  ? "text-green-500"
-                  : "text-black"
-              }`}
-            >
+            <p onClick={() => setShowModal(!showModal)} className="flex items-center gap-2 py-2 cursor-pointer text-black">
               <FaRegUser />
             </p>
           </div>
         </div>
       </nav>
-      <div className="container mx-auto flex flex-col md:flex-row items-center p-4 relative">
+
+      {/* Search bar and results */}
+      <div className="mx-2  flex flex-col md:flex-row  items-center  relative">
         <div className="relative w-full md:w-1/2">
           <input
             type="text"
             value={searchInput}
             onChange={handleSearchChange}
-            placeholder="Search all phone screens & phone accessories (e.g Tecno, sim trays, batteries)"
-            className="border p-3 border-gray-300 shadow-lg md:shadow-none outline-none focus:ring-2 focus:ring-green-500 rounded-md w-full h-full pl-4 pr-12 text-gray-700 placeholder-gray-500"
+            placeholder="What are you looking for?"
+            className="border p-2   bg-slate-200 outline-none rounded-2xl w-full pl-[3rem] pr-12"
           />
-          <p className="absolute inset-y-0 right-0 bg-green-800 p-2 rounded-r-md flex items-center">
-            <CiSearch className="text-white" />
-          </p>
-        </div>
+          
+           {/* Search Icon */}
+            <div className="absolute   top-[20%] left-4 flex  items-center  pointer-events-none">
+              <CiSearch className=" font-bold " />
+            </div>
+          {/* products */}
+          <div className="mt-2 md:mx-8">
+            <ul className="flex text-sm md:text-lg justify-between">
+              <li className="capitalize font-bold">
+                <DropdownMenu>
+                  <DropdownMenuTrigger><span className="flex  items-center gap-2">
+                    <span>Accessories</span> <span className="text-2xl"><RiArrowDropDownLine /></span></span> </DropdownMenuTrigger>
+                  <DropdownMenuContent>
+                    <DropdownMenuLabel>Phone accessories</DropdownMenuLabel>
+                    <DropdownMenuSeparator />
+                    <DropdownMenuItem>laptop accessories</DropdownMenuItem>
+                    <DropdownMenuItem>computer accessories</DropdownMenuItem>
+                  </DropdownMenuContent>
+                </DropdownMenu></li>
+              <li className="capitalize font-bold"> <DropdownMenu>
+                <DropdownMenuTrigger><span className="flex  items-center gap-2">
+                  <span>Spare Parts</span> <span className="text-2xl"><RiArrowDropDownLine /></span></span> </DropdownMenuTrigger>
+                <DropdownMenuContent>
+                  <DropdownMenuLabel>Phone spare parts</DropdownMenuLabel>
+                  <DropdownMenuSeparator />
+                  <DropdownMenuItem>laptop spareparts</DropdownMenuItem>
+                  <DropdownMenuItem>computer spareparts</DropdownMenuItem>
 
-        {searchInput.trim() !== "" && (
-          <div className="absolute mt-[3rem] md:mt-[9rem] bg-white shadow-lg rounded-md w-full md:w-1/2 z-50">
-            {searchResults.length > 0 ? (
-              <ul>
-                {searchResults.map((result, index) => (
-                  <li key={index} className="p-2 border-b border-gray-300">
-                    <Link
-                      to={`/products/${result.toLowerCase().replace(/\s+/g, "-")}`}
-                      className="hover:underline"
-                    >
-                      {result}
-                    </Link>
-                  </li>
-                ))}
-              </ul>
-            ) : (
-              <div className="p-2 text-gray-500">Results not found</div>
-            )}
-          </div>
-        )}
-
-        <div className="hidden md:flex flex-grow justify-between items-center">
-          <div className="relative"></div>
-          <div>
-            <ul className="flex space-x-4">
-              {extraLinks.map((link) => (
-                <li
-                  key={link.title}
-                  className={`text-white md:text-gray-800 hover:underline ${
-                    window.location.pathname === link.href
-                      ? "text-green-800 underline font-bold "
-                      : "text-gray-800"
-                  }`}
-                >
-                  <Link to={link.href}>{link.title}</Link>
-                </li>
-              ))}
+                </DropdownMenuContent>
+              </DropdownMenu> </li>
+              <li className="capitalize font-bold"> <DropdownMenu>
+                <DropdownMenuTrigger><span className="flex  items-center gap-2">
+                  <span>LCD's</span> <span className="text-2xl"><RiArrowDropDownLine /></span></span> </DropdownMenuTrigger>
+                <DropdownMenuContent>
+                  <DropdownMenuLabel>phone screens</DropdownMenuLabel>
+                  <DropdownMenuSeparator />
+                </DropdownMenuContent>
+              </DropdownMenu> </li>
             </ul>
           </div>
+
+          {/* Display search results */}
+          {searchInput && (
+            <div className="absolute  bg-white shadow-lg rounded-md w-full  md:w-1/2 z-50">
+              {filteredProducts.length > 0 ? (
+                <ul>
+                  {filteredProducts.map((product, index) => (
+                    <li key={index} className="p-2 border-b border-gray-300">
+                      <Link to={`/category/:categoryId/product/:productId`}>
+
+                        <h3 className="font-bold">{product.title}</h3>
+                        <h5>Ksh {product.price}</h5>
+                      </Link>
+                    </li>
+                  ))}
+                </ul>
+              ) : (
+                <div className="p-2 text-gray-500">No results found</div>
+              )}
+            </div>
+          )}
+
+        </div>
+        <div className="hidden   md:ml-2 md:flex flex-grow justify-between  -mt-8 ">
+          <ul className="flex space-x-4">
+            {extraLinks.map((link) => (
+              <li key={link.title} className="text-gray-800 hover:underline">
+                <Link to={link.href}>{link.title}</Link>
+              </li>
+            ))}
+          </ul>
         </div>
       </div>
     </div>
