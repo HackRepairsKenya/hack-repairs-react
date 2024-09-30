@@ -1,8 +1,8 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useState, useEffect } from "react";
 import { FiShoppingCart } from "react-icons/fi";
 import { FaRegUser } from "react-icons/fa6";
 import { FaBus } from "react-icons/fa";
-import { RiArrowDropDownLine } from "react-icons/ri"
+import { RiArrowDropDownLine } from "react-icons/ri";
 import { GiHamburgerMenu } from "react-icons/gi";
 import {
   DropdownMenu,
@@ -11,17 +11,41 @@ import {
   DropdownMenuLabel,
   DropdownMenuSeparator,
   DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu"
+} from "@/components/ui/dropdown-menu";
 import { Link } from "react-router-dom";
 import SignIn from "../auth/SignIn";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import { CartContext } from "@/context/cart";
 import { CiSearch } from "react-icons/ci";
+import axios from "axios";
+
+interface Category {
+  id: number;
+  name: string;
+}
 
 const Navbar: React.FC = () => {
   const [searchInput, setSearchInput] = useState("");
   const [isHamburgerClicked, setIsHamburgerClicked] = useState<boolean>(false);
   const [showModal, setShowModal] = useState<boolean>(false);
+  const [categories, setCategories] = useState<Category[]>([]);
+
+  // fetch categories
+  const fetchCategories = async () => {
+    try {
+      const response = await axios.get("https://api.hackrepairs.co.ke/categories");
+      console.log(response.data);
+      setCategories(response.data);
+    } catch (error) {
+      console.error("Error fetching categories:", error);
+    }
+  };
+
+  // useEffect to fetch categories when component mounts
+  useEffect(() => {
+    fetchCategories();
+  }, []);
+
   const [products] = useState([
     {
       id: 1,
@@ -67,7 +91,6 @@ const Navbar: React.FC = () => {
     },
   ]);
 
-
   const cartContext = useContext(CartContext);
   if (!cartContext) {
     return <p>Cart context is not available.</p>;
@@ -88,10 +111,11 @@ const Navbar: React.FC = () => {
     setSearchInput(e.target.value.toLowerCase());
   };
 
-  const filteredProducts = products.filter((product) =>
-    product.tags.toLowerCase().includes(searchInput) ||
-    product.title.toLowerCase().includes(searchInput) ||
-    product.category.toLowerCase().includes(searchInput)
+  const filteredProducts = products.filter(
+    (product) =>
+      product.tags.toLowerCase().includes(searchInput) ||
+      product.title.toLowerCase().includes(searchInput) ||
+      product.category.toLowerCase().includes(searchInput)
   );
 
   return (
@@ -101,7 +125,10 @@ const Navbar: React.FC = () => {
         <div className="container mx-auto flex justify-between items-center p-4">
           {/* Hamburger menu for mobile */}
           <Sheet>
-            <div className="flex md:hidden" onClick={() => setIsHamburgerClicked(!isHamburgerClicked)}>
+            <div
+              className="flex md:hidden"
+              onClick={() => setIsHamburgerClicked(!isHamburgerClicked)}
+            >
               <SheetTrigger>
                 <GiHamburgerMenu />
               </SheetTrigger>
@@ -121,7 +148,13 @@ const Navbar: React.FC = () => {
             </SheetContent>
           </Sheet>
           <div className="flex items-center">
-            <img src="/hack-repairs.jpg" alt="logo" width={30} height={30} className="rounded-full" />
+            <img
+              src="/hack-repairs.jpg"
+              alt="logo"
+              width={30}
+              height={30}
+              className="rounded-full"
+            />
             <p className="text-sm ml-2 font-semibold md:text-2xl">Hack-Repairs</p>
           </div>
           <div className="flex items-center space-x-4">
@@ -134,7 +167,10 @@ const Navbar: React.FC = () => {
             <a href="/orders" className="hidden md:flex items-center gap-2 py-2 text-black">
               <FaBus /> Orders
             </a>
-            <p onClick={() => setShowModal(!showModal)} className="flex items-center gap-2 py-2 cursor-pointer text-black">
+            <p
+              onClick={() => setShowModal(!showModal)}
+              className="flex items-center gap-2 py-2 cursor-pointer text-black"
+            >
               <FaRegUser />
             </p>
           </div>
@@ -142,86 +178,97 @@ const Navbar: React.FC = () => {
       </nav>
 
       {/* Search bar and results */}
-      <div className="mx-2  flex flex-col md:flex-row  items-center  relative">
+      <div className="mx-2 flex flex-col md:flex-row items-center relative">
         <div className="relative w-full md:w-1/2">
           <input
             type="text"
             value={searchInput}
             onChange={handleSearchChange}
             placeholder="What are you looking for?"
-            className="border p-2   bg-slate-200 outline-none rounded-2xl w-full pl-[3rem] pr-12"
+            className="border p-2 bg-slate-200 outline-none rounded-2xl w-full pl-[3rem] pr-12"
           />
-          
-           {/* Search Icon */}
-            <div className="absolute   top-[20%] left-4 flex  items-center  pointer-events-none">
-              <CiSearch className=" font-bold " />
-            </div>
+
+          {/* Search Icon */}
+          <div className="absolute top-[20%] left-4 flex items-center pointer-events-none">
+            <CiSearch className="font-bold" />
+          </div>
+
           {/* products */}
           <div className="mt-2 md:mx-8">
             <ul className="flex text-sm md:text-lg justify-between">
               <li className="capitalize font-bold">
                 <DropdownMenu>
-                  <DropdownMenuTrigger><span className="flex  items-center gap-2">
-                    <span>Accessories</span> <span className="text-2xl"><RiArrowDropDownLine /></span></span> </DropdownMenuTrigger>
+                  <DropdownMenuTrigger>
+                    <span className="flex items-center gap-2">
+                      <span>Accessories</span>{" "}
+                      <span className="text-2xl">
+                        <RiArrowDropDownLine />
+                      </span>
+                    </span>
+                  </DropdownMenuTrigger>
                   <DropdownMenuContent>
-                    <DropdownMenuLabel>Phone accessories</DropdownMenuLabel>
                     <DropdownMenuSeparator />
-                    <DropdownMenuItem>laptop accessories</DropdownMenuItem>
-                    <DropdownMenuItem>computer accessories</DropdownMenuItem>
+                   
+                      <DropdownMenuItem >Phone Accessories</DropdownMenuItem>
+                      <DropdownMenuItem >Laptop Accessories</DropdownMenuItem>
+                      <DropdownMenuItem >Computer Accessories</DropdownMenuItem>
+                    
                   </DropdownMenuContent>
-                </DropdownMenu></li>
-              <li className="capitalize font-bold"> <DropdownMenu>
-                <DropdownMenuTrigger><span className="flex  items-center gap-2">
-                  <span>Spare Parts</span> <span className="text-2xl"><RiArrowDropDownLine /></span></span> </DropdownMenuTrigger>
-                <DropdownMenuContent>
-                  <DropdownMenuLabel>Phone spare parts</DropdownMenuLabel>
-                  <DropdownMenuSeparator />
-                  <DropdownMenuItem>laptop spareparts</DropdownMenuItem>
-                  <DropdownMenuItem>computer spareparts</DropdownMenuItem>
-
-                </DropdownMenuContent>
-              </DropdownMenu> </li>
-              <li className="capitalize font-bold"> <DropdownMenu>
-                <DropdownMenuTrigger><span className="flex  items-center gap-2">
-                  <span>LCD's</span> <span className="text-2xl"><RiArrowDropDownLine /></span></span> </DropdownMenuTrigger>
-                <DropdownMenuContent>
-                  <DropdownMenuLabel>phone screens</DropdownMenuLabel>
-                  <DropdownMenuSeparator />
-                </DropdownMenuContent>
-              </DropdownMenu> </li>
+                </DropdownMenu>
+              </li>
+              <li className="capitalize font-bold">
+                <DropdownMenu>
+                  <DropdownMenuTrigger>
+                    <span className="flex items-center gap-2">
+                      <span>Spare Parts</span>{" "}
+                      <span className="text-2xl">
+                        <RiArrowDropDownLine />
+                      </span>
+                    </span>
+                  </DropdownMenuTrigger>
+                  <DropdownMenuContent>
+                    <DropdownMenuLabel>Phone spare parts</DropdownMenuLabel>
+                    <DropdownMenuSeparator />
+                    <DropdownMenuItem>laptop spareparts</DropdownMenuItem>
+                    <DropdownMenuItem>computer spareparts</DropdownMenuItem>
+                  </DropdownMenuContent>
+                </DropdownMenu>
+              </li>
+              <li className="capitalize font-bold">
+                <DropdownMenu>
+                  <DropdownMenuTrigger>
+                    <span className="flex items-center gap-2">
+                      <span>LCD's</span>{" "}
+                      <span className="text-2xl">
+                        <RiArrowDropDownLine />
+                      </span>
+                    </span>
+                  </DropdownMenuTrigger>
+                  <DropdownMenuContent>
+                    <DropdownMenuLabel>phone screens</DropdownMenuLabel>
+                    <DropdownMenuSeparator />
+                  </DropdownMenuContent>
+                </DropdownMenu>
+              </li>
             </ul>
           </div>
 
           {/* Display search results */}
           {searchInput && (
-            <div className="absolute  bg-white shadow-lg rounded-md w-full  md:w-1/2 z-50">
+            <div className="absolute bg-white shadow-lg rounded-md w-full md:w-1/2 z-50">
               {filteredProducts.length > 0 ? (
-                <ul>
-                  {filteredProducts.map((product, index) => (
-                    <li key={index} className="p-2 border-b border-gray-300">
-                      <Link to={`/category/:categoryId/product/:productId`}>
-
-                        <h3 className="font-bold">{product.title}</h3>
-                        <h5>Ksh {product.price}</h5>
-                      </Link>
-                    </li>
-                  ))}
-                </ul>
+                filteredProducts.map((product) => (
+                  <div key={product.id} className="p-4 border-b hover:bg-gray-100">
+                    <p className="text-lg font-bold">{product.title}</p>
+                    <p>{product.category}</p>
+                    <p className="text-sm">Price: Ksh {product.price}</p>
+                  </div>
+                ))
               ) : (
-                <div className="p-2 text-gray-500">No results found</div>
+                <p className="p-4 text-sm">No products found matching your search.</p>
               )}
             </div>
           )}
-
-        </div>
-        <div className="hidden   md:ml-2 md:flex flex-grow justify-between  -mt-8 ">
-          <ul className="flex space-x-4">
-            {extraLinks.map((link) => (
-              <li key={link.title} className="text-gray-800 hover:underline">
-                <Link to={link.href}>{link.title}</Link>
-              </li>
-            ))}
-          </ul>
         </div>
       </div>
     </div>

@@ -3,13 +3,9 @@ import axios from 'axios';
 import { IoTrashOutline } from 'react-icons/io5';
 import { HiPencil } from 'react-icons/hi2';
 import UpdateCategoryModal from './UpdateCategoriesModal';
-import { Product } from '@/utils/types';
+import { Category } from "@/utils/types";
 
-interface Category {
-  id: number;
-  name: string;
-  products: Product[];
-}
+
 
 const CategoriesTable: React.FC = () => {
   const [categories, setCategories] = useState<Category[]>([]);

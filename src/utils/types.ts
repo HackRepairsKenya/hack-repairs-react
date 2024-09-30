@@ -1,5 +1,4 @@
 
-
 export interface Product {
   id: number;
   productName: string;
@@ -7,7 +6,7 @@ export interface Product {
   productColor: string;
   productPrice: number;
   marketPrice: number;
-  categoryId: string; // or number depending on your need
+  categoryId: string; 
   subcategoryId: string;
   yearOfManufacture: string;
   productModel: string;
@@ -18,7 +17,7 @@ export interface Product {
 
   
   export interface Category {
-	
+    image: string ;
     id: number;
     name: string;
     products:Product[]
@@ -37,7 +36,6 @@ export interface Product {
     paymentStatus: string;
     deliveryStatus: string;
     status:string
-    // Add any other properties needed
   }
 
 
@@ -48,8 +46,6 @@ export interface Product {
     uploadImageToCloudinary: (file: File, cloudName: string, uploadPreset: string) => Promise<string | null>;
     handleImageChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
   }
-
-
 
   export interface CartItem {
     title: string | undefined;

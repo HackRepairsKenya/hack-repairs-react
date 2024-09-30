@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
-import { motion, useAnimation } from 'framer-motion';
-import { FaArrowRightLong } from 'react-icons/fa6';
+import {  useAnimation } from 'framer-motion';
+
 import { Link, useNavigate } from 'react-router-dom';
 import ScreenRepaircard from '../shared/ScreenRepaircard';
 
@@ -19,16 +19,7 @@ interface Repair {
 }
 
 
-const typingAnimation = {
-  hidden: { width: 0 },
-  visible: (i: number) => ({
-    width: `${i}ch`,
-    transition: {
-      duration: i * 0.1,
-      ease: 'linear',
-    },
-  }),
-};
+
 
 const Repairs: React.FC = () => {
   const navigate = useNavigate();
@@ -109,24 +100,20 @@ const Repairs: React.FC = () => {
   }, [controls, hasAnimated]);
 
   return (
-    <div className="mx-6 md:ml-8 md:mx-0 my-8">
+    <div className="mx-8 my-8">
       {/* Available Repairs Section */}
-      <h1
-        
-        className="text-2xl font-bold capitalize overflow-hidden whitespace-nowrap"
-      
-      >
-        <div className='flex justify-between'>
-       <p>Phone Screen Replacement</p> 
+    
+        <div className=' flex gap-4 justify-between'>
+       <p className='font-bold text-lg md:text-2xl'>Phone Screen Replacement</p> 
        
-        <div className=" bg-green-800 md:mr-8 hover:bg-green-700 transition duration-300 p-4 text-white py-2  rounded-lg text-lg">
+        <div className=" bg-green-800  hover:bg-green-700 transition duration-300 p-4 text-white py-2  rounded-lg md:text-lg">
           <Link to="/services/screen-replacement" className="flex items-center justify-center gap-2">
             <span>View All</span>
         
           </Link>
         </div>
         </div>
-      </h1>
+      
       <section className="md:p-4 mt-6">
         <div className="">
           

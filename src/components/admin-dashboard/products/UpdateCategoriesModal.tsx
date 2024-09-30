@@ -1,58 +1,56 @@
-import {  useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { useFormik } from "formik";
 import axios from "axios";
 import { Category } from "@/utils/types";
-interface UpdateCategoriesModalPropTypes{
+
+interface UpdateCategoriesModalPropTypes {
   handleCatClose: () => void;
-  category:Category
+  category: Category;
 }
 
-const UpdateCategoryModal = ({ handleCatClose, category }:UpdateCategoriesModalPropTypes) => {
-  const [isLoading,setIsLoading] = useState(false)
+const UpdateCategoryModal = ({ handleCatClose, category }: UpdateCategoriesModalPropTypes) => {
+  const [isLoading, setIsLoading] = useState(false);
+
   const formik = useFormik({
-    initialValues: category,
+    initialValues: {
+      name: category.name,  // Assuming the 'Category' type has a 'name' field
+    },
     onSubmit: async (values) => {
       try {
-        setIsLoading(true)
+        setIsLoading(true);
         const response = await axios.put(
-          "https://api.hackrepairs.co.ke/categories",
+          `https://api.hackrepairs.co.ke/categories/${category.id}`, // Assuming category has an 'id' field
           values
         );
 
         if (response.status === 200) {
-        
           alert("Category updated successfully!");
-          setIsLoading(false)
+          setIsLoading(false);
           handleCatClose();
         } else {
           throw new Error("Failed to update category");
-          
         }
       } catch (error) {
         console.error("Error updating category:", error);
-        // Handle error creating category
         alert("Failed to update category. Please try again later.");
-        setIsLoading(false)
+        setIsLoading(false);
       }
     },
   });
 
-  
+  useEffect(() => {
+    fetchCategories();
+  }, []);
 
-  useEffect(()=>{
-    fetchCategories()
-  },[])
-  // fetch categories
-  const fetchCategories = async()=>{
+  // Fetch categories (though this function seems unused in this component)
+  const fetchCategories = async () => {
     try {
-      const response = await axios.get('https://api.hackrepairs.co.ke/categories')      
-      console.log(response)
+      const response = await axios.get("https://api.hackrepairs.co.ke/categories");
+      console.log(response);
     } catch (error) {
-      console.log(error) 
+      console.log(error);
     }
-  }
-
-
+  };
 
   return (
     <div className="fixed w-full left-0 top-0 h-full bg-black bg-opacity-50 flex justify-center">
@@ -75,6 +73,7 @@ const UpdateCategoryModal = ({ handleCatClose, category }:UpdateCategoriesModalP
           </div>
           <div className="mt-5 flex">
             <button
+              type="button"
               className="bg-red-500 hover:bg-red-600 mr-2 text-sm text-white font-bold py-2 px-4 rounded"
               onClick={handleCatClose}
             >
@@ -84,7 +83,7 @@ const UpdateCategoryModal = ({ handleCatClose, category }:UpdateCategoriesModalP
               type="submit"
               className="bg-blue-500 hover:bg-blue-600 text-sm text-white font-bold py-2 px-4 rounded"
             >
-           {isLoading ? "Updating Category ...":" Update Category"}  
+              {isLoading ? "Updating Category..." : "Update Category"}
             </button>
           </div>
         </form>

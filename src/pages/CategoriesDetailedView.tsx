@@ -5,6 +5,7 @@ import Footer from "@/components/mainlayout/Footer";
 import { Input } from "@/components/ui/input";
 import ScreenRepaircard from "@/components/shared/ScreenRepaircard";
 import Breadcrumbs from "@/components/BreadCrumbs";
+import axios from "axios";
 
 interface Screen {
   oldPrice: number;
@@ -106,6 +107,7 @@ const CategoriesDetailedView: React.FC = () => {
   const [selectedBrands, setSelectedBrands] = useState<string[]>([]);
   const [priceRange, setPriceRange] = useState<[number, number]>([0, 5000]);
   const [isFilterOpen, setIsFilterOpen] = useState<boolean>(false); 
+  const [categories,setCategories] = useState(availableRepairs)
 
   const navigate = useNavigate();
 
@@ -151,6 +153,16 @@ const CategoriesDetailedView: React.FC = () => {
       window.scroll(0,0)
     })
 
+
+
+    const fetchCategories = async()=>{
+      const response = await axios.get('api.hackrepairs.co.ke/categories')
+      setCategories(response.data)
+    }
+    useEffect(()=>{
+      fetchCategories()
+    },[])
+
   return (
     <>
       <Navbar />
@@ -168,7 +180,7 @@ const CategoriesDetailedView: React.FC = () => {
             <div>
               <h3 className="text-lg font-semibold mb-2">Filter by Brand</h3>
               <div className="space-y-2">
-                {availableRepairs.map((brand,index) => (
+                {categories.map((brand,index) => (
                   <label key={index} className="flex items-center">
                     <input
                       type="checkbox"

@@ -3,6 +3,7 @@ import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { motion, useAnimation } from "framer-motion";
 import axios from "axios";
+import { Category } from "@/utils/types";
 
 
 // Typing animation variants
