@@ -14,7 +14,7 @@ interface Services {
 }
 const services: Services[] = [
   {
-    title: "phone screen replacement",
+    title: "phone repair services",
     link: "/services/screen-replacement",
     img: "/repair.png",
   },
@@ -62,14 +62,14 @@ const Services = () => {
       </div>
       
        {/* services section */}
-       <section className="bg-gray-100 p-6">
+       <section className="mx-6 mb-6">
           <h2 className="text-3xl font-semibold capitalize text-center mb-6">
             Our Services
           </h2>
           <div className="flex flex-col md:flex-row gap-4 ">
             {services.map((service, index) => (
               <div key={index}>
-                {" "}
+                
                 <ServicesCard
                   title={service.title}
                   img={service.img}

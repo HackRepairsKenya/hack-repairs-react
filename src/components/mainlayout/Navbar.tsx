@@ -1,4 +1,4 @@
-import React, { useContext, useState, useEffect } from "react";
+import React, { useContext, useState } from "react";
 import { FiShoppingCart } from "react-icons/fi";
 import { FaRegUser } from "react-icons/fa6";
 import { FaBus } from "react-icons/fa";
@@ -17,35 +17,14 @@ import SignIn from "../auth/SignIn";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import { CartContext } from "@/context/cart";
 import { CiSearch } from "react-icons/ci";
-import axios from "axios";
-
-interface Category {
-  id: number;
-  name: string;
-}
 
 const Navbar: React.FC = () => {
   const [searchInput, setSearchInput] = useState("");
   const [isHamburgerClicked, setIsHamburgerClicked] = useState<boolean>(false);
   const [showModal, setShowModal] = useState<boolean>(false);
-  const [categories, setCategories] = useState<Category[]>([]);
+  
 
-  // fetch categories
-  const fetchCategories = async () => {
-    try {
-      const response = await axios.get("https://api.hackrepairs.co.ke/categories");
-      console.log(response.data);
-      setCategories(response.data);
-    } catch (error) {
-      console.error("Error fetching categories:", error);
-    }
-  };
-
-  // useEffect to fetch categories when component mounts
-  useEffect(() => {
-    fetchCategories();
-  }, []);
-
+  
   const [products] = useState([
     {
       id: 1,

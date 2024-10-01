@@ -114,10 +114,10 @@ const Repairs: React.FC = () => {
         </div>
         </div>
       
-      <section className="md:p-4 mt-6">
+      <section className="  mt-6">
         <div className="">
           
-                  <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-4  gap-4">
+                  <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-4 gap-4">
                     {availableRepairs[0].screen.map((product,index) => (
                       <ScreenRepaircard
                         key={index}

@@ -29,7 +29,7 @@ export default function ServicesCard({ title, img, link }: serviceprops) {
         />
       </div>
       <div className="p-4 bg-white absolute z-50 left-0 bottom-0 w-full hover:text-gray-900 ">
-        <h2 className="text-lg hover:text-gray-90  font-bold">{title}</h2>
+        <h2 className="text-lg hover:text-gray-90 text-white  font-bold">{title}</h2>
       </div>
     </div>
   );

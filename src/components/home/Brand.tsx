@@ -30,7 +30,7 @@ const Brands = () =>{
     ]
     return(
         <div className=' bg-white'>
-        <h1 className='text-2xl mx-8 font-bold'>Brands We Work With</h1>
+        <h1 className='text-2xl mx-8 mt-6 font-bold'>Brands We Work With</h1>
         <div className='mx-8 mb-8 my-8  flex gap-4 mt-8'>
             {brands.map((brand,index)=>{
 
