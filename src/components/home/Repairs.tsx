@@ -1,22 +1,19 @@
 import { useState, useEffect } from 'react';
 import {  useAnimation } from 'framer-motion';
 
+
 import { Link, useNavigate } from 'react-router-dom';
 import ScreenRepaircard from '../shared/ScreenRepaircard';
+import axios from 'axios';
 
-interface Screen {
-  oldPrice: number;
-  newPrice: number;
-  img: string;
-  type: string;
-  id:number
+interface Product {
+  productPrice: number;
+  marketPrice: number;
+  coverImage: string;
+  productName: string;
+  id:string
 }
 
-interface Repair {
-  id: number;
-  title: string;
-  screen: Screen[];
-}
 
 
 
@@ -25,64 +22,13 @@ const Repairs: React.FC = () => {
   const navigate = useNavigate();
   const controls = useAnimation();
   const [hasAnimated, setHasAnimated] = useState<boolean>(false);
+  const [availableProducts, setAvailableProducts] = useState<Product[]>([]);
 
-  const handleBooking = (category:number,Product:number) => {
+  const handleBooking = (category:string,Product:string) => {
     // Navigate to the detailed view page using the type as part of the URL.
     navigate(`/category/${category}/product/${Product}}`);
   };
 
-  const availableRepairs: Repair[] = [
-    {
-      id: 0,
-      title: "Tecno",
-      screen: [
-        {
-          id:1,
-          type: "Tecno Camon 15",
-          img: "/phone-screen.png",
-          oldPrice: 2000,
-          newPrice: 1800,
-        },
-        {
-          id:1,
-          type: "Tecno Spark 7p",
-          img: "/phone-screen.png",
-          oldPrice: 2500,
-          newPrice: 2300,
-        },
-        {
-          id:1,
-          type: "Tecno Spark 7p",
-          img: "/phone-screen.png",
-          oldPrice: 2500,
-          newPrice: 2300,
-        },
-        {
-          id:1,
-          type: "Tecno Spark 7p",
-          img: "/phone-screen.png",
-          oldPrice: 2500,
-          newPrice: 2300,
-        },
-        
-      ],
-    },
-    {
-      id: 1,
-      title: "Samsung",
-      screen: [
-        {
-          id:1,
-          type: "Samsung Galaxy S10",
-          img: "/phone-screen.png",
-          oldPrice: 3000,
-          newPrice: 2800,
-        },
-        
-      ],
-    },
-    
-  ];
   useEffect(() => {
     const handleScroll = () => {
       const element = document.getElementById('animatedText');
@@ -98,6 +44,21 @@ const Repairs: React.FC = () => {
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
   }, [controls, hasAnimated]);
+
+
+
+
+  const fetchProducts = async () => {
+    try {
+      const response = await axios.get("https://api.hackrepairs.co.ke/products");
+      setAvailableProducts(response.data);
+    } catch (error) {
+      console.error("Error fetching products:", error);
+    }
+  };
+  useEffect(()=>{
+    fetchProducts
+  },[])
 
   return (
     <div className="mx-8 my-8">
@@ -118,11 +79,11 @@ const Repairs: React.FC = () => {
         <div className="">
           
                   <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-4 gap-4">
-                    {availableRepairs[0].screen.map((product,index) => (
+                    {availableProducts.map((product,index) => (
                       <ScreenRepaircard
                         key={index}
                         repair={product}
-                        handleBooking={() => handleBooking(0, product.id)} category={0} product={0}                      />
+                        handleBooking={() => handleBooking(product.id, product.id)}                       />
                     ))}
                   </div>
                 

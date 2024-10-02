@@ -1,10 +1,13 @@
 import React from "react";
 
 interface Repair {
+  coverImage: string ;
+  productPrice:number;
+  marketPrice: number;
+  ProductName: string;
   img: string;
   type: string;
-  oldPrice: number;
-  newPrice: number;
+
 }
 
 interface ScreenRepairCardProps {
@@ -22,10 +25,11 @@ const ScreenRepairCard: React.FC<ScreenRepairCardProps> = ({
 }) => {
   // Calculate discount
   const discount = () => {
-    const discount = repair.oldPrice - repair.newPrice;
-    return Math.floor((discount / repair.oldPrice) * 100);
+    const discount = repair.marketPrice - repair.productPrice;
+    return Math.floor((discount / repair.marketPrice) * 100);
   };
 
+  
   return (
     <div
       onClick={() => handleBooking(category, product)}
@@ -34,15 +38,15 @@ const ScreenRepairCard: React.FC<ScreenRepairCardProps> = ({
       <div className="bg-button absolute right-2 z-50 rounded-lg top-2 text-white h-[2rem] flex items-center justify-center w-[4rem]">
         <p className="text-sm animate-pulse text-center">{discount()}% off</p>
       </div>
-      <img className="w-36 h-auto" src={repair.img} alt={repair.type} />
+      <img className="w-36 h-auto" src={repair.coverImage} alt={repair.name} />
 
       <div className="p-2 flex text-gray-800 justify-between items-center w-full">
         <div>
-          <h2 className="text-sm font-semibold">{repair.type}</h2>
-          <p className="text-sm font-bold">Ksh {repair.newPrice}</p>
+          <h2 className="text-sm font-semibold">{repair.ProductName}</h2>
+          <p className="text-sm font-bold">Ksh {repair.productPrice}</p>
         </div>
         <div className="text-right">
-          <p className="text-sm line-through">Ksh {repair.oldPrice}</p>
+          <p className="text-sm line-through">Ksh {repair.marketPrice}</p>
         </div>
       </div>
     </div>

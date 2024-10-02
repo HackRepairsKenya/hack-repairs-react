@@ -6,89 +6,54 @@ import Footer from "@/components/mainlayout/Footer";
 import { Link, useParams } from "react-router-dom";
 import Breadcrumbs from "@/components/BreadCrumbs";
 import { CartContext } from "@/context/cart";
-;
+import axios from "axios";
+
 interface Product {
-  title: string;
+  coverImage: string | undefined;
   img: string;
-  quantity:number;
-  oldPrice: number;
-  newPrice: number;
-  id: number;
+  ProductName: string;
+  id: string;
+  MarketPrice: number;
+  sellingPrice: number;
 }
-
-interface Repair {
-  id: number;
-  title: string;
-  screen: Product[];
-}
-
-const categories: Repair[] = [
-  {
-    id: 0,
-    title: "Tecno",
-    screen: [
-      {
-        id: 1,
-        title: "Tecno Camon 15",
-        img: "/phone-screen.png",
-        oldPrice: 2000,
-        newPrice: 1800,
-        quantity:1
-      },
-      {
-        id: 2,
-        title: "Tecno Spark 7p",
-        img: "/phone-screen.png",
-        oldPrice: 2500,
-        newPrice: 2300,
-        quantity:1
-      },
-    ],
-  },
-  {
-    id: 2,
-    title: "Samsung",
-    screen: [
-      {
-        id: 1,
-        title: "Samsung Galaxy S10",
-        img: "/phone-screen.png",
-        oldPrice: 3000,
-        quantity:1,
-
-        newPrice: 2800,
-      },
-    ],
-  },
-];
-
 
 const CategoryDetail = () => {
-  const { categoryId, productId } = useParams<{ categoryId: string; productId: string }>();
+  const { productId } = useParams<{ productId: string }>();
   const [product, setProduct] = useState<Product | null>(null);
-  const [category, setCategory] = useState<Repair | null>(null);
-  const [quantity] = useState(1); 
-  
+  const [availableProducts, setAvailableProducts] = useState<Product[]>([]);
+  const [quantity, setQuantity] = useState(1); 
+
   const cartContext = useContext(CartContext);
 
   // Check if CartContext is undefined
   if (!cartContext) {
     return <p>Cart context is not available.</p>;
   }
-  const { addToCart,decreaseQuantity, increaseQuantity} = cartContext;
-  
+
+  const { addToCart, decreaseproductQuantity, increaseproductQuantity } = cartContext;
+
+  const fetchProducts = async () => {
+    try {
+      const response = await axios.get("https://api.hackrepairs.co.ke/products");
+      setAvailableProducts(response.data);
+    } catch (error) {
+      console.error("Error fetching products:", error);
+    }
+  };
 
   useEffect(() => {
-    // Find the category and product based on the params
-    const foundCategory = categories.find(cat => cat.id === parseInt(categoryId || ""));
-    const foundProduct = foundCategory?.screen.find(prod => prod.id === parseInt(productId || ""));
+    fetchProducts();
+  }, []);
 
-    setCategory(foundCategory || null);
+  useEffect(() => {
+    // Find the product based on the productId
+    const foundProduct = availableProducts.find((prod) => prod.id === productId);
     setProduct(foundProduct || null);
-  }, [categoryId, productId]);
+  }, [productId, availableProducts]);
 
-  if (!product || !category) return <div>Product or category not found</div>;
-
+  if (!product) {
+    return <p>Product not found.</p>;
+  }
 
   return (
     <>
@@ -99,36 +64,36 @@ const CategoryDetail = () => {
           {/* Image Section */}
           <div className="md:w-1/2">
             <img
-              src={product.img}
-              alt={product.title}
+              src={product.coverImage}
+              alt={product.ProductName}
               className="rounded-lg shadow-md"
             />
           </div>
 
           {/* Details Section */}
           <div className="md:w-1/2">
-            <h1 className="text-3xl font-bold mb-4">{product.title} Screen</h1>
+            <h1 className="text-3xl font-bold mb-4">{product.ProductName} Screen</h1>
             <p className="text-gray-600 mb-4">
-              Get the best quality screen replacement for {product.title}.
+              Get the best quality screen replacement for {product.ProductName}.
             </p>
 
             {/* Price Details */}
             <div className="mb-4">
-              <p className="text-lg text-gray-500 line-through">Ksh {product.oldPrice}</p>
-              <p className="text-2xl font-bold">Ksh {product.newPrice}</p>
+              <p className="text-lg text-gray-500 line-through">Ksh {product.MarketPrice}</p>
+              <p className="text-2xl font-bold">Ksh {product.sellingPrice}</p>
             </div>
 
             {/* Quantity Selector */}
             <div className="mb-4 flex items-center space-x-4">
               <button
-                onClick={()=>decreaseQuantity(product)}
+                onClick={() => setQuantity(quantity > 1 ? quantity - 1 : 1)}
                 className="px-4 py-2 bg-gray-300 rounded-lg hover:bg-gray-400"
               >
                 -
               </button>
               <span className="text-xl">{quantity}</span>
               <button
-                onClick={()=>increaseQuantity(product)}
+                onClick={() => setQuantity(quantity + 1)}
                 className="px-4 py-2 bg-gray-300 rounded-lg hover:bg-gray-400"
               >
                 +
@@ -138,14 +103,14 @@ const CategoryDetail = () => {
             {/* Total Price */}
             <div className="mb-4">
               <p className="text-xl font-semibold">
-                Total Price: Ksh {product.newPrice * quantity}
+                Total Price: Ksh {product.sellingPrice * quantity}
               </p>
             </div>
 
             {/* Add to Cart Button with Dialog */}
             <Dialog>
               <DialogTrigger>
-                <button onClick={()=>addToCart(product)} className="mt-4 px-6 py-3 bg-green-600 text-white rounded-lg hover:bg-green-700">
+                <button onClick={() => addToCart(product)} className="mt-4 px-6 py-3 bg-green-600 text-white rounded-lg hover:bg-green-700">
                   Add to Cart
                 </button>
               </DialogTrigger>

@@ -2,13 +2,13 @@ import  { createContext, useState, useEffect, ReactNode } from 'react';
 
 // Define the CartItem type
 interface CartItem {
+  productName: ReactNode;
   title: string ;
   
-  img: string ;
-  id: number;
-  
-  newPrice: number;
-  quantity: number;
+  coverImage: string ;
+  id: string;
+  productPrice: number;
+  productQuantity: number;
 }
 
 // Define the CartContext value type
@@ -18,8 +18,8 @@ interface CartContextType {
   removeFromCart: (item: CartItem) => void;
   clearCart: () => void;
   getCartTotal: () => number;
-  increaseQuantity: (item: CartItem) => void;
-  decreaseQuantity: (item: CartItem) => void;
+  increaseproductQuantity: (item: CartItem) => void;
+  decreaseproductQuantity: (item: CartItem) => void;
 }
 
 // Create the context with default values (empty or dummy implementations)
@@ -42,19 +42,19 @@ export const CartProvider = ({ children }: CartProviderProps) => {
       setCartItems(
         cartItems.map((cartItem) =>
           cartItem.id === item.id
-            ? { ...cartItem, quantity: cartItem.quantity + 1 }
+            ? { ...cartItem, productQuantity: cartItem.productQuantity + 1 }
             : cartItem
         )
       );
     } else {
-      setCartItems([...cartItems, { ...item, quantity: 1 }]);
+      setCartItems([...cartItems, { ...item, productQuantity: 1 }]);
     }
   };
 
   const removeFromCart = (item: CartItem) => {
     const updatedCartItems = cartItems.map((cartItem) =>
-      cartItem.id === item.id && cartItem.quantity > 1
-        ? { ...cartItem, quantity: cartItem.quantity - 1 }
+      cartItem.id === item.id && cartItem.productQuantity > 1
+        ? { ...cartItem, productQuantity: cartItem.productQuantity - 1 }
         : cartItem
     );
     setCartItems(updatedCartItems.filter((cartItem) => cartItem.id !== item.id));
@@ -66,7 +66,7 @@ export const CartProvider = ({ children }: CartProviderProps) => {
   };
 
   const getCartItemTotal = (item: CartItem) => {
-    return item.newPrice * item.quantity;
+    return item.productPrice * item.productQuantity;
   };
 
   const getCartTotal = () => {
@@ -84,19 +84,19 @@ export const CartProvider = ({ children }: CartProviderProps) => {
     }
   }, []);
 
-  const increaseQuantity = (item: CartItem) => {
+  const increaseproductQuantity = (item: CartItem) => {
     setCartItems(
       cartItems.map((cartItem) =>
-        cartItem.id === item.id ? { ...cartItem, quantity: cartItem.quantity + 1 } : cartItem
+        cartItem.id === item.id ? { ...cartItem, productQuantity: cartItem.productQuantity + 1 } : cartItem
       )
     );
   };
 
-  const decreaseQuantity = (item: CartItem) => {
+  const decreaseproductQuantity = (item: CartItem) => {
     setCartItems(
       cartItems.map((cartItem) =>
-        cartItem.id === item.id && cartItem.quantity > 1
-          ? { ...cartItem, quantity: cartItem.quantity - 1 }
+        cartItem.id === item.id && cartItem.productQuantity > 1
+          ? { ...cartItem, productQuantity: cartItem.productQuantity - 1 }
           : cartItem
       )
     );
@@ -110,8 +110,8 @@ export const CartProvider = ({ children }: CartProviderProps) => {
         removeFromCart,
         clearCart,
         getCartTotal,
-        increaseQuantity,
-        decreaseQuantity,
+        increaseproductQuantity,
+        decreaseproductQuantity,
       }}
     >
       {children}

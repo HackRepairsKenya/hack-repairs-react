@@ -12,10 +12,10 @@ const Cart = () => {
     return <p>Cart context is not available.</p>;
   }
 
-  const { clearCart, cartItems, decreaseQuantity, increaseQuantity, removeFromCart, getCartTotal } = cartContext;
+  const { clearCart, cartItems, decreaseproductQuantity, increaseproductQuantity, removeFromCart, getCartTotal } = cartContext;
 
   // Handle remove item from cart
-  const handleRemoveItem = (id: number) => {
+  const handleRemoveItem = (id: string) => {
     const item = cartItems.find((cartItem) => cartItem.id === id);
     if (item) {
       removeFromCart(item);
@@ -54,24 +54,24 @@ const Cart = () => {
                   <img
                     width={200}
                     height={200}
-                    src={item.img}
+                    src={item.coverImage}
                     alt={item.title}
                     className="w-24 h-24 object-cover rounded-lg mr-4"
                   />
                   <div className="flex-grow">
-                    <h2 className="text-xl font-semibold">{item.title}</h2>
-                    <p className="text-gray-600">Ksh {item.newPrice}</p>
+                    <h2 className="text-xl font-semibold">{item.productName}</h2>
+                    <p className="text-gray-600">Ksh {item.productPrice}</p>
                     <div className="flex items-center mt-2">
                       <button
-                        onClick={() => decreaseQuantity(item)}
-                        disabled={item.quantity <= 1}
+                        onClick={() => decreaseproductQuantity(item)}
+                        disabled={item.productQuantity <= 1}
                         className="px-4 py-2 bg-gray-300 text-gray-700 rounded-lg"
                       >
                         -
                       </button>
-                      <span className="mx-2">{item.quantity}</span>
+                      <span className="mx-2">{item.productQuantity}</span>
                       <button
-                        onClick={() => increaseQuantity(item)}
+                        onClick={() => increaseproductQuantity(item)}
                         className="px-4 py-2 bg-gray-300 text-gray-700 rounded-lg"
                       >
                         +
@@ -85,7 +85,7 @@ const Cart = () => {
                     </div>
                   </div>
                   <div className="text-right">
-                    <p className="text-lg font-bold">Ksh {item.newPrice *item.quantity}</p>
+                    <p className="text-lg font-bold">Ksh {item.productPrice *item.productQuantity}</p>
                   </div>
                 </div>
               )})}
