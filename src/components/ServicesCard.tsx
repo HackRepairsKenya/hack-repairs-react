@@ -1,4 +1,4 @@
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 
 // service props types
@@ -6,9 +6,10 @@ interface serviceprops {
   title: string;
   img: string;
   link: string;
+  description:string
 }
 
-export default function ServicesCard({ title, img, link }: serviceprops) {
+export default function ServicesCard({ title, img, link,description }: serviceprops) {
   const navigate = useNavigate();
   // handle card click
   const handleClick = () => {
@@ -16,21 +17,26 @@ export default function ServicesCard({ title, img, link }: serviceprops) {
   };
   return (
     <div
-      className="w-68 h-auto  p-2 bg-white  relative transition-transform duration-500 ease-in-out hover:scale-105  hover:bg-white hover:cursor-pointer  border border-gray-100 rounded-lg shadow-md"
+      className="w-68 h-auto  bg-gray-100  p-2 transition-transform duration-500 ease-in-out hover:scale-105   hover:cursor-pointer  "
       onClick={handleClick}
     >
-      <div className=' relative hover:bg-white w-full '>
+      <div className='w-full '>
         <img
           width={400}
           height={400}
-          className="w-full  left-0 top-0 h-48 object-cover rounded-t-lg"
+          className="w-full h-48 object-contain "
           src={img}
           alt={title}
         />
       </div>
-      <div className="p-4 bg-white absolute z-50 left-0 bottom-0 w-full hover:text-gray-900 ">
-        <h2 className="text-lg hover:text-gray-90 text-white  font-bold">{title}</h2>
+      <div className="p-2 flex justify-center  w-full hover:text-gray-900 ">
+        <h2 className="text-lg hover:text-gray-90 text-green-900  font-bold">{title}</h2>
       </div>
-    </div>
+      <div className=" flex justify-center  w-full  ">
+        <h2 className="text-md text-gray-500 ">{description}</h2>
+      </div>
+      <div className='flex p-2 justify-center'>
+      <Link className='bg-green-800 text-center p-2 rounded-md capitalize text-white' to={""}>learn more</Link>
+    </div></div>
   );
 }

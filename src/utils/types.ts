@@ -18,7 +18,7 @@ export interface Product {
   
   export interface Category {
     image: string ;
-    id: number;
+    id: string;
     name: string;
     products:Product[]
   }

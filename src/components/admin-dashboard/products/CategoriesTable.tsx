@@ -12,7 +12,7 @@ const CategoriesTable: React.FC = () => {
   const [updateCategory, setUpdateCategory] = useState<boolean>(false);
   const [category, setCategory] = useState<Category | null>(null);
   const [isDeleting, setIsDeleting] = useState<boolean>(false);
-  const [toBeDeleted, setToBeDeleted] = useState<number | null>(null);
+  const [toBeDeleted, setToBeDeleted] = useState<string | null>(null);
 
   const activateCategory = (selectedCategory: Category) => {
     setUpdateCategory(true);
@@ -35,9 +35,9 @@ const CategoriesTable: React.FC = () => {
 
   useEffect(() => {
     fetchCategories();
-  }, []); // Empty dependency array to run only once on component mount
+  }, []); 
 
-  const handleDelete = (categoryId: number) => {
+  const handleDelete = (categoryId: string) => {
     setIsDeleting(true);
     setToBeDeleted(categoryId);
   };
@@ -55,7 +55,7 @@ const CategoriesTable: React.FC = () => {
       if (delReq.status === 200) {
         setIsDeleting(false);
         setToBeDeleted(null);
-        fetchCategories(); // Refresh categories after deletion
+        fetchCategories(); 
       }
     } catch (error) {
       console.error('Error deleting category:', error);
@@ -91,7 +91,6 @@ const CategoriesTable: React.FC = () => {
             <th scope="col" className="px-6 py-3">Index</th>
             <th scope="col" className="px-6 py-3">Category Id</th>
             <th scope="col" className="px-6 py-3">Category Name</th>
-            <th scope="col" className="px-6 py-3">Total Subcategories</th>
             <th scope="col" className="px-6 py-3">Total Products</th>
             <th scope="col" className="px-6 py-3">Action</th>
           </tr>
@@ -127,5 +126,4 @@ const CategoriesTable: React.FC = () => {
     </div>
   );
 };
-
 export default CategoriesTable;

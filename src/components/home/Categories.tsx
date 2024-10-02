@@ -71,7 +71,7 @@ useEffect(()=>{
         Shop By Category
       </motion.h1>
       {/* Cards */}
-      <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 mt-4">
+      <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-4 gap-4 mt-4">
         {categories.map((category) => (
           <div
             key={category.id}
@@ -85,7 +85,7 @@ useEffect(()=>{
                 className="w-[60%] h-[60%] md:w-[80%] md:h-[80%] object-cover mb-4 rounded-md"
               />
             </div>
-            <h2 className="text-xl font-semibold capitalize mt-2">
+            <h2 className="text-md font-semibold capitalize mt-2">
               {category.name}
             </h2>
           </div>

@@ -37,12 +37,12 @@ const WhyHR = () => {
   ];
   return (
     <section className="mb-12   pt-6 bg-gray-100">
-      <div className="grid grid-cols-1  md:grid-cols-2 lg:grid-cols-4 gap-6">
+      <div className="grid grid-cols-2  md:grid-cols-2 lg:grid-cols-4 gap-6">
         {data.map((item) => {
           return (
             <div key={item.title}>
               <div className="text-center flex flex-col justify-center items-center p-4">
-                <span className=" flex items-center justify-center"><h3 className="text-[3rem]  text-button font-semibold mb-2">
+                <span className=" flex items-center justify-center"><h3 className="text-[3rem]  text-green-800 font-semibold mb-2">
                   {item.icon}
                 </h3></span>
                 <h3 className="text-lg font-semibold mb-2">{item.title}</h3>

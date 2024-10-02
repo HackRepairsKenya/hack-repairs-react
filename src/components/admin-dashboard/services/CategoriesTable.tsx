@@ -10,7 +10,7 @@ const CategoriesTable = () => {
   const [updateCategory, setUpdateCategory] = useState(false);
   const [category, setCategory] = useState<Category | null>(null); // Category or null
   const [isDeleting, setIsDeleting] = useState(false);
-  const [tobeDeleted, setTobeDeleted] = useState<number | null>(null); // number or null
+  const [tobeDeleted, setTobeDeleted] = useState<string| null>(null); // number or null
 
   const activateCategory = (selectedCategory: Category) => {
     setUpdateCategory(true);
@@ -35,7 +35,7 @@ const CategoriesTable = () => {
     fetchCategories();
   }, []);
 
-  const handleDelete = (categoryId: number) => {
+  const handleDelete = (categoryId: string) => {
     setIsDeleting(true);
     setTobeDeleted(categoryId);
   };

@@ -15,20 +15,18 @@ const CreateService = ({ handleCallClose }:CreateServiceProptypes) => {
       productName: "",
       productDescription: "",
       categoryId: "",
-      yearOfManufacture: 0,
+  
       productModel: "",
       marketPrice: 0,
       supplierName: "",
       productQuantity: 0,
-      productColor: "",
-      subcategoryId: "",
       coverImage: "",
     },
     onSubmit: async (values) => {
       try {
         setIsLoading(true);
         const response = await axios.post(
-          "https://api.wemitraders.co.ke/products",
+          "https://api.hackrepairs.co.ke/products",
           values
         );
 
@@ -45,30 +43,21 @@ const CreateService = ({ handleCallClose }:CreateServiceProptypes) => {
   });
   useEffect(() => {
     fetchCategories();
-    fetchSubCategories();
+ 
   }, []);
   // fetch categories
   const fetchCategories = async () => {
     try {
       const response = await axios.get(
-        "https://api.wemitraders.co.ke/categories"
+        "https://api.hackrepairs.co.ke/categories"
       );
       setCategory(response.data);
+      
     } catch (error) {
       console.log(error);
     }
   };
-  // fetch sub categories
-  const fetchSubCategories = async () => {
-    try {
-      const response = await axios.get(
-        "https://api.wemitraders.co.ke/subcategories"
-      );
-      console.log(response.data);
-    } catch (error) {
-      console.log(error);
-    }
-  };
+  
 
   return (
     <div className="w-[100%] border h-[100vh] bg-black bg-opacity-50 flex justify-center fixed top-[0vh] left-0">
@@ -113,12 +102,8 @@ const CreateService = ({ handleCallClose }:CreateServiceProptypes) => {
                 })}
               </select>
             </div>
-            {/* Product Subcategory */}
-            <div>
-              
-            </div>
           </div>
-          {/* More form fields */}
+          
           {/* Image upload */}
           <div className="grid grid-cols-4 gap-3 mt-3">
             {/* Manufacturing Year */}
