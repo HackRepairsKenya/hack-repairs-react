@@ -17,14 +17,31 @@ import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import { CartContext } from "@/context/cart";
 import { CiSearch } from "react-icons/ci";
 import axios from "axios";
+interface Product {
+  productDescription: string;
+  productName: string;
+  description: string;
+  productPrice: number;
+  coverImage: string ;
+  img: string;
+  ProductName: string;
+  id: string;
+  MarketPrice: number;
+  sellingPrice: number;
+  productQuantity:number
+}
+interface Category{
+  name:string
+  id:string
+}
 
 const Navbar: React.FC = () => {
   const [searchInput, setSearchInput] = useState("");
   const [isHamburgerClicked, setIsHamburgerClicked] = useState<boolean>(false);
   const [showModal, setShowModal] = useState<boolean>(false);
-  const [categories,setCategories] = useState([])
+  const [categories,setCategories] = useState<Category[]>([])
 
-  const [products,setProducts] = useState([
+  const [products,setProducts] = useState<Product[]>([
    
   ]);
 
