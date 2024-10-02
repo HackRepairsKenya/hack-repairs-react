@@ -9,19 +9,24 @@ import { CartContext } from "@/context/cart";
 import axios from "axios";
 
 interface Product {
-  coverImage: string | undefined;
+  productDescription: string;
+  productName: string;
+  description: string;
+  productPrice: number;
+  coverImage: string ;
   img: string;
   ProductName: string;
   id: string;
   MarketPrice: number;
   sellingPrice: number;
+  productQuantity:number
 }
 
 const CategoryDetail = () => {
   const { productId } = useParams<{ productId: string }>();
   const [product, setProduct] = useState<Product | null>(null);
   const [availableProducts, setAvailableProducts] = useState<Product[]>([]);
-  const [quantity, setQuantity] = useState(1); 
+  const [quantity] = useState(1); 
 
   const cartContext = useContext(CartContext);
 
@@ -30,7 +35,7 @@ const CategoryDetail = () => {
     return <p>Cart context is not available.</p>;
   }
 
-  const { addToCart, decreaseproductQuantity, increaseproductQuantity } = cartContext;
+  const { addToCart} = cartContext;
 
   const fetchProducts = async () => {
     try {
@@ -72,38 +77,38 @@ const CategoryDetail = () => {
 
           {/* Details Section */}
           <div className="md:w-1/2">
-            <h1 className="text-3xl font-bold mb-4">{product.ProductName} Screen</h1>
+            <h1 className="text-3xl font-bold mb-4">{product.productName} </h1>
             <p className="text-gray-600 mb-4">
-              Get the best quality screen replacement for {product.ProductName}.
+               {product.productDescription}.
             </p>
 
             {/* Price Details */}
             <div className="mb-4">
               <p className="text-lg text-gray-500 line-through">Ksh {product.MarketPrice}</p>
-              <p className="text-2xl font-bold">Ksh {product.sellingPrice}</p>
+              <p className="text-2xl font-bold">Ksh {product.productPrice}</p>
             </div>
 
-            {/* Quantity Selector */}
+            {/* Quantity Selector
             <div className="mb-4 flex items-center space-x-4">
               <button
-                onClick={() => setQuantity(quantity > 1 ? quantity - 1 : 1)}
+                onClick={()=>decreaseproductQuantity(product)}
                 className="px-4 py-2 bg-gray-300 rounded-lg hover:bg-gray-400"
               >
                 -
               </button>
               <span className="text-xl">{quantity}</span>
               <button
-                onClick={() => setQuantity(quantity + 1)}
+                onClick={() => increaseproductQuantity(product)}
                 className="px-4 py-2 bg-gray-300 rounded-lg hover:bg-gray-400"
               >
                 +
               </button>
-            </div>
+            </div> */}
 
             {/* Total Price */}
             <div className="mb-4">
               <p className="text-xl font-semibold">
-                Total Price: Ksh {product.sellingPrice * quantity}
+                Total Price: Ksh {product.productPrice * quantity}
               </p>
             </div>
 
