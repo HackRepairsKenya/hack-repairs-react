@@ -1,3 +1,4 @@
+import Breadcrumbs from "@/components/BreadCrumbs";
 import Footer from "@/components/mainlayout/Footer";
 import Navbar from "@/components/mainlayout/Navbar";
 
@@ -7,6 +8,7 @@ import Navbar from "@/components/mainlayout/Navbar";
               return (
                   <>
                       <Navbar />
+                      <Breadcrumbs />
                       <div className="max-w-4xl mx-auto p-5">
                           <h1 className="text-3xl font-bold text-gray-800 mb-4">hack repairs Shipping Policy</h1>
                           <p className="leading-loose text-justify">
