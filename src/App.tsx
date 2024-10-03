@@ -4,6 +4,8 @@ import PageNotFound from './pages/PageNotFound.tsx';
 import { HelmetProvider } from 'react-helmet-async';
 import Loading from './components/spinner/Loading.tsx';
 import TermsAndConditions from './pages/TermsAndConditions.tsx';
+import ShippingPolicy from './pages/ShippingPolicy.tsx';
+import ReturnPolicy from './pages/ReturnPolicy.tsx';
 const SellWithUsPage = React.lazy(() => import('./pages/SellWithUs.tsx'));
 const Sell = React.lazy(() => import('./pages/Sell.tsx'));
 const Services = React.lazy(() => import('./pages/Services.tsx'));
@@ -65,6 +67,8 @@ function App() {
             <Route path="/admin/dashboard/users" element={<Users />} />
             {/* terms & policies */}
             <Route path='/terms-and-conditions'  element={<TermsAndConditions />  } />
+            <Route path='/shipping-policy'  element={<ShippingPolicy />  } />
+            <Route path='/return-policy'  element={<ReturnPolicy />  } />
             
  
             <Route path='*' element={<PageNotFound />} />

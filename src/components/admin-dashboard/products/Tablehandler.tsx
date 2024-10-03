@@ -89,12 +89,11 @@ const PTable: React.FC<PTableProps> = ({ products, fetchProducts, outOffStock })
             <th scope="col" className="px-6 py-3">Index</th>
             <th scope="col" className="px-6 py-3">Product Name</th>
             <th scope="col" className="px-6 py-3">Available Quantity</th>
-            <th scope="col" className="px-6 py-3">Color</th>
             <th scope="col" className="px-6 py-3">Selling Price</th>
             <th scope="col" className="px-6 py-3">Market Price</th>
             <th scope="col" className="px-6 py-3">Action</th>
           </tr>
-        </thead>
+        </thead>  
         <tbody>
           {outOffStock
             ? zeroQuantityItems.map((item:Product, index) => (
@@ -102,7 +101,6 @@ const PTable: React.FC<PTableProps> = ({ products, fetchProducts, outOffStock })
                   <td className="px-6 py-4 text-black">{index + 1}</td>
                   <td className="px-6 py-4 text-black">{item.ProductName}</td>
                   <td className="px-6 py-4 text-black">{item.productQuantity}</td>
-                  
                   <td className="px-6 py-4 text-black">Ksh. {item.productPrice}</td>
                   <td className="px-6 py-4 text-black">Ksh. {item.marketPrice}</td>
                   <td className="px-6 py-4">
@@ -127,7 +125,7 @@ const PTable: React.FC<PTableProps> = ({ products, fetchProducts, outOffStock })
             : products.map((item, index) => (
                 <tr key={index} className="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
                   <td className="px-6 py-4 text-black">{index + 1}</td>
-                  <td className="px-6 py-4 text-black">{item.ProductName}</td>
+                  <td className="px-6 py-4 text-black">{item.productName}</td>
                   <td className="px-6 py-4 text-black">{item.productQuantity}</td>
                  
                   <td className="px-6 py-4 text-black">Ksh. {item.productPrice}</td>

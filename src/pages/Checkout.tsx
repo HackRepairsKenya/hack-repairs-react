@@ -110,7 +110,7 @@ const Checkout = () => {
                     width={100}
                     height={100}
                       src={item.coverImage}
-                      alt={item.productName}
+                      alt={item.ProductName}
                       className="w-24 h-24 object-cover rounded-lg mr-4"
                     />
                     <div className="flex-grow">

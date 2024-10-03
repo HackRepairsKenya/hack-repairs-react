@@ -1,5 +1,6 @@
 
 import React from 'react';
+import { Link } from 'react-router-dom';
 const Footer: React.FC = () => {
   interface TermsPolicies{
     title:string
@@ -10,6 +11,14 @@ const Footer: React.FC = () => {
     {
       title:'Terms and Conditions',
       link:'/terms-and-conditions'
+    },
+    {
+      title:'Return Policy',
+      link:'/return-policy'
+    },
+    {
+      title:'Shipping Policy',
+      link:'/shipping-policy'
     },
     
   ]
@@ -58,7 +67,7 @@ const Footer: React.FC = () => {
               {termsPolicies.map((link,index)=>{
                 return (
                   <li className="mb-2" key={index}>
-                  <a href="/terms-and-conditions" className="text-gray-400 hover:text-white transition">{link.title}</a>
+                  <Link to={link.link} className="text-gray-400 hover:text-white transition">{link.title}</Link>
                 </li>
                 ) 
               })}

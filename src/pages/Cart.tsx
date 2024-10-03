@@ -56,11 +56,11 @@ const Cart = () => {
                     width={200}
                     height={200}
                     src={item.coverImage}
-                    alt={item.productName}
+                    alt={item.ProductName}
                     className="w-24 h-24 object-cover rounded-lg mr-4"
                   />
                   <div className="flex-grow">
-                    <h2 className="text-xl font-semibold">{item.productName}</h2>
+                    <h2 className="text-xl font-semibold">{item.ProductName}</h2>
                     <p className="text-gray-600">Ksh {item.productPrice}</p>
                     <div className="flex items-center mt-2">
                       <button
