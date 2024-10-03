@@ -7,11 +7,16 @@ import ScreenRepaircard from '../shared/ScreenRepaircard';
 import axios from 'axios';
 
 interface Product {
+  id: string;
+  ProductName: string;
+  productQuantity: number;
   productPrice: number;
   marketPrice: number;
+  categoryId: string; 
+  productModel: string;
+  supplierName: string;
   coverImage: string;
-  productName: string;
-  id:string
+  productDescription: string;
 }
 
 
@@ -83,7 +88,7 @@ const Repairs: React.FC = () => {
                       <ScreenRepaircard
                         key={index}
                         repair={product}
-                        handleBooking={() => handleBooking(product.id, product.id)}                       />
+                        handleBooking={() => handleBooking(product.id, product.id)} category={''} product={''}                        />
                     ))}
                   </div>
                 

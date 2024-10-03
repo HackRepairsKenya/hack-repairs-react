@@ -55,7 +55,7 @@ const Cart = () => {
                     width={200}
                     height={200}
                     src={item.coverImage}
-                    alt={item.title}
+                    alt={item.productName}
                     className="w-24 h-24 object-cover rounded-lg mr-4"
                   />
                   <div className="flex-grow">

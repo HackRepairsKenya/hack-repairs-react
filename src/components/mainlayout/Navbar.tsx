@@ -169,7 +169,7 @@ setCategories(response.data)
               <li className="capitalize font-bold">
                 <DropdownMenu>
                   <DropdownMenuTrigger><span className="flex  items-center gap-2">
-                    <span>Accessories</span> <span className="text-2xl"><RiArrowDropDownLine /></span></span> </DropdownMenuTrigger>
+                    <span>Categories</span> <span className="text-2xl"><RiArrowDropDownLine /></span></span> </DropdownMenuTrigger>
                   <DropdownMenuContent>
 
 {categories.map((category)=>< DropdownMenuItem onClick={()=> handleCategoryClick(`${category.name}`)} >{category.name}</DropdownMenuItem>)}

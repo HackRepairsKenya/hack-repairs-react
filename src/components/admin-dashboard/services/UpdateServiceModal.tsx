@@ -70,7 +70,7 @@ const UpdateServiceModal = ({ handleCallClose, product }:UpdateProductModalProps
               <label className="text-sm font-semibold">Product Name</label>
               <input
                 onChange={formik.handleChange}
-                value={formik.values.productName}
+                value={formik.values.ProductName}
                 id="productName"
                 className="bg-white border border-gray-500 text-black placeholder-black dark:placeholder-green-500 text-sm rounded focus:ring-black focus:border-gray block w-full p-2 outline-none"
                 placeholder="Product Name"
@@ -98,40 +98,13 @@ const UpdateServiceModal = ({ handleCallClose, product }:UpdateProductModalProps
                 })}
               </select>
             </div>
-            {/* Product Subcategory */}
-            <div>
-              <label className="text-sm font-semibold">
-                Product Subcategory
-              </label>
-              <select
-                name="subcategoryId"
-              
-                required
-                id="subcategoryId"
-                onChange={formik.handleChange}
-                value={formik.values.subcategoryId}
-                className="bg-white border border-gray-500 text-black placeholder-black dark:placeholder-green-500 text-sm rounded focus:ring-black focus:border-gray block w-full p-2 outline-none"
-              >
-                
-              </select>
-            </div>
+           
           </div>
           {/* More form fields */}
           {/* Image upload */}
           <div className="grid grid-cols-4 gap-3 mt-3">
-            {/* Manufacturing Year */}
-            <div>
-              <label className="text-sm font-semibold">
-                Manufacturing Year
-              </label>
-              <input
-                onChange={formik.handleChange}
-                value={formik.values.yearOfManufacture}
-                id="yearOfManufacture"
-                className="bg-white border border-gray-500 text-black placeholder-black dark:placeholder-green-500 text-sm rounded focus:ring-black focus:border-gray block w-full p-2 outline-none"
-                placeholder="Manufacturing Year"
-              />
-            </div>
+            
+            
             {/* Product Model */}
             <div>
               <label className="text-sm font-semibold">Product Model</label>
@@ -194,17 +167,7 @@ const UpdateServiceModal = ({ handleCallClose, product }:UpdateProductModalProps
                 placeholder="Product's Price"
               />
             </div>
-            {/* Product's Colors */}
-            <div>
-              <label className="text-sm font-semibold">Product's Colors</label>
-              <input
-                onChange={formik.handleChange}
-                value={formik.values.productColor}
-                id="productColor"
-                className="bg-white border border-gray-500 text-black placeholder-black dark:placeholder-green-500 text-sm rounded focus:ring-black focus:border-gray block w-full p-2 outline-none"
-                placeholder="Product's Colors"
-              />
-            </div>
+           
             {/* Product cover image */}
             <div className="flex flex-col justify-center">
               <label className="text-sm font-semibold">

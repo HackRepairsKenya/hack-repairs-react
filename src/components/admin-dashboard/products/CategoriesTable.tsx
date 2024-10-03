@@ -101,7 +101,7 @@ const CategoriesTable: React.FC = () => {
               <td className="px-6 py-4 text-black">{index + 1}</td>
               <td className="px-6 py-4 text-black">{item.id}</td>
               <td className="px-6 py-4 text-black">{item.name}</td>
-              <td className="px-6 py-4 text-black">{item.products.length}</td>
+              {/* <td className="px-6 py-4 text-black">{item.products.length}</td> */}
               <td className="px-6 py-4">
                 <button
                   className="font-medium text-blue-600 dark:text-blue-500 hover:underline mr-2"

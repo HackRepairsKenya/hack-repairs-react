@@ -4,7 +4,6 @@ import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle, Di
 import Navbar from "@/components/mainlayout/Navbar";
 import Footer from "@/components/mainlayout/Footer";
 import { Link, useParams } from "react-router-dom";
-import Breadcrumbs from "@/components/BreadCrumbs";
 import { CartContext } from "@/context/cart";
 import axios from "axios";
 
@@ -27,6 +26,7 @@ const CategoryDetail = () => {
   const [product, setProduct] = useState<Product | null>(null);
   const [availableProducts, setAvailableProducts] = useState<Product[]>([]);
   const [quantity] = useState(1); 
+  const[loading,setIsLoading] = useState<boolean>(false)
 
   const cartContext = useContext(CartContext);
 
@@ -39,10 +39,13 @@ const CategoryDetail = () => {
 
   const fetchProducts = async () => {
     try {
+      setIsLoading(true)
       const response = await axios.get("https://api.hackrepairs.co.ke/products");
       setAvailableProducts(response.data);
+      setIsLoading(false)
     } catch (error) {
       console.error("Error fetching products:", error);
+      setIsLoading(false)
     }
   };
 
@@ -56,6 +59,10 @@ const CategoryDetail = () => {
     setProduct(foundProduct || null);
   }, [productId, availableProducts]);
 
+
+  if (loading) {
+    return <p>loading ...</p>;
+  }
   if (!product) {
     return <p>Product not found.</p>;
   }
@@ -63,7 +70,7 @@ const CategoryDetail = () => {
   return (
     <>
       <Navbar />
-      <Breadcrumbs />
+      {/* <Breadcrumbs /> */}
       <div className="container mx-auto py-8">
         <div className="flex flex-col md:flex-row gap-8">
           {/* Image Section */}

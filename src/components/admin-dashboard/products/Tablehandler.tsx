@@ -17,7 +17,7 @@ const PTable: React.FC<PTableProps> = ({ products, fetchProducts, outOffStock })
   const [updateProducts, setUpdateProducts] = useState<boolean>(false);
   const [product, setProduct] = useState<Product | null>(null); // Changed to Product | null
   const [Isdeleting, setIsDeleting] = useState<boolean>(false);
-  const [tobeDeleted, setTobeDeleted] = useState<number | null>(null);
+  const [tobeDeleted, setTobeDeleted] = useState<string| null>(null);
 
   const activateProducts = (selectedProduct: Product) => {
     setUpdateProducts(true);
@@ -29,7 +29,7 @@ const PTable: React.FC<PTableProps> = ({ products, fetchProducts, outOffStock })
     setProduct(null); // Product can be set to null safely
   };
 
-  const handleDelete = (productId: number) => {
+  const handleDelete = (productId: string) => {
     setIsDeleting(true);
     setTobeDeleted(productId);
   };
@@ -100,9 +100,9 @@ const PTable: React.FC<PTableProps> = ({ products, fetchProducts, outOffStock })
             ? zeroQuantityItems.map((item:Product, index) => (
                 <tr key={index} className="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
                   <td className="px-6 py-4 text-black">{index + 1}</td>
-                  <td className="px-6 py-4 text-black">{item.productName}</td>
+                  <td className="px-6 py-4 text-black">{item.ProductName}</td>
                   <td className="px-6 py-4 text-black">{item.productQuantity}</td>
-                  <td className="px-6 py-4 text-black">{item.productColor}</td>
+                  
                   <td className="px-6 py-4 text-black">Ksh. {item.productPrice}</td>
                   <td className="px-6 py-4 text-black">Ksh. {item.marketPrice}</td>
                   <td className="px-6 py-4">
@@ -127,9 +127,9 @@ const PTable: React.FC<PTableProps> = ({ products, fetchProducts, outOffStock })
             : products.map((item, index) => (
                 <tr key={index} className="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
                   <td className="px-6 py-4 text-black">{index + 1}</td>
-                  <td className="px-6 py-4 text-black">{item.productName}</td>
+                  <td className="px-6 py-4 text-black">{item.ProductName}</td>
                   <td className="px-6 py-4 text-black">{item.productQuantity}</td>
-                  <td className="px-6 py-4 text-black">{item.productColor}</td>
+                 
                   <td className="px-6 py-4 text-black">Ksh. {item.productPrice}</td>
                   <td className="px-6 py-4 text-black">Ksh. {item.marketPrice}</td>
                   <td className="px-6 py-4">

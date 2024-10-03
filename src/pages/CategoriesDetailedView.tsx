@@ -8,23 +8,28 @@ import Breadcrumbs from "@/components/BreadCrumbs";
 import axios from "axios";
 
 interface Product {
-  img: string;
-  ProductName: string;
   id: string;
-  MarketPrice: number;
-  sellingPrice: number;
+  ProductName: string;
+  productQuantity: number;
+  productPrice: number;
+  marketPrice: number;
+  categoryId: string; 
+  productModel: string;
+  supplierName: string;
+  coverImage: string;
+  productDescription: string;
 }
 
 interface Category {
   id: string;
   name: string;
-  products: Product[];
+  
 }
 
 const CategoriesDetailedView: React.FC = () => {
   const [searchTerm, setSearchTerm] = useState<string>("");
-  const [selectedBrands, setSelectedBrands] = useState<string[]>([]);
-  const [priceRange, setPriceRange] = useState<[number, number]>([0, 5000]);
+  const [selectedBrands] = useState<string[]>([]);
+  const [priceRange] = useState<[number, number]>([0, 5000]);
   const [isFilterOpen, setIsFilterOpen] = useState<boolean>(false);
   const [availableProducts, setAvailableProducts] = useState<Product[]>([]);
   const [categories, setCategories] = useState<Category[]>([]);
@@ -154,8 +159,7 @@ const CategoriesDetailedView: React.FC = () => {
                   <ScreenRepaircard
                     key={product.id}
                     repair={product}
-                    handleBooking={() => handleBooking(product.id, product.id)}
-                  />
+                    handleBooking={() => handleBooking(product.id, product.id)} category={""} product={""}                    />
                 ))}
               </div>
             )}

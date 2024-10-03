@@ -40,7 +40,7 @@ const CreateImages = ( {products}:PropTypes )=>{
                                 <option></option>
                                 {products.map((item, index)=>{
                                     return (
-                                        <option key={index} value={item.id}>{item.productName}</option>
+                                        <option key={index} value={item.id}>{item.ProductName}</option>
                                     )
                                 }
                                 )}

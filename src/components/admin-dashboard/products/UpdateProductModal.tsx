@@ -39,16 +39,13 @@ const UpdateProductModal = ({ handleCallClose, product }: UpdateProductModalProp
 
   const formik = useFormik({
     initialValues: product || {
-      productName: '',
+      ProductName: '',
       categoryId: '',
-      subcategoryId: '',
-      yearOfManufacture: '',
       productModel: '',
       marketPrice: 0,
       supplierName: '',
       productQuantity: 0,
       productPrice: 0,
-      productColor: '',
       coverImage: '',
       productDescription: ''
     },
@@ -86,7 +83,7 @@ const UpdateProductModal = ({ handleCallClose, product }: UpdateProductModalProp
               <label className="text-sm font-semibold">Product Name</label>
               <input
                 onChange={formik.handleChange}
-                value={formik.values.productName}
+                value={formik.values.ProductName}
                 id="productName"
                 className="bg-white border border-gray-500 text-black placeholder-black dark:placeholder-green-500 text-sm rounded focus:ring-black focus:border-gray block w-full p-2 outline-none"
                 placeholder="Product Name"
@@ -111,34 +108,11 @@ const UpdateProductModal = ({ handleCallClose, product }: UpdateProductModalProp
                 ))}
               </select>
             </div>
-            {/* Product Subcategory */}
-            <div>
-              <label className="text-sm font-semibold">Product Subcategory</label>
-              <select
-                name="subcategoryId"
-                id="subcategoryId"
-                required
-                onChange={formik.handleChange}
-                value={formik.values.subcategoryId}
-                className="bg-white border border-gray-500 text-black placeholder-black dark:placeholder-green-500 text-sm rounded focus:ring-black focus:border-gray block w-full p-2 outline-none"
-              >
-                {/* Add options here */}
-              </select>
-            </div>
+            
           </div>
           {/* More form fields */}
           <div className="grid grid-cols-4 gap-3 mt-3">
-            {/* Manufacturing Year */}
-            <div>
-              <label className="text-sm font-semibold">Manufacturing Year</label>
-              <input
-                onChange={formik.handleChange}
-                value={formik.values.yearOfManufacture}
-                id="yearOfManufacture"
-                className="bg-white border border-gray-500 text-black placeholder-black dark:placeholder-green-500 text-sm rounded focus:ring-black focus:border-gray block w-full p-2 outline-none"
-                placeholder="Manufacturing Year"
-              />
-            </div>
+           
             {/* Product Model */}
             <div>
               <label className="text-sm font-semibold">Product Model</label>
@@ -199,17 +173,7 @@ const UpdateProductModal = ({ handleCallClose, product }: UpdateProductModalProp
                 placeholder="Product's Price"
               />
             </div>
-            {/* Product's Colors */}
-            <div>
-              <label className="text-sm font-semibold">Product's Colors</label>
-              <input
-                onChange={formik.handleChange}
-                value={formik.values.productColor}
-                id="productColor"
-                className="bg-white border border-gray-500 text-black placeholder-black dark:placeholder-green-500 text-sm rounded focus:ring-black focus:border-gray block w-full p-2 outline-none"
-                placeholder="Product's Colors"
-              />
-            </div>
+            
             {/* Product cover image */}
             <div className="flex flex-col justify-center">
               <label className="text-sm font-semibold">Product Cover Image</label>

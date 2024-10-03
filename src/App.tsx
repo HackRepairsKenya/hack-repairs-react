@@ -8,7 +8,7 @@ const SellWithUsPage = React.lazy(() => import('./pages/SellWithUs.tsx'));
 const Sell = React.lazy(() => import('./pages/Sell.tsx'));
 const Services = React.lazy(() => import('./pages/Services.tsx'));
 const AboutOurProducts = React.lazy(() => import('./pages/AboutOurProducts.tsx'));
-const ServiceDetailedView = React.lazy(() => import('./pages/ServiceDetailedView.tsx'));
+
 const CategoriesDetailedView = React.lazy(() => import('./pages/CategoriesDetailedView.tsx'));
 
 const CategoryDetail = React.lazy(() => import('./pages/CategoryDetail.tsx'));
@@ -41,7 +41,7 @@ function App() {
             <Route path='/sell-with-us/sell' element={<Sell />} />
             {/* Services */}
             <Route path='/services' element={<Services />} />
-            <Route path='/services/:id' element={<ServiceDetailedView />} />
+           
             {/* Categories */}
             <Route path='/category/:id' element={<CategoriesDetailedView />} />
             {/* About our products */}
@@ -65,7 +65,8 @@ function App() {
             <Route path="/admin/dashboard/users" element={<Users />} />
             {/* terms & policies */}
             <Route path='/terms-and-conditions'  element={<TermsAndConditions />  } />
-
+            
+ 
             <Route path='*' element={<PageNotFound />} />
           </Routes>
         </Suspense>

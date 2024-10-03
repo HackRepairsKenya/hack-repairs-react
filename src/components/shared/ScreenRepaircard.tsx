@@ -1,20 +1,26 @@
 import React from "react";
 
-interface Repair {
-  coverImage: string ;
-  productPrice:number;
-  marketPrice: number;
+interface Product {
+  
+  id: string;
   ProductName: string;
-  img: string;
-  type: string;
+  productQuantity: number;
+  productPrice: number;
+  marketPrice: number;
+  categoryId: string; 
+  productModel: string;
+  supplierName: string;
+  coverImage: string;
+  productDescription: string;
+
 
 }
 
 interface ScreenRepairCardProps {
-  repair: Repair;
-  category: number;
-  product: number;
-  handleBooking: (category: number, product: number) => void;
+  repair: Product;
+  category: string;
+  product: string;
+  handleBooking: (category: string, product: string) => void;
 }
 
 const ScreenRepairCard: React.FC<ScreenRepairCardProps> = ({
@@ -38,7 +44,7 @@ const ScreenRepairCard: React.FC<ScreenRepairCardProps> = ({
       <div className="bg-button absolute right-2 z-50 rounded-lg top-2 text-white h-[2rem] flex items-center justify-center w-[4rem]">
         <p className="text-sm animate-pulse text-center">{discount()}% off</p>
       </div>
-      <img className="w-36 h-auto" src={repair.coverImage} alt={repair.name} />
+      <img className="w-36 h-auto" src={repair.coverImage} alt={repair.ProductName} />
 
       <div className="p-2 flex text-gray-800 justify-between items-center w-full">
         <div>

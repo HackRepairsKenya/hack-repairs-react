@@ -1,14 +1,11 @@
 
 export interface Product {
-  id: number;
-  productName: string;
+  id: string;
+  ProductName: string;
   productQuantity: number;
-  productColor: string;
   productPrice: number;
   marketPrice: number;
   categoryId: string; 
-  subcategoryId: string;
-  yearOfManufacture: string;
   productModel: string;
   supplierName: string;
   coverImage: string;
@@ -20,7 +17,7 @@ export interface Product {
     image: string ;
     id: string;
     name: string;
-    products:Product[]
+    
   }
   
   export interface CategoriesContextType {
@@ -48,11 +45,11 @@ export interface Product {
   }
 
   export interface CartItem {
-    title: string | undefined;
-    price: number;
-    img: string ;
+    ProductName: string ;
+  
+    coverImage: string ;
     id: number;
     name: string;
-    newPrice: number;
-    quantity: number;
+    productPrice: number;
+    productQuantity: number;
   }
