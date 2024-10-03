@@ -50,7 +50,8 @@ const Cart = () => {
                
               
                 return (
-                <div key={item.id} className="flex items-center border-b border-gray-200 py-4">
+                <div key={item.id} className="flex  flex-col md:flex-row lg:flex-row justify-between md:items-center border-b border-gray-200 py-4">
+                  <div>
                   <img
                     width={200}
                     height={200}
@@ -76,16 +77,21 @@ const Cart = () => {
                       >
                         +
                       </button>
-                      <button
+                     
+                    </div>
+                  </div>
+                  </div>
+                  {/* col-2 */}
+                  <div>
+                  <button
                         onClick={() => handleRemoveItem(item.id)}
                         className="ml-4 px-4 py-2 text-red-500 hover:text-red-400 rounded-lg"
                       >
                         remove
                       </button>
-                    </div>
-                  </div>
                   <div className="text-right">
                     <p className="text-lg font-bold">Ksh {item.productPrice *item.productQuantity}</p>
+                  </div>
                   </div>
                 </div>
               )})}

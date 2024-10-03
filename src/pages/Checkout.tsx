@@ -1,6 +1,6 @@
 
 
-import { useState } from "react";
+import { useContext } from "react";
 import { useForm, FormProvider } from "react-hook-form";
 import { Button } from "@/components/ui/button";
 import { 
@@ -9,32 +9,8 @@ import {
 import Navbar from "@/components/mainlayout/Navbar";
 import Footer from "@/components/mainlayout/Footer";
 import Breadcrumbs from "@/components/BreadCrumbs";
+import { CartContext } from "@/context/cart";
 
-
-interface CartItem {
-  id: number;
-  title: string;
-  img: string;
-  price: number;
-  quantity: number;
-}
-
-const initialCartItems: CartItem[] = [
-  {
-    id: 1,
-    title: "Tecno Screen",
-    img: "/screens/tecno/tecnos.jpeg",
-    price: 1800,
-    quantity: 1,
-  },
-  {
-    id: 2,
-    title: "Samsung Screen",
-    img: "/screens/samsung/samsung.jpg",
-    price: 2300,
-    quantity: 2,
-  },
-];
 
 const Checkout = () => {
   const methods = useForm({
@@ -48,16 +24,19 @@ const Checkout = () => {
 
   const { register, handleSubmit, formState: { errors } } = methods;
 
-  const [cartItems] = useState<CartItem[]>(initialCartItems);
 
   const handleCheckout = (data: unknown) => {
     console.log("Checkout data:", data);
     // Handle form submission logic here
   };
 
-  const getTotalPrice = () => {
-    return cartItems.reduce((total, item) => total + item.price * item.quantity, 0);
-  };
+  
+  const cartContext = useContext(CartContext);
+  if (!cartContext) {
+    return <p>Cart context is not available.</p>;
+  }
+
+  const {  cartItems, getCartTotal } = cartContext;
 
   return (
     <>
@@ -130,23 +109,23 @@ const Checkout = () => {
                     <img
                     width={100}
                     height={100}
-                      src={item.img}
-                      alt={item.title}
+                      src={item.coverImage}
+                      alt={item.productName}
                       className="w-24 h-24 object-cover rounded-lg mr-4"
                     />
                     <div className="flex-grow">
-                      <h3 className="text-lg font-semibold">{item.title}</h3>
-                      <p className="text-gray-600">Ksh {item.price}</p>
-                      <p className="text-gray-500">Quantity: {item.quantity}</p>
+                      <h3 className="text-lg font-semibold">{item.ProductName}</h3>
+                      <p className="text-gray-600">Ksh {item.productPrice}</p>
+                      <p className="text-gray-500">Quantity: {item.productQuantity}</p>
                     </div>
                     <div className="text-right">
-                      <p className="text-lg font-bold">Ksh {item.price * item.quantity}</p>
+                      <p className="text-lg font-bold">Ksh {item.productPrice * item.productQuantity}</p>
                     </div>
                   </div>
                 ))}
                 <div className="mt-4 flex justify-between items-center">
                   <h3 className="text-xl font-semibold">Total:</h3>
-                  <p className="text-2xl font-bold">Ksh {getTotalPrice()}</p>
+                  <p className="text-2xl font-bold">Ksh {getCartTotal()}</p>
                 </div>
               </div>
             )}
