@@ -3,7 +3,9 @@
         return (
           import Navbar from "../components/navbar/Navbar"
           import Footer from "../components/Footer/Footer"
+          import React, { useState, useEffect } from 'react';
           
+          const [scrollPosition, setScrollPosition] = useState(0);
           const ShippingPolicy = ()=>{
               return (
                   <>
@@ -11,7 +13,7 @@
                       <div className="max-w-4xl mx-auto p-5">
                           <h1 className="text-3xl font-bold text-gray-800 mb-4">Wemi Traders Financing Policy</h1>
                           <p className="leading-loose text-justify">
-                              At Wemi Traders, we are committed to providing a seamless and reliable shipping experience
+                              At Hack Repairs, we are committed to providing a seamless and reliable shipping experience
                               for all our customers. Our shipping and delivery policy is designed to ensure your products reach you safely and in a timely manner.
                           </p>
                           <div>
@@ -96,7 +98,7 @@
                           <div>
                               <h4 className="text-xl font-semibold text-gray-800 mb-2">12. Policy Updates:</h4>
                               <ul className="list-disc p-3">
-                                  <li>Wemi Traders reserves the right to update or modify our shipping and delivery policy at
+                                  <li>Hack Repairs reserves the right to update or modify our shipping and delivery policy at
                                   any time. Updates will be communicated on our website.</li>
                               </ul>
                           </div>
