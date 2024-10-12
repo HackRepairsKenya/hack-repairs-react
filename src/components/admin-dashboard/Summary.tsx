@@ -45,7 +45,7 @@ const Summary = ()=>{
 	// function to fetch customers
 	const fetchCustomers =async ()=>{
 		try {
-			const response = await axios.get("https://api.wemitraders.co.ke/clients");
+			const response = await axios.get("https://api.hackrepairs.co.ke/clients");
 			
 			 setCustomers(response.data);
 			
@@ -59,7 +59,7 @@ const Summary = ()=>{
 
 	const fetchProducts = async ()=>{
 		try {
-			const response = await axios.get("https://api.wemitraders.co.ke/products");
+			const response = await axios.get("https://api.hackrepairs.co.ke/products");
 			
 			 setProducts(response.data);
 			
@@ -81,17 +81,9 @@ const Summary = ()=>{
 		return <div>Loading...</div>;  // Handle the case where categories are not yet loaded
 	  }
 
-	// total products
-	const getTotalProducts = () => {
-		let totalProducts = 0;
-		categories.forEach((category) => {
-		  totalProducts += category.products.length;
-		});
-		return totalProducts;
-	  };
 	
-	// call the function to get total products 
-	const totalProducts = getTotalProducts()
+	
+	
 
 	const tabs = [
 		{ name: 'Getting Started', content: <GettingStarted/> },
@@ -122,7 +114,7 @@ const Summary = ()=>{
 				<div className="flex justify-between p-5 ml-1">
 						<div>
 							<h1 className="font-semibold text-xl">Total Products</h1>
-							<p className="text-lg text-left font-semibold">{totalProducts}</p>
+							<p className="text-lg text-left font-semibold">{products.length}</p>
 						</div>
 						<div>
 							<IoStatsChartSharp className="w-[30px] h-[30px]"/>

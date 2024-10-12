@@ -10,33 +10,59 @@ import Navbar from "@/components/mainlayout/Navbar";
 import Footer from "@/components/mainlayout/Footer";
 import Breadcrumbs from "@/components/BreadCrumbs";
 import { CartContext } from "@/context/cart";
-
+import axios from "axios";
+interface CheckoutData {
+  name: string;
+  email: string;
+  phone: string;
+  address: string;
+  cartItems: any[];
+  totalAmount: number;
+}
 
 const Checkout = () => {
+  const cartContext = useContext(CartContext);
+  if (!cartContext) {
+    return <p>Cart context is not available.</p>;
+  }
+
+  const { cartItems,  getCartTotal } = cartContext;
   const methods = useForm({
     defaultValues: {
       name: '',
       email: '',
       phone: '',
       address: '',
+      cartItems:[],
+      totalAmount: 0,
     }
   });
 
   const { register, handleSubmit, formState: { errors } } = methods;
 
-
-  const handleCheckout = (data: unknown) => {
-    console.log("Checkout data:", data);
+ 
+  const handleCheckout = async(data: CheckoutData) => {
+    const orderData = {
+      name: data.name,
+      email: data.email,
+      phone: data.phone,
+      address: data.address,
+      cartItems: cartItems, // Include cart items
+      totalAmount: getCartTotal(), // Include total price
+    };
     // Handle form submission logic here
+    try {
+      const response = await axios.post('https://api.hackrepairs.co.ke/orders', orderData);
+      console.log("Order successfully placed:", response.data);
+      alert("Order placed successfully!");
+    } catch (error) {
+      console.error("Error placing order:", error);
+      alert("Failed to place the order. Please try again.");
+    }
   };
 
   
-  const cartContext = useContext(CartContext);
-  if (!cartContext) {
-    return <p>Cart context is not available.</p>;
-  }
 
-  const {  cartItems, getCartTotal } = cartContext;
 
   return (
     <>

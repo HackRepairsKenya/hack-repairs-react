@@ -10,6 +10,7 @@ const CreateCategory = ({ handleCatClose }:CreateCategoryPropTypes) => {
   const formik = useFormik({
     initialValues: {
       name: "",
+      image:""
     },
     onSubmit: async (values) => {
       try {
@@ -45,7 +46,7 @@ const CreateCategory = ({ handleCatClose }:CreateCategoryPropTypes) => {
 
   return (
     <div className="fixed w-full left-0 top-0 h-full bg-black bg-opacity-50 flex justify-center">
-      <div className="bg-white rounded-lg h-[40%] w-[50%] mt-[5rem] p-5">
+      <div className="bg-white rounded-lg h-[50%] w-[50%] mt-[5rem] p-5">
         <form onSubmit={formik.handleSubmit}>
           <h1 className="font-semibold text-lg">Create Category</h1>
           <div className="grid grid-cols-1 gap-3 mt-3">
@@ -59,6 +60,18 @@ const CreateCategory = ({ handleCatClose }:CreateCategoryPropTypes) => {
                 value={formik.values.name}
                 className="bg-white border border-black-500 text-black placeholder-black dark:placeholder-white-500 text-sm rounded-lg focus:ring-green-500 focus:border-green-500 block w-full p-2.5 dark:bg-gray-700 dark:border-green-500 outline-none"
                 placeholder="Category Name"
+              />
+            </div>
+            <div>
+              <label className="text-sm font-semibold">Category image</label>
+              <input
+                id="image"
+                name="image"
+                type="text"
+                onChange={formik.handleChange}
+                value={formik.values.image}
+                className="bg-white border border-black-500 text-black placeholder-black dark:placeholder-white-500 text-sm rounded-lg focus:ring-green-500 focus:border-green-500 block w-full p-2.5 dark:bg-gray-700 dark:border-green-500 outline-none"
+                placeholder="Category image link"
               />
             </div>
           </div>
