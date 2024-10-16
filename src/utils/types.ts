@@ -48,7 +48,6 @@ export interface Product {
 
   export interface CartItem {
     ProductName: string ;
-  
     coverImage: string ;
     id: number;
     name: string;

@@ -2,7 +2,6 @@ import CarouselBanner from "@/components/CarouselBanner";
 import Brands from "@/components/home/Brand";
 import Categories from "@/components/home/Categories";
 import Hero from "@/components/home/Hero.tsx";
-import OtherProducts from "@/components/home/OtherProducts";
 import Repairs from "@/components/home/Repairs";
 import WhyHR from "@/components/home/WHYHR";
 import Footer from "@/components/mainlayout/Footer";
@@ -63,7 +62,7 @@ const handleClose =()=>{
       <WhyHR />
       <Categories />
       <Repairs />
-      <OtherProducts />
+      {/* <OtherProducts /> */}
       <Brands />
       
       <Footer />

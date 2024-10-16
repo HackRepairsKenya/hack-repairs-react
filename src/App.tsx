@@ -1,4 +1,4 @@
-import React, { Suspense } from 'react';
+import React, { Suspense, useState } from 'react';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import PageNotFound from './pages/PageNotFound.tsx';
 import { HelmetProvider } from 'react-helmet-async';
@@ -6,6 +6,9 @@ import Loading from './components/spinner/Loading.tsx';
 import TermsAndConditions from './pages/TermsAndConditions.tsx';
 import ShippingPolicy from './pages/ShippingPolicy.tsx';
 import ReturnPolicy from './pages/ReturnPolicy.tsx';
+import SignUp from './components/auth/SignUp.tsx';
+import useToken from './utils/UseToken.tsx';
+import Login from './pages/Login.tsx';
 const SellWithUsPage = React.lazy(() => import('./pages/SellWithUs.tsx'));
 const Sell = React.lazy(() => import('./pages/Sell.tsx'));
 const Services = React.lazy(() => import('./pages/Services.tsx'));
@@ -32,6 +35,8 @@ const AboutUs = React.lazy(() => import('./pages/AboutUs.tsx'));
 const helmetContext = {};
 
 function App() {
+  const { token, setToken } = useToken();
+  const [user, setUser] = useState(""); // State to store user data
   return (
     <HelmetProvider context={helmetContext}>
       <BrowserRouter>
@@ -43,6 +48,9 @@ function App() {
             <Route path='/sell-with-us/sell' element={<Sell />} />
             {/* Services */}
             <Route path='/services' element={<Services />} />
+            if (!token){
+            <Route path="/login" element={<Login token={token} setToken={ setToken } setUser={setUser}/>} />
+          }
            
             {/* Categories */}
             <Route path='/category/:id' element={<CategoriesDetailedView />} />
@@ -57,6 +65,7 @@ function App() {
             <Route path='/cart' element={<Cart />} />
             <Route path='/checkout' element={<Checkout />} />
             <Route path='/booking' element={<BookingPage />} />
+            <Route path='sign-up' element={<SignUp />} />
 
             <Route path="/admin/dashboard/home" element={<Dashboard />} />
             <Route path="/admin/dashboard/products" element={<Products />} />
