@@ -8,7 +8,9 @@ import ShippingPolicy from './pages/ShippingPolicy.tsx';
 import ReturnPolicy from './pages/ReturnPolicy.tsx';
 import SignUp from './components/auth/SignUp.tsx';
 import useToken from './utils/UseToken.tsx';
-import Login from './pages/Login.tsx';
+import ProtectedRoute from './utils/ProtectedRoute.tsx';
+import { AuthProvider } from './context/AuthContext.tsx';
+import SignIn from './components/auth/SignIn.tsx';
 const SellWithUsPage = React.lazy(() => import('./pages/SellWithUs.tsx'));
 const Sell = React.lazy(() => import('./pages/Sell.tsx'));
 const Services = React.lazy(() => import('./pages/Services.tsx'));
@@ -41,16 +43,16 @@ function App() {
     <HelmetProvider context={helmetContext}>
       <BrowserRouter>
         <Suspense fallback={<Loading />}>
+        <AuthProvider>
           <Routes>
+            <Route path='login' element={<SignIn />} />
             <Route path='/' element={<Home />} />
             {/* Sell */}
             <Route path='/sell-with-us' element={<SellWithUsPage />} />
             <Route path='/sell-with-us/sell' element={<Sell />} />
             {/* Services */}
             <Route path='/services' element={<Services />} />
-            if (!token){
-            <Route path="/login" element={<Login token={token} setToken={ setToken } setUser={setUser}/>} />
-          }
+           
            
             {/* Categories */}
             <Route path='/category/:id' element={<CategoriesDetailedView />} />
@@ -62,7 +64,10 @@ function App() {
             <Route path='/how-it-works' element={<HowItWorks />} />
             
             <Route path='/category/:categoryId/product/:productId' element={<CategoryDetail />} />
+            <Route path='/' element={<ProtectedRoute />}>
             <Route path='/cart' element={<Cart />} />
+            </Route>
+            
             <Route path='/checkout' element={<Checkout />} />
             <Route path='/booking' element={<BookingPage />} />
             <Route path='sign-up' element={<SignUp />} />
@@ -81,7 +86,9 @@ function App() {
             
  
             <Route path='*' element={<PageNotFound />} />
+
           </Routes>
+          </AuthProvider>
         </Suspense>
       </BrowserRouter>
     </HelmetProvider>
