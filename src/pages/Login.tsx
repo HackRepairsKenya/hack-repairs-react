@@ -6,10 +6,10 @@ interface PropTypes {
     token: string;
   }
 
-export default function Login({ setToken,setUser,token }:PropTypes) {
+export default function Login({  }:PropTypes) {
   return (
     <div>
-      <SignIn  token={token} setToken={ setToken } setUser={setUser} />
+      <SignIn   />
     </div>
   )
 }

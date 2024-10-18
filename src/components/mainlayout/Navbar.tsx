@@ -38,7 +38,7 @@ interface Category{
 const Navbar: React.FC = () => {
   const [searchInput, setSearchInput] = useState("");
   const [isHamburgerClicked, setIsHamburgerClicked] = useState<boolean>(false);
-  const [showModal, setShowModal] = useState<boolean>(false);
+  const [showModal] = useState<boolean>(false);
   const [categories,setCategories] = useState<Category[]>([])
 
   const [products,setProducts] = useState<Product[]>([

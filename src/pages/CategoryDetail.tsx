@@ -19,6 +19,12 @@ interface Product {
   MarketPrice: number;
   sellingPrice: number;
   productQuantity:number
+  
+  categoryId: string;
+  productModel: string;
+  marketPrice: number;
+  supplierName: string;
+  
 }
 
 const CategoryDetail = () => {
