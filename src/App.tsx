@@ -1,4 +1,4 @@
-import React, { Suspense, useState } from 'react';
+import React, { Suspense } from 'react';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import PageNotFound from './pages/PageNotFound.tsx';
 import { HelmetProvider } from 'react-helmet-async';
@@ -7,10 +7,10 @@ import TermsAndConditions from './pages/TermsAndConditions.tsx';
 import ShippingPolicy from './pages/ShippingPolicy.tsx';
 import ReturnPolicy from './pages/ReturnPolicy.tsx';
 import SignUp from './components/auth/SignUp.tsx';
-import useToken from './utils/UseToken.tsx';
 import ProtectedRoute from './utils/ProtectedRoute.tsx';
 import { AuthProvider } from './context/AuthContext.tsx';
 import SignIn from './components/auth/SignIn.tsx';
+import UserProfile from './pages/UserProfile.tsx';
 const SellWithUsPage = React.lazy(() => import('./pages/SellWithUs.tsx'));
 const Sell = React.lazy(() => import('./pages/Sell.tsx'));
 const Services = React.lazy(() => import('./pages/Services.tsx'));
@@ -37,57 +37,60 @@ const AboutUs = React.lazy(() => import('./pages/AboutUs.tsx'));
 const helmetContext = {};
 
 function App() {
-  const { token, setToken } = useToken();
-  const [user, setUser] = useState(""); // State to store user data
+  
   return (
     <HelmetProvider context={helmetContext}>
       <BrowserRouter>
         <Suspense fallback={<Loading />}>
-        <AuthProvider>
-          <Routes>
-            <Route path='login' element={<SignIn />} />
-            <Route path='/' element={<Home />} />
-            {/* Sell */}
-            <Route path='/sell-with-us' element={<SellWithUsPage />} />
-            <Route path='/sell-with-us/sell' element={<Sell />} />
-            {/* Services */}
-            <Route path='/services' element={<Services />} />
-           
-           
-            {/* Categories */}
-            <Route path='/category/:id' element={<CategoriesDetailedView />} />
-            {/* About our products */}
-            <Route path='/about-our-products' element={<AboutOurProducts />} />
-            {/* About us */}
-            <Route path='/about' element={<AboutUs />} />
-            <Route path='/contact' element={<Contact />} />
-            <Route path='/how-it-works' element={<HowItWorks />} />
-            
-            <Route path='/category/:categoryId/product/:productId' element={<CategoryDetail />} />
-            <Route path='/' element={<ProtectedRoute />}>
-            <Route path='/cart' element={<Cart />} />
-            </Route>
-            
-            <Route path='/checkout' element={<Checkout />} />
-            <Route path='/booking' element={<BookingPage />} />
-            <Route path='sign-up' element={<SignUp />} />
+          <AuthProvider>
+            <Routes>
+              <Route path='/login' element={<SignIn />} />
+              <Route path='/' element={<Home />} />
+              {/* Sell */}
+              <Route path='/sell-with-us' element={<SellWithUsPage />} />
+              <Route path='/sell-with-us/sell' element={<Sell />} />
+              {/* Services */}
+              <Route path='/services' element={<Services />} />
 
-            <Route path="/admin/dashboard/home" element={<Dashboard />} />
-            <Route path="/admin/dashboard/products" element={<Products />} />
-            <Route path="/admin/dashboard/services" element={<ServicesDashboard />} />
-            <Route path="/admin/dashboard/transactions" element={<Transactions transactions={[]} />} />
-            <Route path="/admin/dashboard/orders" element={<Orders />} />
-            <Route path="/admin/dashboard/feedback" element={<Feedback />} />
-            <Route path="/admin/dashboard/users" element={<Users />} />
-            {/* terms & policies */}
-            <Route path='/terms-and-conditions'  element={<TermsAndConditions />  } />
-            <Route path='/shipping-policy'  element={<ShippingPolicy />  } />
-            <Route path='/return-policy'  element={<ReturnPolicy />  } />
-            
- 
-            <Route path='*' element={<PageNotFound />} />
 
-          </Routes>
+              {/* Categories */}
+              <Route path='/category/:id' element={<CategoriesDetailedView />} />
+              {/* About our products */}
+              <Route path='/about-our-products' element={<AboutOurProducts />} />
+              {/* About us */}
+              <Route path='/about' element={<AboutUs />} />
+              <Route path='/contact' element={<Contact />} />
+              <Route path='/how-it-works' element={<HowItWorks />} />
+              {/* user profile */}
+              <Route element={<ProtectedRoute />}>
+              <Route path='/user/:userId' element={<UserProfile  />} />
+              </Route>
+
+              <Route path='/category/:categoryId/product/:productId' element={<CategoryDetail />} />
+              <Route element={<ProtectedRoute />}>
+                <Route path='/cart' element={<Cart />} />
+              </Route>
+
+              <Route path='/checkout' element={<Checkout />} />
+              <Route path='/booking' element={<BookingPage />} />
+              <Route path='sign-up' element={<SignUp />} />
+
+              <Route path="/admin/dashboard/home" element={<Dashboard />} />
+              <Route path="/admin/dashboard/products" element={<Products />} />
+              <Route path="/admin/dashboard/services" element={<ServicesDashboard />} />
+              <Route path="/admin/dashboard/transactions" element={<Transactions transactions={[]} />} />
+              <Route path="/admin/dashboard/orders" element={<Orders />} />
+              <Route path="/admin/dashboard/feedback" element={<Feedback />} />
+              <Route path="/admin/dashboard/users" element={<Users />} />
+              {/* terms & policies */}
+              <Route path='/terms-and-conditions' element={<TermsAndConditions />} />
+              <Route path='/shipping-policy' element={<ShippingPolicy />} />
+              <Route path='/return-policy' element={<ReturnPolicy />} />
+
+
+              <Route path='*' element={<PageNotFound />} />
+
+            </Routes>
           </AuthProvider>
         </Suspense>
       </BrowserRouter>

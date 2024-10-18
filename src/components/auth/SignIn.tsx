@@ -6,7 +6,7 @@ import { Link, useLocation, useNavigate } from 'react-router-dom';
 import * as Yup from "yup";
 import { useAuth } from '../../context/AuthContext'; // Use the context
 
-const SignIn = () => {
+const SignIn = ({}) => {
   const { setToken, setUser } = useAuth(); // Added setUser to context
   const navigate = useNavigate();
   const location = useLocation();
@@ -14,8 +14,12 @@ const SignIn = () => {
 
   // Function to get user details
   const getUserDetails = async (token: string) => {
-    const response = await axios.get(`https://api.hackrepairs.co.ke/client/${token}`);
-    setUser(response.data.name);
+    try {
+      const response = await axios.get(`https://api.hackrepairs.co.ke/client/${token}`);
+      setUser(response.data.name);
+    } catch (error) {
+      console.error("Error fetching user details:", error);
+    }
   };
 
   // Define validation schema
@@ -35,10 +39,16 @@ const SignIn = () => {
       try {
         // Make API call to backend to confirm user details
         const response = await axios.post("https://api.hackrepairs.co.ke/client/login", values);
+        console.log("Login response:", response.data);
+
         if (response.data.token) {
           // If user details are valid, login and navigate to the specified route
           setToken(response.data.token);
-          await getUserDetails(response.data.token); // Call to fetch user details
+
+          // Fetch user details after getting token
+          await getUserDetails(response.data.token);
+
+          console.log("Redirecting to:", redirectPath);
           navigate(redirectPath, { replace: true });
         } else {
           console.error("Invalid credentials");

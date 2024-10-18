@@ -70,7 +70,6 @@ const Navbar: React.FC = () => {
   }
   const { cartItems } = cartContext;
 
-  const closeModal = () => setShowModal(false);
 
   const extraLinks = [
     { title: "Sell With Us", href: "/sell-with-us" },
@@ -101,7 +100,7 @@ setCategories(response.data)
   
   return (
     <div>
-      {showModal && <SignIn closeModal={closeModal} />}
+      {showModal && <SignIn  />}
       <nav className="relative bg-white">
         <div className="container mx-auto flex justify-between items-center p-4">
           {/* Hamburger menu for mobile */}
@@ -141,7 +140,7 @@ setCategories(response.data)
             <a href="/orders" className="hidden md:flex items-center gap-2 py-2 text-black">
               <FaBus /> Orders
             </a>
-            <p onClick={() => setShowModal(!showModal)} className="flex items-center gap-2 py-2 cursor-pointer text-black">
+            <p onClick={() =>navigate('/user/:userId')} className="flex items-center gap-2 py-2 cursor-pointer text-black">
               <FaRegUser />
             </p>
           </div>
