@@ -51,7 +51,7 @@ const SignUp = () => {
   };
 
   return (
-    <div className="bg-black h-screen absolute top-0 left-0 w-full bg-opacity-50 flex justify-center items-center">
+    <div className="bg-gradient-to-r from-gray-800 to-green-800 h-screen absolute top-0 left-0 w-full  flex justify-center items-center">
       <div className="bg-white w-[90%] md:w-1/2 shadow-lg rounded-lg mx-auto p-8 max-w-lg">
         <h1 className="text-2xl text-center md:text-2xl font-bold mb-2">Create Your Account</h1>
         <p className="text-center">Welcome! Please sign up to continue</p>
@@ -91,7 +91,7 @@ const SignUp = () => {
           </div>
           <button
             type="submit"
-            className="w-full text-base md:text-lg py-2 px-4 bg-button text-white font-semibold rounded-md shadow-sm hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500"
+            className="w-full text-base md:text-lg py-2 px-4 bg-button text-white font-semibold rounded-md shadow-sm hover:bg-green-600 focus:outline-none focus:ring-2 focus:ring-blue-500"
             disabled={loading}
           >
             {loading ? 'Signing Up...' : 'Sign Up'}
@@ -108,8 +108,8 @@ const SignUp = () => {
         >
           <FcGoogle className="text-xl mr-2 " /> Sign up with Google
         </button>
-        <p className="mt-4 text-center">
-          Have an account? <span className="text-blue-500 hover:underline">Sign In</span>
+        <p className="mt-4 text-center cursor-pointer">
+          Have an account? <span className="text-blue-500 hover:underline" onClick={()=>navigate('/login')}>Sign In</span>
         </p>
       </div>
     </div>

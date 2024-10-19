@@ -68,7 +68,7 @@ const SignIn = ({}) => {
   return (
     <div>
       <div
-        className="bg-black hover:cursor-pointer h-screen absolute top-0 left-0 w-full bg-opacity-50 flex justify-center z-50 items-center"
+        className="bg-gradient-to-r from-gray-800 to-green-800 hover:cursor-pointer h-screen absolute top-0 left-0 w-full flex justify-center z-50 items-center"
       >
         <div
           onClick={stopPropagation}
@@ -117,7 +117,7 @@ const SignIn = ({}) => {
             </div>
             <button
               type="submit"
-              className="w-full text-base md:text-lg py-2 px-4 bg-button text-white font-semibold rounded-md shadow-sm hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500"
+              className="w-full text-base md:text-lg py-2 px-4 bg-button text-white font-semibold rounded-md shadow-sm hover:bg-green-600 focus:outline-none focus:ring-2 focus:ring-blue-500"
             >
               Login
             </button>
