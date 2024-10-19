@@ -15,7 +15,7 @@ const UserModal = ( { handleClose }:AdminModalPropTypes )=>{
             password: ""
         },
         onSubmit: async(values)=>{
-                const response = await axios.post('https://api.wemitraders.co.ke/clients', values);
+                const response = await axios.post('https://api.hackrepairs.co.ke/clients', values);
                 if (response.status === 201) {
                   // alert('Registration successful!');
                   handleClose()

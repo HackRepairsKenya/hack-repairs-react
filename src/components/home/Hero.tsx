@@ -12,7 +12,7 @@ const Hero = () => {
             We provide top-notch phone & laptop repair services and sell high-quality accessories for all major brands.
           </p>
           <div className="mt-8 bg-green-800 hover:bg-green-800 transition duration-300 p-4 text-white py-2 px-6 rounded-full text-lg">
-            <Link to='/services'>Explore Services</Link>
+            <Link className="font-bold" to='/services'>Explore Services</Link>
           </div>
         </div>
         <div className="h-screen  absolute md:relative inset-0 flex items-center justify-center md:justify-end">

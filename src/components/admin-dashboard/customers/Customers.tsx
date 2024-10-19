@@ -30,7 +30,7 @@ const Customers = ()=>{
 	// function to fetch customers
 	const fetchCustomers =async ()=>{
 		try {
-			const response = await axios.get("https://api.wemitraders.co.ke/clients");
+			const response = await axios.get("https://api.hackrepairs.co.ke/clients");
 			
 			 setCustomers(response.data);
 			
@@ -42,7 +42,7 @@ const Customers = ()=>{
 	}
 	const fetchAdmins =async ()=>{
 		try {
-			const response = await axios.get("https://api.wemitraders.co.ke/admins");
+			const response = await axios.get("https://api.hackrepairs.co.ke/admins");
 			
 			setAdmins(response.data);
 			
@@ -83,7 +83,7 @@ const Customers = ()=>{
 				</div>
 				<div>
 					<button
-					className="bg-blue-500 hover:bg-blue-700 text-sm text-white font-bold py-2 px-4 rounded mb-4 outline-none"
+					className="bg-green-500 hover:bg-blue-700 text-sm text-white font-bold py-2 px-4 rounded mb-4 outline-none"
 					onClick={() => {
 						activateAdmin();
 					}}

@@ -51,7 +51,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
   const signOut = () => {
     setToken(null);
     setUser(null); // Clear user data on sign out
-    navigate('/login');
+    navigate('/');
   };
 
   return (

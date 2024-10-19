@@ -17,10 +17,10 @@ interface UsersTableProps {
 
 const UsersTable: React.FC<UsersTableProps> = ({ users, admin }) => {
   const handleDelete = async (customerId: string) => {
-    let url = 'https://api.wemitraders.co.ke/clients';
+    let url = 'https://api.hackrepairs.co.ke/clients';
     try {
       if (admin) {
-        url = 'https://api.wemitraders.co.ke/admins';
+        url = 'https://api.hackrepairs.co.ke/admins';
       }
 
       await axios.delete(url, {

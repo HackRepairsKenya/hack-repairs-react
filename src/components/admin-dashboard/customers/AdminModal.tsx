@@ -12,7 +12,7 @@ const AdminModal = ({ handleClose }:AdminModalPropTypes)=>{
             password: ""
         },
         onSubmit: async (values)=>{
-            const response = await axios.post('https://api.wemitraders.co.ke/admins', values);
+            const response = await axios.post('https://api.hackrepairs.co.ke/admins', values);
             if (response.status === 201) {
                 handleClose()
             }
