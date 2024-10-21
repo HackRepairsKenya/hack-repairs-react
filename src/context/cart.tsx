@@ -8,8 +8,7 @@ interface CartItem {
   marketPrice: number;
   supplierName: string;
   ProductName: string;
- 
-  
+
   coverImage: string ;
   id: string;
   productPrice: number;

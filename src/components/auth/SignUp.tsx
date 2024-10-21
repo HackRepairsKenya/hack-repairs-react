@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { FcGoogle } from 'react-icons/fc'; // Import Google icon
 import axios from 'axios'; // Import axios
 import { useNavigate } from 'react-router-dom';
+import Alert from '@mui/material/Alert';
 
 const SignUp = () => {
   const [name, setName] = useState<string>(''); // New state for name
@@ -10,6 +11,10 @@ const SignUp = () => {
   const [confirmPassword, setConfirmPassword] = useState<string>('');
   const [loading, setLoading] = useState<boolean>(false); // Optional: for showing loading state
   const navigate = useNavigate();
+  const [showAlert,setShowAlert] = useState<boolean>(false);
+  const [showForm,setShowForm] = useState<boolean>(true);
+
+
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -33,11 +38,16 @@ const SignUp = () => {
 
       // Send a POST request to the API
       const response = await axios.post('https://api.hackrepairs.co.ke/clients', data);
-      
+      console.log(response.data)
+      const { id } = response.data;
+      localStorage.setItem('client_id', id);
       // Handle success response
       console.log('Sign-up successful:', response.data);
-      alert('Account created successfully!');
-      navigate('/');
+      setShowForm(false)
+      setShowAlert(true)
+      setTimeout(()=>{
+        navigate('/')
+      },3000);
     } catch (error) {
       // Handle error
       console.error('Error signing up:', error);
@@ -52,9 +62,10 @@ const SignUp = () => {
     // Implement Google Sign-In logic here
   };
 
-  return (
-    <div className="bg-gradient-to-r from-gray-800 to-green-800 h-screen absolute top-0 left-0 w-full flex justify-center items-center">
-      <div className="bg-white w-[90%] md:w-1/2 shadow-lg rounded-lg mx-auto p-8 max-w-lg">
+  return (<div>
+    
+    {showForm &&  <div className="bg-gradient-to-r from-gray-800 to-green-800 h-screen absolute top-0 left-0 w-full flex justify-center items-center">
+     <div className="bg-white w-[90%] md:w-1/2 shadow-lg rounded-lg mx-auto p-8 max-w-lg">
         <h1 className="text-2xl text-center md:text-2xl font-bold mb-2">Create Your Account</h1>
         <p className="text-center">Welcome! Please sign up to continue</p>
         <form onSubmit={handleSubmit} className="space-y-4">
@@ -125,6 +136,13 @@ const SignUp = () => {
           Have an account? <span className="text-blue-500 hover:underline" onClick={() => navigate('/login')}>Sign In</span>
         </p>
       </div>
+      
+    </div>}
+    <div className='bg-white h-screen items-center flex justify-center'>
+    {showAlert && <Alert variant="filled" severity="success">
+  Account created successfully.
+</Alert>}
+</div>
     </div>
   );
 };

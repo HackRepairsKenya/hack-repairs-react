@@ -19,7 +19,7 @@ const ClientOrders: React.FC<ClientOrdersProps> = ({ orders }) => {
 
   const fetchOrders = async () => {
     try {
-      const response = await axios.get<Order[]>("https://api.wemitraders.co.ke/orders");
+      const response = await axios.get<Order[]>("https://api.hackrepairs.co.ke/orders");
       setOrders(response.data);
     } catch (error) {
       console.log(error);
